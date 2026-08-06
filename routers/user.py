@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from database import get_db
-from schemas.user import UserCreate, UserResponse
+from schemas.userDTO import UserCreate, UserResponse
 from service import user as user_service
 
 # 1. Define the router variable that main.py is looking for
