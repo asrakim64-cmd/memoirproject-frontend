@@ -15,7 +15,7 @@ router = APIRouter(
 def create_new_user(user_data: UserCreate, db: Session = Depends(get_db)):
     try:
         # Pass the incoming data to your service layer to save in the database
-        new_user = user_service.create_user(db=db, user_data=user_data)
+        new_user = user_service.create_user(db=db, user_data=user_data,auth_provider_uid="dummy_test_uid_123")
         return new_user
     except Exception as e:
         # If something goes wrong (like a duplicate email), return a clear error
