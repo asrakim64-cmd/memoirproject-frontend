@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from schemas.user import UserCreate
+from schemas.userDTO import UserCreate
 from repository import user as user_repo
 
 def create_user(db: Session, user_data: UserCreate, auth_provider_uid: str):
