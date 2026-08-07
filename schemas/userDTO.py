@@ -7,14 +7,13 @@ from typing import Optional
 class UserCreate(BaseModel):
     email: EmailStr
     full_name: str
-    # Notice we removed auth_provider_uid here!
 
 # What the API returns
 class UserResponse(BaseModel):
     id: uuid.UUID
     email: EmailStr
     full_name: str
-    auth_provider_uid: Optional[str]
+    auth_provider_uid: str
     created_at: datetime
 
     class Config:
