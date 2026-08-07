@@ -19,7 +19,6 @@ def verify_supabase_token(credentials: HTTPAuthorizationCredentials = Security(s
         raise HTTPException(status_code=401, detail="Invalid token format")
 
     try:
-        # Handle HS256 (symmetric using secret key)
         if alg == "HS256":
             jwt_secret = os.getenv("SUPABASE_JWT_SECRET")
             if not jwt_secret:
@@ -32,7 +31,6 @@ def verify_supabase_token(credentials: HTTPAuthorizationCredentials = Security(s
                 audience="authenticated"
             )
             
-        # Handle RS256 or ES256 (asymmetric using Supabase JWKS public keys)
         elif alg in ["RS256", "ES256"]:
             supabase_url = "https://fqpizscquprqqubsaymq.supabase.co"
             jwks_url = f"{supabase_url}/auth/v1/.well-known/jwks.json"
