@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from database import get_db
 from schemas.userDTO import UserCreate, UserResponse
 from service import user as user_service
+from dependencies import verify_supabase_token
 
 # 1. Define the router variable that main.py is looking for
 router = APIRouter(
