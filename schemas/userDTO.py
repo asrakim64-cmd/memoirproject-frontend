@@ -3,12 +3,10 @@ from datetime import datetime
 import uuid
 from typing import Optional
 
-# What the frontend sends
 class UserCreate(BaseModel):
     email: EmailStr
     full_name: str
 
-# What the API returns
 class UserResponse(BaseModel):
     id: uuid.UUID
     email: EmailStr
