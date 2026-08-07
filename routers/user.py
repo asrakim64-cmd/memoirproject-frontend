@@ -12,10 +12,10 @@ router = APIRouter(
 
 # 2. Create the API endpoint to handle user onboarding
 @router.post("/", response_model=UserResponse)
-def create_new_user(user_data: UserCreate, db: Session = Depends(get_db)):
+def create_new_user(user_data: UserCreate, db: Session = Depends(get_db),user_uid: str = Depends(verify_supabase_token)):
     try:
         # Pass the incoming data to your service layer to save in the database
-        new_user = user_service.create_user(db=db, user_data=user_data,auth_provider_uid="dummy_test_uid_123")
+        new_user = user_service.create_user(db=db, user_data=user_data,auth_provider_uid="user_uid")
         return new_user
     except Exception as e:
         # If something goes wrong (like a duplicate email), return a clear error
