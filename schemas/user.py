@@ -3,10 +3,6 @@ from datetime import datetime
 import uuid
 from typing import Optional
 
-class UserCreate(BaseModel):
-    email: EmailStr
-    full_name: str
-
 class UserResponse(BaseModel):
     id: uuid.UUID
     email: EmailStr
