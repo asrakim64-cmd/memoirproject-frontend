@@ -7,97 +7,96 @@ import { useRouter } from 'next/navigation';
 export default function ChooseFormat() {
   const router = useRouter();
   // Using an array because the prompt says "Choose one or more"
-  const [selectedFormats, setSelectedFormats] = useState<string[]>([]);
+  const [selected, setSelected] = useState<string | null>(null);
 
   const formats = [
-    { 
-      id: 'voice', 
-      title: 'Voice', 
+    {
+      id: 'voice',
+      title: 'Voice',
       desc: 'Record and preserve spoken memories',
-      icon: Mic 
+      icon: Mic
     },
-    { 
-      id: 'writing', 
-      title: 'Writing', 
+    {
+      id: 'writing',
+      title: 'Writing',
       desc: 'Write stories in your own words',
-      icon: Pencil 
+      icon: Pencil
     },
-    { 
-      id: 'photos', 
-      title: 'Photos', 
+    {
+      id: 'photos',
+      title: 'Photos',
       desc: 'Capture and save special moments',
-      icon: Camera 
+      icon: Camera
     }
   ];
 
-  const toggleFormat = (id: string) => {
-    setSelectedFormats(prev => 
-      prev.includes(id) 
-        ? prev.filter(f => f !== id) 
-        : [...prev, id]
-    );
-  };
+
 
   return (
     <div className="min-h-screen bg-stone-50 flex flex-col items-center px-6 py-8 font-sans">
       <div className="w-full max-w-md">
-  
+
         {/* Headers */}
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-semibold text-stone-800 mb-2">
-            How would you like to<br />preserve your memories?
+          <h1 className="text-center text-[35px] font-bold leading-[52px] text-black mb-2">
+            Choose your starting<br /> format
           </h1>
           <p className="text-stone-500 text-sm">
-            Choose one or more that you love.
+            How would you initially want to add to your memoir?
           </p>
         </div>
 
-        {/* Selection Grid */}
-        <div className="grid grid-cols-2 gap-4 mb-12">
-          {formats.map((format) => {
-            const Icon = format.icon;
-            const isSelected = selectedFormats.includes(format.id);
-            
-            return (
-              <button
-                key={format.id}
-                onClick={() => toggleFormat(format.id)}
-                className={`relative flex flex-col items-center text-center p-6 rounded-2xl border transition-all duration-200 ${
-                  isSelected 
-                    ? 'border-[#1a3628] bg-[#f2f7f4]' 
-                    : 'border-stone-200 bg-white hover:border-stone-300'
-                }`}
-              >
-                {/* Green Checkmark Badge for Selected Items */}
-                {isSelected && (
-                  <div className="absolute top-3 right-3 bg-[#1a3628] rounded-full p-0.5">
-                    <Check size={14} className="text-white" strokeWidth={3} />
-                  </div>
-                )}
-                
-                <div className="h-10 flex items-center justify-center mb-4">
-                  <Icon size={36} strokeWidth={1.5} className="text-[#1a3628]" />
-                </div>
-                <span className="text-base font-semibold text-stone-800 mb-1">
-                  {format.title}
-                </span>
-                <span className="text-xs text-stone-500 leading-tight">
-                  {format.desc}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+        {/* Selection Area */}
+        <div className="w-full mb-12">
 
+          {/*Added the exact swipe hint from the who_is_this_for page */}
+          <div className="flex w-full justify-end mb-2 pr-1">
+            <span className="text-xs text-stone-400 font-medium animate-pulse">
+              Swipe for more &rarr;
+            </span>
+          </div>
+
+          {/*Brought back the exact horizontal scrolling classes and gap */}
+          <div className="flex flex-row overflow-x-auto gap-4 pb-2 w-full [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            {formats.map((format) => {
+              const Icon = format.icon;
+              const isSelected = selected === format.id;
+
+              return (
+                <button
+                  key={format.id}
+                  onClick={() => setSelected(format.id)}
+
+                  //flex-shrink-0 ensures they stay exactly w-36 without squishing
+                  className={`flex-shrink-0 flex flex-col items-center justify-center text-center w-36 h-40 p-4 rounded-2xl border transition-all duration-200 ${isSelected
+                      ? 'border-[#1a3628] bg-[#f2f7f4]'
+                      : 'border-stone-200 bg-white hover:border-stone-300'
+                    }`}
+                >
+                  <div className="h-10 flex items-center justify-center mb-3">
+                    <Icon size={36} strokeWidth={1.5} className="text-[#1a3628]" />
+                  </div>
+                  <span className="text-sm font-semibold text-stone-800 mb-1">
+                    {format.title}
+                  </span>
+                  <span className="text-[11px] text-stone-500 leading-tight">
+                    {format.desc}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
         {/* Continue Button */}
         <button
-          onClick={() => router.push('/handwritten-note')}
-          disabled={selectedFormats.length === 0}
-          className={`w-full py-4 rounded-xl text-center font-medium transition-colors ${
-            selectedFormats.length > 0 
-              ? 'bg-[#1a3628] text-white hover:bg-[#132a1e]' 
+          onClick={() => router.push('/')}
+
+          // Button unlocks when exactly 1 is selected
+          disabled={!selected}
+          className={`bg-[#a7cdbd] text-white text-[28px] font-bold w-full py-4 rounded-lg hover:bg-[#a7cdbd] transition ${selected
+              ? 'bg-[#1a3628] text-white hover:bg-[#132a1e]'
               : 'bg-stone-200 text-stone-400 cursor-not-allowed'
-          }`}
+            }`}
         >
           Continue
         </button>
