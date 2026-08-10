@@ -30,7 +30,7 @@ export default function HandwrittenNote() {
         </Link>
  
         <Link
-          href="/subscription"
+          href="/chooseFormat"
           className="bg-[#a7cdbd] text-white text-[28px] font-bold px-7 py-3 rounded-lg hover:bg-[#a7cdbd] transition"
         >
           Continue
