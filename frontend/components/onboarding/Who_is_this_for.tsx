@@ -35,16 +35,15 @@ export default function WhoIsThisFor() {
           {options.map((option) => {
             const Icon = option.icon;
             const isSelected = selected === option.id;
-            
+
             return (
               <button
                 key={option.id}
                 onClick={() => setSelected(option.id)}
-                className={`flex flex-col items-center justify-center p-6 rounded-2xl border transition-all duration-200 ${
-                  isSelected 
-                    ? 'border-[#1a3628] bg-[#f2f7f4]' 
+                className={`flex flex-col items-center justify-center p-6 rounded-2xl border transition-all duration-200 ${isSelected
+                    ? 'border-[#1a3628] bg-[#f2f7f4]'
                     : 'border-stone-200 bg-white hover:border-stone-300'
-                }`}
+                  }`}
               >
                 <div className="h-12 flex items-center justify-center mb-3">
                   <Icon size={40} strokeWidth={1.5} className={option.iconColor || 'text-stone-700'} />
@@ -56,16 +55,15 @@ export default function WhoIsThisFor() {
             );
           })}
         </div>
-
         {/* Continue Button */}
         <button
           onClick={() => router.push('/handwritten-note')}
           disabled={!selected}
-          className={`w-full py-4 rounded-xl text-center font-medium transition-colors ${
-            selected 
-              ? 'bg-[#1a3628] text-white hover:bg-[#132a1e]' 
+          className={`bg-[#a7cdbd] text-white text-[28px] font-bold w-full py-4 rounded-lg hover:bg-[#a7cdbd] transition
+ ${selected
+              ? 'bg-[#1a3628] text-white hover:bg-[#132a1e]'
               : 'bg-stone-200 text-stone-400 cursor-not-allowed'
-          }`}
+            }`}
         >
           Continue
         </button>
