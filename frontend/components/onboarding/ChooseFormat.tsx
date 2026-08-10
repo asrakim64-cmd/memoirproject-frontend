@@ -98,7 +98,7 @@ export default function ChooseFormat() {
         </div>
         {/* Continue Button */}
         <button
-          onClick={() => router.push('/')}
+          onClick={() => router.push('/memoir-details')}
 
           // Button unlocks when exactly 1 is selected
           disabled={!selected}
