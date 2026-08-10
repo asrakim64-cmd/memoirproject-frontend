@@ -30,8 +30,9 @@ export default function WhoIsThisFor() {
           </p>
         </div>
 
-        {/* Selection Grid */}
-        <div className="grid grid-cols-2 gap-4 mb-12">
+        {/* Selection Row (Horizontal Swipe Flow) */}
+        {/* [&::-webkit-scrollbar]:hidden hides the ugly scrollbar while keeping the swipe working */}
+        <div className="flex flex-row overflow-x-auto gap-4 mb-10 pb-2 w-full [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {options.map((option) => {
             const Icon = option.icon;
             const isSelected = selected === option.id;
@@ -40,7 +41,7 @@ export default function WhoIsThisFor() {
               <button
                 key={option.id}
                 onClick={() => setSelected(option.id)}
-                className={`flex flex-col items-center justify-center p-6 rounded-2xl border transition-all duration-200 ${isSelected
+                className={`flex-shrink-0 flex flex-col items-center justify-center w-36 h-40 p-4 rounded-2xl border transition-all duration-200 ${isSelected
                     ? 'border-[#1a3628] bg-[#f2f7f4]'
                     : 'border-stone-200 bg-white hover:border-stone-300'
                   }`}
@@ -48,7 +49,7 @@ export default function WhoIsThisFor() {
                 <div className="h-12 flex items-center justify-center mb-3">
                   <Icon size={40} strokeWidth={1.5} className={option.iconColor || 'text-stone-700'} />
                 </div>
-                <span className="text-sm font-medium text-stone-800">
+                <span className="text-sm font-medium text-stone-800 text-center leading-tight">
                   {option.label}
                 </span>
               </button>
