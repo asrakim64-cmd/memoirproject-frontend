@@ -2,7 +2,7 @@
 import Link from "next/link";
 
 import { useState } from 'react';
-import { ArrowLeft, Mic, Pencil, Camera, Check } from 'lucide-react';
+import { Mic, Pencil, Camera } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 export default function ChooseFormat() {
@@ -34,82 +34,85 @@ export default function ChooseFormat() {
 
 
   return (
-    <div className="min-h-screen bg-stone-50 flex flex-col items-center px-6 py-8 font-sans">
-      <div className="w-full max-w-md">
+    <section className="min-h-screen flex justify-center items-center py-20 bg-white font-sans">
+      <div className="w-[650px] max-w-full bg-white border border-[#D8CEC8] rounded-xl p-10 shadow-sm mx-4">
+        <div className="w-full max-w-md">
 
-        {/* Headers */}
-        <div className="text-center mb-8">
-          <span className="mb-4">
-            <Link
-              href="/handwritten-note"
-              className="inline-flex gap-2 text-[16px] font-medium text-[#6B5E53] hover:text-[#2C2C2C] transition -ml-105"
-            >
-              <span><b>←</b></span>
-            </Link>
-          </span>
-          <h1 className="text-center text-[35px] font-bold leading-[52px] text-black mb-2">
-            Choose your starting<br /> format
-          </h1>
-          <p className="text-stone-500 text-sm">
-            How would you initially want to add to your memoir?
-          </p>
-        </div>
-
-        {/* Selection Area */}
-        <div className="w-full mb-12">
-
-          {/*Added the exact swipe hint from the who_is_this_for page */}
-          <div className="flex w-full justify-end mb-2 pr-1">
-            <span className="text-xs text-stone-400 font-medium animate-pulse">
-              Swipe for more &rarr;
+          {/* Headers */}
+          <div className="text-center mb-8">
+            <span className="mb-4 block text-left">
+              <Link
+                href="/handwritten-note"
+                className="inline-flex gap-2 text-[16px] font-medium text-[#6B5E53] hover:text-[#2C2C2C] transition -ml-2"
+              >
+                <span><b>←</b></span>
+              </Link>
             </span>
+            <h1 className="text-center text-[35px] font-bold leading-[52px] text-black mb-2">
+              Share a memory in <br /> your own way
+            </h1>
+            <p className="text-[#77716D] text-[18px]">
+              Take all the time you need. We're here to help you keep their memory close.
+            </p>
           </div>
 
-          {/*Brought back the exact horizontal scrolling classes and gap */}
-          <div className="flex flex-row overflow-x-auto gap-4 pb-2 w-full [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-            {formats.map((format) => {
-              const Icon = format.icon;
-              const isSelected = selected === format.id;
+          {/* Selection Area */}
+          <div className="w-full mb-12">
 
-              return (
-                <button
-                  key={format.id}
-                  onClick={() => setSelected(format.id)}
+            {/*Added the exact swipe hint from the who_is_this_for page */}
+            <div className="flex w-full justify-end mb-2 pr-1">
+              <span className="text-xs text-stone-400 font-medium animate-pulse">
+                Swipe for more &rarr;
+              </span>
+            </div>
 
-                  //flex-shrink-0 ensures they stay exactly w-36 without squishing
-                  className={`flex-shrink-0 flex flex-col items-center justify-center text-center w-36 h-40 p-4 rounded-2xl border transition-all duration-200 ${isSelected
-                    ? 'border-[#1a3628] bg-[#f2f7f4]'
-                    : 'border-stone-200 bg-white hover:border-stone-300'
-                    }`}
-                >
-                  <div className="h-10 flex items-center justify-center mb-3">
-                    <Icon size={36} strokeWidth={1.5} className="text-[#1a3628]" />
-                  </div>
-                  <span className="text-sm font-semibold text-stone-800 mb-1">
-                    {format.title}
-                  </span>
-                  <span className="text-[11px] text-stone-500 leading-tight">
-                    {format.desc}
-                  </span>
-                </button>
-              );
-            })}
+            {/*Brought back the exact horizontal scrolling classes and gap */}
+            <div className="flex flex-row overflow-x-auto gap-4 pb-2 w-full [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+              {formats.map((format) => {
+                const Icon = format.icon;
+                const isSelected = selected === format.id;
+
+                return (
+                  <button
+                    key={format.id}
+                    onClick={() => setSelected(format.id)}
+
+                    //flex-shrink-0 ensures they stay exactly w-36 without squishing
+                    className={`flex-shrink-0 flex flex-col items-center justify-center text-center w-36 h-40 p-4 rounded-2xl border transition-all duration-200 ${isSelected
+                      ? 'border-[#1a3628] bg-[#f2f7f4]'
+                      : 'border-stone-200 bg-white hover:border-stone-300'
+                      }`}
+                  >
+                    <div className="h-10 flex items-center justify-center mb-3">
+                      <Icon size={36} strokeWidth={1.5} className="text-[#1a3628]" />
+                    </div>
+                    <span className="text-sm font-semibold text-stone-800 mb-1">
+                      {format.title}
+                    </span>
+                    <span className="text-[11px] text-stone-500 leading-tight">
+                      {format.desc}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
+          {/* Continue Button */}
+          <button
+            onClick={() => router.push('/memoir-details')}
+
+            // Button unlocks when exactly 1 is selected
+            disabled={!selected}
+            className={`bg-[#a7cdbd] text-white text-[28px] font-bold w-full py-4 rounded-lg hover:bg-[#a7cdbd] transition ${selected
+              ? 'bg-[#1a3628] text-white hover:bg-[#132a1e]'
+              : 'bg-stone-200 text-stone-400 cursor-not-allowed'
+              }`}
+          >
+            Continue
+          </button>
         </div>
-        {/* Continue Button */}
-        <button
-          onClick={() => router.push('/memoir-details')}
-
-          // Button unlocks when exactly 1 is selected
-          disabled={!selected}
-          className={`bg-[#a7cdbd] text-white text-[28px] font-bold w-full py-4 rounded-lg hover:bg-[#a7cdbd] transition ${selected
-            ? 'bg-[#1a3628] text-white hover:bg-[#132a1e]'
-            : 'bg-stone-200 text-stone-400 cursor-not-allowed'
-            }`}
-        >
-          Continue
-        </button>
       </div>
-    </div>
+    </section>
+
   );
 }
