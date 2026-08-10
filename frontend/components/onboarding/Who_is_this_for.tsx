@@ -1,4 +1,5 @@
 'use client';
+import Link from "next/link";
 
 import { useState } from 'react';
 import { ArrowLeft, Users, Heart, MoreHorizontal } from 'lucide-react';
@@ -22,7 +23,14 @@ export default function WhoIsThisFor() {
       <div className="w-full max-w-md">
         {/* Headers */}
         <div className="text-center mb-8">
-         
+          <span className="mb-4">
+            <Link
+              href="/"
+              className="inline-flex gap-2 text-[16px] font-medium text-[#6B5E53] hover:text-[#2C2C2C] transition -ml-105"
+            >
+              <span><b>←</b></span>
+            </Link>
+          </span>
           <h1 className="text-center text-[35px] font-bold leading-[52px] text-black mb-2">
             Who are you creating<br />this memoir for?
           </h1>
@@ -30,7 +38,7 @@ export default function WhoIsThisFor() {
             This helps us personalize your experience.
           </p>
         </div>
-        {/* he horizontal scroll hint */}
+        {/* The horizontal scroll hint */}
         <div className="flex w-full justify-end mb-2 pr-1">
           <span className="text-xs text-stone-400 font-medium animate-pulse">
             Swipe for more &rarr;
