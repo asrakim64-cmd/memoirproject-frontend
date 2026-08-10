@@ -1,4 +1,5 @@
 'use client';
+import Link from "next/link";
 
 import { useState } from 'react';
 import { ArrowLeft, Mic, Pencil, Camera, Check } from 'lucide-react';
@@ -38,6 +39,14 @@ export default function ChooseFormat() {
 
         {/* Headers */}
         <div className="text-center mb-8">
+          <span className="mb-4">
+            <Link
+              href="/handwritten-note"
+              className="inline-flex gap-2 text-[16px] font-medium text-[#6B5E53] hover:text-[#2C2C2C] transition -ml-105"
+            >
+              <span><b>←</b></span>
+            </Link>
+          </span>
           <h1 className="text-center text-[35px] font-bold leading-[52px] text-black mb-2">
             Choose your starting<br /> format
           </h1>
@@ -69,8 +78,8 @@ export default function ChooseFormat() {
 
                   //flex-shrink-0 ensures they stay exactly w-36 without squishing
                   className={`flex-shrink-0 flex flex-col items-center justify-center text-center w-36 h-40 p-4 rounded-2xl border transition-all duration-200 ${isSelected
-                      ? 'border-[#1a3628] bg-[#f2f7f4]'
-                      : 'border-stone-200 bg-white hover:border-stone-300'
+                    ? 'border-[#1a3628] bg-[#f2f7f4]'
+                    : 'border-stone-200 bg-white hover:border-stone-300'
                     }`}
                 >
                   <div className="h-10 flex items-center justify-center mb-3">
@@ -94,8 +103,8 @@ export default function ChooseFormat() {
           // Button unlocks when exactly 1 is selected
           disabled={!selected}
           className={`bg-[#a7cdbd] text-white text-[28px] font-bold w-full py-4 rounded-lg hover:bg-[#a7cdbd] transition ${selected
-              ? 'bg-[#1a3628] text-white hover:bg-[#132a1e]'
-              : 'bg-stone-200 text-stone-400 cursor-not-allowed'
+            ? 'bg-[#1a3628] text-white hover:bg-[#132a1e]'
+            : 'bg-stone-200 text-stone-400 cursor-not-allowed'
             }`}
         >
           Continue
