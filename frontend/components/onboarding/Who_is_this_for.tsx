@@ -23,7 +23,7 @@ export default function WhoIsThisFor() {
         {/* Headers */}
         <div className="text-center mb-8">
          
-          <h1 className=" text-center text-[35px] font-bold leading-[52px] text-black mb-2">
+          <h1 className="text-center text-[35px] font-bold leading-[52px] text-black mb-2">
             Who are you creating<br />this memoir for?
           </h1>
           <p className="text-stone-500 text-sm">
