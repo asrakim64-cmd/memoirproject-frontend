@@ -41,7 +41,7 @@ export default function SignupForm() {
     // 4. Save Name, Email, and UUID to your Public DB
     if (authData.user) {
       const { error: dbError } = await supabase
-        .from("user_account") // ⚠️ Verify this matches your actual table name in Supabase
+        .from("user_account") //  Verify this matches your actual table name in Supabase
         .insert([
           {
             id: authData.user.id,
@@ -55,7 +55,7 @@ export default function SignupForm() {
         console.error(dbError);
       } else {
         // Success! Redirect them to the next page in your onboarding flow
-        router.push("/handwritten-note");
+        router.push("/subscription");
       }
     }
     setLoading(false);
@@ -66,7 +66,7 @@ export default function SignupForm() {
       <div className="w-[650px] bg-white border border-[#D8CEC8] rounded-lg p-10">
         <span className="mb-6">
           <Link
-            href="/"
+            href="/review"
             className="inline-flex text-[16px] font-medium text-[#6B5E53] hover:text-[#2C2C2C] transition -ml-2"
           >
             <span><b>←</b></span>
