@@ -24,7 +24,7 @@ export default function Hero() {
         </p>
 
         <div className="flex gap-10 mt-9 ml-2">
-          <Link
+          {/* <Link
             href="/signup"
             className="w-[180px] h-[70px] bg-[#a7cdbd] text-white text-[28px] font-bold px-8 py-2 rounded-md hover:bg-[#a7cdbd] transition inline-block"
           >
@@ -36,14 +36,15 @@ export default function Hero() {
             className="w-[180px] h-[70px] bg-[#a7cdbd] text-white text-[28px] font-bold px-10 py-2 rounded-md hover:bg-[#a7cdbd] transition inline-block"
           >
             Login
+          </Link> */}
+          <Link
+            href="/who_is_this_for"
+            className="w-[360px] h-[70px] bg-[#a7cdbd] text-white text-[28px] font-bold px-10 py-3 rounded-md hover:bg-[#a7cdbd] transition inline-block ml-5"
+          >
+            Begin Your Memoir
           </Link>
         </div>
-        <Link
-          href="/who_is_this_for"
-          className="inline-block w-full sm:w-auto px-8 py-4 bg-[#1a3628] text-white text-center rounded-xl font-medium hover:bg-[#132a1e] transition-colors"
-        >
-          Begin Your Memoir
-        </Link>
+
       </div>
 
       {/* Right Side: Preview Placeholder Section */}
