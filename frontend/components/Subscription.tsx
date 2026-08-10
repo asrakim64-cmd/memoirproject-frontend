@@ -61,15 +61,8 @@ export default function Subscription() {
         />
 
         <div className="flex justify-between ">
- 
-          <Link
-            href="/"
-            className="w-[150px] h-14 bg-[#a7cdbd] text-white text-[20px] font-bold rounded-lg hover:bg-[#a7cdbd] transition flex items-center justify-center"
-          >
-            Back
-          </Link>
           <button
-            className="w-[150px] h-14 bg-[#a7cdbd] text-white text-[20px] font-bold rounded-lg hover:bg-[#a7cdbd] transition flex items-center justify-center"
+            className="bg-[#a7cdbd] text-white text-[28px] font-bold w-full py-4 rounded-lg hover:bg-[#a7cdbd] transition"
           >
             Pay Now
           </button>
