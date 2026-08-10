@@ -63,7 +63,7 @@ export default function Subscription() {
         <div className="flex justify-between ">
  
           <Link
-            href="/handwritten-note"
+            href="/"
             className="w-[150px] h-14 bg-[#a7cdbd] text-white text-[20px] font-bold rounded-lg hover:bg-[#a7cdbd] transition flex items-center justify-center"
           >
             Back
