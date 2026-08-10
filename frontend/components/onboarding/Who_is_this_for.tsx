@@ -22,14 +22,20 @@ export default function WhoIsThisFor() {
       <div className="w-full max-w-md">
         {/* Headers */}
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-semibold text-stone-800 mb-2">
+         
+          <h1 className=" text-center text-[35px] font-bold leading-[52px] text-black mb-2">
             Who are you creating<br />this memoir for?
           </h1>
           <p className="text-stone-500 text-sm">
             This helps us personalize your experience.
           </p>
         </div>
-
+        {/* he horizontal scroll hint */}
+        <div className="flex w-full justify-end mb-2 pr-1">
+          <span className="text-xs text-stone-400 font-medium animate-pulse">
+            Swipe for more &rarr;
+          </span>
+        </div>
         {/* Selection Row (Horizontal Swipe Flow) */}
         {/* [&::-webkit-scrollbar]:hidden hides the ugly scrollbar while keeping the swipe working */}
         <div className="flex flex-row overflow-x-auto gap-4 mb-10 pb-2 w-full [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
@@ -42,8 +48,8 @@ export default function WhoIsThisFor() {
                 key={option.id}
                 onClick={() => setSelected(option.id)}
                 className={`flex-shrink-0 flex flex-col items-center justify-center w-36 h-40 p-4 rounded-2xl border transition-all duration-200 ${isSelected
-                    ? 'border-[#1a3628] bg-[#f2f7f4]'
-                    : 'border-stone-200 bg-white hover:border-stone-300'
+                  ? 'border-[#1a3628] bg-[#f2f7f4]'
+                  : 'border-stone-200 bg-white hover:border-stone-300'
                   }`}
               >
                 <div className="h-12 flex items-center justify-center mb-3">
