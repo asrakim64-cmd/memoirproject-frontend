@@ -5,7 +5,7 @@ export default function Hero() {
     <section className="grid grid-cols-1 lg:grid-cols-12 items-center gap-12 max-w-7xl mx-auto px-8 py-12">
 
       {/* Left Side: Heading, Description, and Action Buttons */}
-      <div className="lg:col-span-7 w-full">
+      <div className="lg:col-span-6">
 
         <h1 className="text-[#1D1D1D] text-[48px] font-bold leading-[58px] max-w-[520px]">
           A shared family
@@ -24,22 +24,9 @@ export default function Hero() {
         </p>
 
         <div className="flex gap-10 mt-9 ml-2">
-          {/* <Link
-            href="/signup"
-            className="w-[180px] h-[70px] bg-[#a7cdbd] text-white text-[28px] font-bold px-8 py-2 rounded-md hover:bg-[#a7cdbd] transition inline-block"
-          >
-            Sign up
-          </Link>
-
-          <Link
-            href="/login"
-            className="w-[180px] h-[70px] bg-[#a7cdbd] text-white text-[28px] font-bold px-10 py-2 rounded-md hover:bg-[#a7cdbd] transition inline-block"
-          >
-            Login
-          </Link> */}
           <Link
             href="/who_is_this_for"
-            className="w-[360px] h-[70px] bg-[#a7cdbd] text-white text-[28px] font-bold px-10 py-3 rounded-md hover:bg-[#a7cdbd] transition inline-block ml-5"
+            className="w-[360px] h-[70px] bg-[#a7cdbd] text-white text-[28px] font-bold px-10 py-2 rounded-md hover:bg-[#a7cdbd] transition inline-block ml-6"
           >
             Begin Your Memoir
           </Link>
@@ -47,14 +34,13 @@ export default function Hero() {
 
       </div>
 
-      {/* Right Side: Preview Placeholder Section */}
-      <div className="lg:col-span-5 w-full flex items-center justify-start h-[450px]">
+       <div className="lg:col-span-6 mt-10 -ml-15">
 
-        <h2 className="text-[32px] font-bold text-left text-[#1D1D1D] leading-[42px]">
-          Here preview will be
-          <br />
-          shown
-        </h2>
+        <div className="min-h-[400px] bg-[#fafaf9] border-2 border-dashed border-[#a7cdbd] rounded-xl flex items-center justify-center p-6 text-center shadow-sm">
+          <p className="text-[20px] font-medium text-[#77716D] leading-relaxed">
+            Proper preview of how the living memoir will look like at the end so user knows what value he is getting right
+          </p>
+        </div>
 
       </div>
 

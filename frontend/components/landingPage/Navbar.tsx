@@ -22,6 +22,9 @@ export default function Navbar() {
         <li>
           FAQs
         </li>
+        <Link href="/login" className="hover:text-[#B7A79A] transition">
+          Login
+        </Link>
       </ul>
 
     </nav>
