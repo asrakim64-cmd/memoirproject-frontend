@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Hero() {
   return (
     <section className="grid grid-cols-1 lg:grid-cols-12 items-center gap-12 max-w-7xl mx-auto px-8 py-12">
- 
+
       <div className="lg:col-span-6">
 
         <h1 className="text-[#1D1D1D] text-[48px] font-bold leading-[58px] max-w-[520px]">
@@ -25,15 +25,15 @@ export default function Hero() {
         <div className="flex gap-10 mt-9 ml-2">
           <Link
             href="/who_is_this_for"
-            className="w-[360px] h-[70px] bg-[#a7cdbd] text-white text-[28px] font-bold px-10 py-2 rounded-md hover:bg-[#a7cdbd] transition inline-block ml-6"
+            className="w-[400px] h-[70px] bg-[#a7cdbd] text-white text-[28px] font-bold px-10 py-2 rounded-md hover:bg-[#a7cdbd] transition inline-block ml-4"
           >
-            Begin Your Memoir
-          </Link>
+            Gather your memories
+            </Link>
         </div>
 
       </div>
 
-       <div className="lg:col-span-6 mt-10 -ml-15">
+      <div className="lg:col-span-6 mt-10 -ml-15">
 
         <div className="min-h-[400px] bg-[#fafaf9] border-2 border-dashed border-[#a7cdbd] rounded-xl flex items-center justify-center p-6 text-center shadow-sm">
           <p className="text-[20px] font-medium text-[#77716D] leading-relaxed">
