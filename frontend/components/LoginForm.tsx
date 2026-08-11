@@ -41,7 +41,7 @@ export default function LoginForm() {
       <div className="w-[650px] bg-white border border-[#D8CEC8] rounded-lg p-10">
         <span className="mb-6">
           <Link
-            href=""
+            href="\"
             className="inline-flex items-center gap-2 text-[16px] font-medium text-[#6B5E53] hover:text-[#2C2C2C] transition"
           >
             <span><b>←</b></span>
@@ -50,12 +50,8 @@ export default function LoginForm() {
 
         {/* Heading */}
         <h1 className="text-center text-[40px] font-bold leading-[52px] text-black">
-          Welcome Back !
-          <br />
-          Log in to your memoir
-          <br />
-          account
-        </h1>
+          Step back into <br/>your family's safe space<br/>
+          </h1>
 
         {/* Wrap inputs and button in a form */}
         <form onSubmit={handleLogin}>

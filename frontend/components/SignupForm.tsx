@@ -66,7 +66,7 @@ export default function SignupForm() {
       <div className="w-[650px] bg-white border border-[#D8CEC8] rounded-lg p-10">
         <span className="mb-6">
           <Link
-            href="/review"
+            href="/memoir-details"
             className="inline-flex text-[16px] font-medium text-[#6B5E53] hover:text-[#2C2C2C] transition -ml-2"
           >
             <span><b>←</b></span>
@@ -75,7 +75,7 @@ export default function SignupForm() {
 
         <div className="flex justify-between items-start">
           <h2 className="text-[34px] font-bold text-black">
-            Create your account
+            Let’s create a safe space for your memories
           </h2>
 
           <div className="flex flex-col items-end text-[20px] text-black whitespace-nowrap">
