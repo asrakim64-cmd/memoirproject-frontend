@@ -12,21 +12,17 @@ export default function SignupForm() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const router = useRouter(); // We will use this to redirect the user after success
+  const router = useRouter(); 
 
-  // 2. The function that runs when the form is submitted
+
   const handleSignup = async (e: React.FormEvent) => {
-    e.preventDefault(); // Prevents the page from refreshing
-
-    // Quick validation to ensure passwords match
+    e.preventDefault(); 
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
 
     setLoading(true);
-
-    // 3. Send Email and Password to the Supabase Private Auth DB
     const { data: authData, error: authError } = await supabase.auth.signUp({
       email,
       password,
@@ -38,10 +34,9 @@ export default function SignupForm() {
       return;
     }
 
-    // 4. Save Name, Email, and UUID to your Public DB
     if (authData.user) {
       const { error: dbError } = await supabase
-        .from("user_account") //  Verify this matches your actual table name in Supabase
+        .from("user_account") 
         .insert([
           {
             id: authData.user.id,
@@ -54,7 +49,6 @@ export default function SignupForm() {
         alert("Account created, but failed to save profile name.");
         console.error(dbError);
       } else {
-        // Success! Redirect them to the next page in your onboarding flow
         router.push("/subscription");
       }
     }
@@ -64,46 +58,46 @@ export default function SignupForm() {
 
     <section className="flex justify-center items-center py-20">
       <div className="w-[650px] bg-white border border-[#D8CEC8] rounded-lg p-10">
-        <span className="mb-6">
+        <span className="mb-4 block text-left">
           <Link
             href="/memoir-details"
             className="inline-flex text-[16px] font-medium text-[#6B5E53] hover:text-[#2C2C2C] transition -ml-2"
           >
-            <span><b>←</b></span>
+            <span ><b>←</b></span>
           </Link>
         </span>
 
-        <div className="flex justify-between items-start">
-          <h2 className="text-[34px] font-bold text-black">
-            Let’s create a safe space for your memories
+        <div className="flex justify-between items-start gap-6 mb-1">
+
+          <h2 className="font-serif text-[32px] text-[#2C2C2C] leading-[40px] flex-1">
+            Let’s create a safe space <br /> for your memories
           </h2>
 
-          <div className="flex flex-col items-end text-[20px] text-black whitespace-nowrap">
-            <p>Have an account ?</p>
+          <div className="flex flex-col text-[16px] text-[#77716D] whitespace-nowrap pt-2">
+            <p>Have an account?</p>
             <Link
               href="/login"
-              className="text-[#3D7C47] text-[20px] font-semibold mr-3"
+              className="text-[#3D7C47] font-bold mt-1 hover:underline transition ml-15"
             >
               Login
             </Link>
           </div>
         </div>
 
-        {/* START OF THE FORM */}
         <form onSubmit={handleSignup}>
-          
+
           <input
             type="text"
-            placeholder="Full Name"
-            value={full_name} // Connects to your state
-            onChange={(e) => setName(e.target.value)} // Updates state as you type
-            required // Forces them to fill it out
+            placeholder="Full Name*"
+            value={full_name} 
+            onChange={(e) => setName(e.target.value)}
+            required 
             className="w-full mt-8 px-5 py-4 border border-black rounded-lg text-[18px] text-black placeholder:text-gray-500 outline-none"
           />
 
           <input
             type="email"
-            placeholder="Email"
+            placeholder="Email*"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -113,7 +107,7 @@ export default function SignupForm() {
           <div className="grid grid-cols-2 gap-4 mt-4">
             <input
               type="password"
-              placeholder="Password"
+              placeholder="Password*"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -122,7 +116,7 @@ export default function SignupForm() {
 
             <input
               type="password"
-              placeholder="Confirm Password"
+              placeholder="Confirm Password*"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
@@ -137,10 +131,8 @@ export default function SignupForm() {
           >
             {loading ? "Loading..." : "Continue"}
           </button>
-          
-        </form>
-        {/*  END OF THE FORM  */}
 
+        </form>
         <p className="text-center text-[18px] font-semibold text-black mt-6">
           By clicking create an account you agree to the
           <br />

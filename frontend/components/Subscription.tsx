@@ -9,9 +9,8 @@ export default function Subscription() {
           Complete Your Subscription
         </h1>
 
-        {/* Payment */}
         <div className="flex justify-between items-center mb-2">
-          <h2 className="text-[22px] font-bold text-black">
+          <h2 className="font-serif text-[36px] text-[#2C2C2C] leading-[44px] mb-3">
             Payment
           </h2>
 

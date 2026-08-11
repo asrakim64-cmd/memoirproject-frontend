@@ -15,7 +15,6 @@ export default function LoginForm() {
     e.preventDefault();
     setLoading(true);
 
-    // Authenticate with Supabase
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -27,8 +26,8 @@ export default function LoginForm() {
       if (data.user) {
         await supabase
           .from("user_account")
-          .update({ last_login_at: new Date().toISOString() }) // Sets current date & time
-          .eq("id", data.user.id); // Matches the logged-in user's UUID
+          .update({ last_login_at: new Date().toISOString() })
+          .eq("id", data.user.id); 
       }
       alert("Login successful!");
       router.push("/");
@@ -39,7 +38,7 @@ export default function LoginForm() {
   return (
     <section className="flex justify-center items-center py-20">
       <div className="w-[650px] bg-white border border-[#D8CEC8] rounded-lg p-10">
-        <span className="mb-6">
+        <span className="mb-4 block text-left">
           <Link
             href="\"
             className="inline-flex items-center gap-2 text-[16px] font-medium text-[#6B5E53] hover:text-[#2C2C2C] transition"
@@ -48,14 +47,11 @@ export default function LoginForm() {
           </Link>
         </span>
 
-        {/* Heading */}
-        <h1 className="text-center text-[40px] font-bold leading-[52px] text-black">
+        <h1 className="font-serif text-[36px] text-center text-[#2C2C2C] leading-[44px]">
           Step back into <br/>your family's safe space<br/>
           </h1>
 
-        {/* Wrap inputs and button in a form */}
         <form onSubmit={handleLogin}>
-          {/* Inputs */}
           <input
             type="email"
             placeholder="Email"
@@ -74,7 +70,6 @@ export default function LoginForm() {
             className="w-full mt-4 px-5 py-4 border border-black rounded-lg text-[18px] text-black placeholder:text-gray-500 outline-none"
           />
 
-          {/* Remember / Forgot */}
           <div className="flex justify-between items-center mt-6 text-black text-[20px]">
             <label className="flex items-center gap-3 cursor-pointer">
               <input
@@ -92,7 +87,6 @@ export default function LoginForm() {
             </a>
           </div>
 
-          {/* Button */}
           <div className="mt-6">
             <button
               type="submit"
@@ -104,7 +98,6 @@ export default function LoginForm() {
           </div>
         </form>
 
-        {/* Bottom */}
         <div className="border border-black rounded-lg mt-7 py-4 text-center text-[20px] text-black">
           Not a member yet ?
           <Link
