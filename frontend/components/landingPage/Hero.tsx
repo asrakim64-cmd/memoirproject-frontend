@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Hero() {
   return (
     <section className="grid grid-cols-1 lg:grid-cols-12 items-center gap-12 max-w-7xl mx-auto px-8 py-12">
-
+ 
       {/* Left Side: Heading, Description, and Action Buttons */}
       <div className="lg:col-span-6">
 
