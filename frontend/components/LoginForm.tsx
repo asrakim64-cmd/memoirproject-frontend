@@ -1,0 +1,114 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabaseClient";
+
+export default function LoginForm() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      alert("Login failed: " + error.message);
+    } else {
+      if (data.user) {
+        await supabase
+          .from("user_account")
+          .update({ last_login_at: new Date().toISOString() })
+          .eq("id", data.user.id); 
+      }
+      alert("Login successful!");
+      router.push("/");
+    }
+    setLoading(false);
+  };
+
+  return (
+    <section className="flex justify-center items-center py-20">
+      <div className="w-[650px] bg-white border border-[#D8CEC8] rounded-lg p-10">
+        <span className="mb-4 block text-left">
+          <Link
+            href="\"
+            className="inline-flex items-center gap-2 text-[16px] font-medium text-[#6B5E53] hover:text-[#2C2C2C] transition"
+          >
+            <span><b>←</b></span>
+          </Link>
+        </span>
+
+        <h1 className="font-serif text-[36px] text-center text-[#2C2C2C] leading-[44px]">
+          Step back into <br/>your family's safe space<br/>
+          </h1>
+
+        <form onSubmit={handleLogin}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="w-full mt-10 px-5 py-4 border border-black rounded-lg text-[18px] text-black placeholder:text-gray-500 outline-none"
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className="w-full mt-4 px-5 py-4 border border-black rounded-lg text-[18px] text-black placeholder:text-gray-500 outline-none"
+          />
+
+          <div className="flex justify-between items-center mt-6 text-black text-[20px]">
+            <label className="flex items-center gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                className="w-5 h-5 accent-[#B7A79A]"
+              />
+              <span className="text-[20px]">Remember me</span>
+            </label>
+
+            <a
+              href="#"
+              className="text-[20px] font-normal hover:underline"
+            >
+              Forgot your Password?
+            </a>
+          </div>
+
+          <div className="mt-6">
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-[#a7cdbd] text-white rounded-lg py-4 text-[20px] font-semibold text-center flex items-center justify-center disabled:opacity-50"
+            >
+              {loading ? "Logging in..." : "Login"}
+            </button>
+          </div>
+        </form>
+
+        <div className="border border-black rounded-lg mt-7 py-4 text-center text-[20px] text-black">
+          Not a member yet ?
+          <Link
+            href="/signup"
+            className="text-[#3D7C47] text-[20px] font-semibold ml-2"
+          >
+            Sign up
+          </Link>
+        </div>
+
+      </div>
+    </section>
+  );
+}
