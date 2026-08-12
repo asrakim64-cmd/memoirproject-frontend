@@ -2,17 +2,50 @@ export default function LandingPageScroll() {
   return (
     <div className="flex flex-col w-full">
       
-      {/* 
-        NOTE: Place this component exactly below your existing static Hero Section.
-        It assumes your global CSS has no conflicting margins.
-      */}
 
-      {/* Card 1: The Emotional Quote (Base Blue to establish tone) */}
-      <section className="min-h-screen flex items-center justify-center bg-[#00253e] p-8">
-        <h2 className="text-[#c9a063] text-4xl md:text-6xl text-center max-w-4xl font-serif leading-snug">
-          "Every family already holds the memoir. It is just scattered across the people who loved them."
-        </h2>
-      </section>
+   <section className="relative min-h-screen flex items-center justify-center p-8 bg-[#fefaf1]  overflow-hidden">
+  
+  {/* 1. The Photo Artifact (Top Left) */}
+  <div className="hidden md:block absolute top-16 left-30 w-48 h-64 bg-gray-200 border-[10px] border-white shadow-xl -rotate-12 transition-transform duration-500 hover:scale-105 hover:z-20">
+    {/* A soft gradient placeholder to represent an old photo */}
+    <div className="w-full h-full bg-gradient-to-br from-gray-300 to-gray-400"></div>
+  </div>
+
+  {/* 2. The Video Artifact (Bottom Right) */}
+  <div className="hidden md:flex absolute bottom-24 right-24 w-72 h-44 bg-gray-800 border-[8px] border-white shadow-xl -rotate-15 transition-transform duration-500 hover:scale-105 hover:z-20 items-center justify-center overflow-hidden">
+    {/* Video Background Placeholder */}
+    <div className="absolute inset-0 bg-gradient-to-tr from-[#00253e] to-gray-700 opacity-80"></div>
+    {/* Glassmorphism Play Button Overlay */}
+    <div className="relative w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 shadow-lg cursor-pointer hover:bg-white/30 transition-colors">
+      <div className="w-0 h-0 border-t-[8px] border-t-transparent border-l-[14px] border-l-white border-b-[8px] border-b-transparent ml-1"></div>
+    </div>
+  </div>
+
+  {/* 3. The Voice Note Artifact (Mid-Left, tucked behind) */}
+  <div className="hidden md:flex absolute bottom-20 left-1/4 w-60 h-16 bg-white rounded-full shadow-lg -rotate-12 opacity-90 border border-gray-100 transition-transform duration-500 hover:scale-105 hover:z-20 items-center px-4 gap-3 cursor-pointer">
+    {/* Play Icon */}
+    <div className="w-10 h-10 rounded-full bg-[#00253e] flex items-center justify-center shrink-0">
+      <div className="w-0 h-0 border-t-[5px] border-t-transparent border-l-[8px] border-l-[#c9a063] border-b-[5px] border-b-transparent ml-1"></div>
+    </div>
+  </div>
+
+  {/* 4. The Journal Text Artifact (Top Right) */}
+  <div className="hidden md:block absolute top-20 right-[40%] w-56 p-6 bg-white shadow-lg rotate-12 opacity-80 border border-gray-100 transition-transform duration-500 hover:scale-105 hover:z-20">
+    <div className="w-full h-[1px] bg-gray-200 mb-3"></div>
+    <div className="w-full h-[1px] bg-gray-200 mb-3"></div>
+    <p className="font-serif italic text-gray-400 text-sm leading-relaxed transform -translate-y-6">
+      "I still remember the summer he taught us..."
+    </p>
+  </div>
+
+  {/* Replaced yellow bg with pure white at 60% opacity for a crystal-clear glass effect */}
+  <div className="relative z-10 max-w-3xl backdrop-blur-md bg-white/60 p-10 md:p-14 rounded-3xl border border-white shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
+    <h2 className="text-[#00253e] text-3xl md:text-4xl text-center font-serif leading-relaxed">
+      "Every family already holds the memoir. It is just <span className="text-[#c9a063] italic">scattered across</span> the people who loved them."
+    </h2>
+  </div>
+
+</section>
 
       {/* Card 2: Storytelling Toolkit (Gradient shift to Sage Green) */}
       <section className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#00253e] to-[#a2b59f] p-8">
