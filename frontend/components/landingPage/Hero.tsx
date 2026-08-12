@@ -25,7 +25,7 @@ export default function Hero() {
         <div className="flex gap-10 mt-9 ml-2">
           <Link
             href="/who_is_this_for"
-            className="w-[400px] h-[70px] bg-[#a7cdbd] text-white text-[28px] font-bold px-10 py-2 rounded-md hover:bg-[#a7cdbd] transition inline-block ml-4"
+            className="w-[400px] h-[70px] bg-[#00253e] text-white text-[28px] font-bold px-10 py-2 rounded-md hover:bg-[#00253e] transition inline-block ml-4"
           >
             Gather your memories
             </Link>
