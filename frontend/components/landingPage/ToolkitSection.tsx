@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function ToolkitSection() {
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#00253e] to-[#0f172a] p-8 md:p-16 overflow-hidden">
+    <section className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#381c24] p-8 md:p-16 overflow-hidden">
       
       <div className="text-center mb-20">
          <motion.h3 
