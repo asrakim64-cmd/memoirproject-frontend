@@ -1,6 +1,5 @@
 "use client";
 import { motion } from "framer-motion";
-import React from "react";
 
 export default function ToolkitSection() {
   return (
@@ -11,7 +10,7 @@ export default function ToolkitSection() {
            initial={{ opacity: 0, y: 20 }}
            whileInView={{ opacity: 1, y: 0 }}
            viewport={{ once: true }}
-           className="text-[#fefaf1] text-4xl md:text-5xl font-serif mb-4"
+           className="text-[#fefaf1] text-3xl md:text-4xl font-serif mb-4"
          >
            Capture Memories <span className="text-[#c9a063] italic">Without Friction</span>
          </motion.h3>
