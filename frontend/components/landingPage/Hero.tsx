@@ -2,42 +2,51 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="grid grid-cols-1 lg:grid-cols-12 items-center gap-12 max-w-7xl mx-auto px-8 py-12">
+    <section className="grid grid-cols-1 lg:grid-cols-12 items-center gap-12 max-w-7xl mx-auto px-8 py-12 md:py-24 bg-[#faf8f5]">
 
-      <div className="lg:col-span-6">
+      <div className="lg:col-span-6 flex flex-col justify-center">
 
-        <h1 className="text-[#1D1D1D] text-[48px] font-bold leading-[58px] max-w-[520px]">
+        {/* Deep Blue, Serif, tighter line-height for a premium feel */}
+        <h1 className="text-[#00253e] text-5xl md:text-[56px] font-serif font-bold leading-tight max-w-[560px]">
           A shared family
           <br />
           memoir created by
           <br />
           everyone who
           <br />
-          loved them
+          loved them.
         </h1>
 
-        <p className="mt-8 text-[28px] font-normal leading-[42px] text-[#4A4A4A] max-w-[540px]">
+        {/* Softer Deep Blue, Sans-Serif for readability */}
+        <p className="mt-6 md:mt-8 text-xl md:text-[22px] font-sans font-light leading-relaxed text-[#00253e]/80 max-w-[540px]">
           Share one link to collect voice stories, memories and photos
-          from family. Everything is automatically organized into
-          chaptered archive and printable pdf.
+          from family. Everything is automatically organized into a 
+          chaptered archive and printable PDF.
         </p>
 
-        <div className="flex gap-10 mt-9 ml-2">
+        <div className="flex mt-10">
+          {/* Sleeker button with hover states tying into the Gold/Deep Blue theme */}
           <Link
             href="/who_is_this_for"
-            className="w-[400px] h-[70px] bg-[#00253e] text-white text-[28px] font-bold px-10 py-2 rounded-md hover:bg-[#00253e] transition inline-block ml-4"
+            className="bg-[#00253e] text-[#faf8f5] text-lg md:text-[20px] font-sans font-medium px-10 py-5 rounded-full hover:bg-[#0f172a] hover:shadow-xl hover:shadow-[#00253e]/20 hover:-translate-y-1 transition-all duration-300 inline-flex items-center justify-center border border-[#00253e]"
           >
             Gather your memories
-            </Link>
+          </Link>
         </div>
 
       </div>
 
-      <div className="lg:col-span-6 mt-10 -ml-15">
+      <div className="lg:col-span-6 mt-12 lg:mt-0 relative">
 
-        <div className="min-h-[400px] bg-[#fafaf9] border-2 border-dashed border-[#a7cdbd] rounded-xl flex items-center justify-center p-6 text-center shadow-sm">
-          <p className="text-[20px] font-medium text-[#77716D] leading-relaxed">
-            Proper preview of how the living memoir will look like at the end so user knows what value he is getting right
+        {/* Swapped Sage Green for Warm Yellow & Gold */}
+        <div className="min-h-[440px] bg-[#fdf8ed] border-2 border-dashed border-[#c9a063]/50 rounded-2xl flex flex-col items-center justify-center p-10 text-center shadow-lg group hover:border-[#c9a063] transition-colors duration-300">
+          
+          <div className="w-12 h-12 rounded-full bg-[#c9a063]/10 flex items-center justify-center mb-6">
+            <svg className="w-6 h-6 text-[#c9a063]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          </div>
+          
+          <p className="text-xl font-serif italic text-[#00253e]/60 leading-relaxed max-w-[80%] group-hover:text-[#00253e]/80 transition-colors">
+            Proper preview of how the living memoir will look like at the end so the user knows what value they are getting right away.
           </p>
         </div>
 
