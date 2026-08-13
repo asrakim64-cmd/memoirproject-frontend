@@ -57,12 +57,65 @@ export default function ToolkitSection() {
            </p>
         </motion.div>
 
-        {/* Column 2 Placeholder */}
-        <div className="bg-white/10 backdrop-blur-md p-8 rounded-xl border border-white/20 text-center hover:bg-white/20 transition-all cursor-default">
-           <h4 className="text-[#00253e] text-xl mb-4 font-bold">Voice or Text</h4>
-           <p className="text-[#fefaf1]">Share memories however you feel most comfortable, right in the browser.</p>
-        </div>
-        
+       {/* CARD 2: VOICE OR TEXT (Dark Frosted Glass Version) */}
+        {/* CARD 2: VOICE OR TEXT (Warm Yellow / Nostalgic Version) */}
+        <motion.div 
+          whileHover="hover"
+          className="group relative bg-[#fdf8ed] p-8 rounded-3xl border-2 border-[#f0e4d3] text-center flex flex-col items-center cursor-pointer overflow-hidden transition-all duration-500 hover:border-[#c9a063] hover:shadow-2xl hover:shadow-[#c9a063]/20"
+        >
+           {/* HIGH-FIDELITY PROTOTYPE (The CSS Doodle) */}
+           <div className="w-full h-44 mb-8 bg-[#c9a063]/10 rounded-2xl p-4 flex flex-col items-center justify-center relative overflow-hidden border border-[#c9a063]/20 gap-3">
+              
+              {/* Active Voice Recording Snippet */}
+              <motion.div 
+                variants={{
+                  hover: { y: -2, scale: 1.02, transition: { type: "spring", stiffness: 400, damping: 25 } }
+                }}
+                className="w-full bg-[#00253e] rounded-xl p-3 border border-[#00253e] flex items-center justify-between shadow-lg group-hover:border-[#c9a063] transition-colors"
+              >
+                 <div className="flex items-center gap-2">
+                    {/* Pulsing red dot on hover */}
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-500 group-hover:animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.6)]"></div>
+                    <span className="text-xs text-[#faf8f5]/70 font-mono group-hover:text-[#faf8f5] transition-colors duration-300">02:14</span>
+                 </div>
+                 
+                 {/* Animated Waveform */}
+                 <div className="flex items-center gap-[3px]">
+                    <motion.div variants={{ hover: { scaleY: [1, 1.8, 0.8, 1], transition: { repeat: Infinity, duration: 0.8 } } }} className="w-1 h-3 bg-[#c9a063] rounded-full origin-center"></motion.div>
+                    <motion.div variants={{ hover: { scaleY: [1, 2.5, 1.2, 1], transition: { repeat: Infinity, duration: 0.9 } } }} className="w-1.5 h-5 bg-[#c9a063] rounded-full origin-center"></motion.div>
+                    <motion.div variants={{ hover: { scaleY: [1, 1.5, 0.5, 1], transition: { repeat: Infinity, duration: 0.7 } } }} className="w-1 h-2 bg-[#c9a063] rounded-full origin-center"></motion.div>
+                    <motion.div variants={{ hover: { scaleY: [1, 2, 0.9, 1], transition: { repeat: Infinity, duration: 0.85 } } }} className="w-1.5 h-4 bg-[#c9a063] rounded-full origin-center"></motion.div>
+                    <motion.div variants={{ hover: { scaleY: [1, 1.4, 0.7, 1], transition: { repeat: Infinity, duration: 0.75 } } }} className="w-1 h-3 bg-[#c9a063] rounded-full origin-center"></motion.div>
+                 </div>
+              </motion.div>
+
+              {/* Text Input Snippet */}
+              <motion.div 
+                variants={{
+                  hover: { y: 2, scale: 1.02, transition: { type: "spring", stiffness: 400, damping: 25 } }
+                }}
+                className="w-full bg-white rounded-xl p-3 border border-[#f0e4d3] flex items-center justify-between shadow-sm group-hover:border-[#c9a063]/50 transition-colors"
+              >
+                 <div className="flex flex-col items-start gap-1">
+                    <span className="text-[10px] text-[#c9a063] uppercase tracking-wider font-bold">Text Mode</span>
+                    <span className="text-xs text-[#00253e]/60 italic font-serif group-hover:text-[#00253e] transition-colors">"I still remember..."</span>
+                 </div>
+                 {/* Send Button */}
+                 <div className="w-6 h-6 rounded-full bg-[#fdf8ed] border border-[#f0e4d3] flex items-center justify-center group-hover:bg-[#c9a063] transition-colors duration-300">
+                   <svg className="w-3 h-3 text-[#00253e] group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                 </div>
+              </motion.div>
+
+           </div>
+
+           {/* The Refined Text */}
+           <h4 className="text-[#00253e] text-2xl mb-3 font-serif transition-colors duration-300 group-hover:text-[#c9a063]">
+             Voice or Text
+           </h4>
+           <p className="text-[#00253e]/70 leading-relaxed text-sm transition-colors duration-300 group-hover:text-[#00253e]">
+             Share memories however you feel most comfortable, right in the browser.
+           </p>
+        </motion.div>        
         {/* Column 3 Placeholder */}
         <div className="bg-white/10 backdrop-blur-md p-8 rounded-xl border border-white/20 text-center hover:bg-white/20 transition-all cursor-default">
            <h4 className="text-[#00253e] text-xl mb-4 font-bold">Curated Prompts</h4>
