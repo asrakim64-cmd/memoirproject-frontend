@@ -1,3 +1,4 @@
+import ToolkitSection from "./ToolkitSection";
 export default function LandingPageScroll() {
   return (
     <div className="flex flex-col w-full">
@@ -46,30 +47,7 @@ export default function LandingPageScroll() {
   </div>
 
 </section>
-
-      {/* Card 2: Storytelling Toolkit (Gradient shift to Sage Green) */}
-      <section className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#00253e] to-[#a2b59f] p-8">
-        <h3 className="text-[#fefaf1] text-3xl mb-12 font-serif text-center">Your Storytelling Toolkit</h3>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl w-full">
-          {/* Column 1 */}
-          <div className="bg-white/10 backdrop-blur-md p-8 rounded-xl border border-white/20 text-center hover:bg-white/20 transition-all cursor-default">
-             <h4 className="text-[#00253e] text-xl mb-4 font-bold">No App Required</h4>
-             <p className="text-[#fefaf1]">Contributors simply click a secure link to start sharing immediately.</p>
-          </div>
-          {/* Column 2 */}
-          <div className="bg-white/10 backdrop-blur-md p-8 rounded-xl border border-white/20 text-center hover:bg-white/20 transition-all cursor-default">
-             <h4 className="text-[#00253e] text-xl mb-4 font-bold">Voice or Text</h4>
-             <p className="text-[#fefaf1]">Share memories however you feel most comfortable, right in the browser.</p>
-          </div>
-          {/* Column 3 */}
-          <div className="bg-white/10 backdrop-blur-md p-8 rounded-xl border border-white/20 text-center hover:bg-white/20 transition-all cursor-default">
-             <h4 className="text-[#00253e] text-xl mb-4 font-bold">Curated Prompts</h4>
-             <p className="text-[#fefaf1]">Meaningful, relationship-based questions to eliminate the blank page.</p>
-          </div>
-        </div>
-      </section>
-
+<ToolkitSection />
       {/* Card 3: Prompt Carousel (High Contrast Deep Blue) */}
       <section className="min-h-screen flex flex-col items-center justify-center bg-[#00253e] p-8 overflow-hidden">
         <h3 className="text-[#c9a063] text-3xl mb-12 font-serif text-center">Find just the right questions to ask</h3>
