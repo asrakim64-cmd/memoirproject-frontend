@@ -116,12 +116,50 @@ export default function ToolkitSection() {
              Share memories however you feel most comfortable, right in the browser.
            </p>
         </motion.div>        
-        {/* Column 3 Placeholder */}
-        <div className="bg-white/10 backdrop-blur-md p-8 rounded-xl border border-white/20 text-center hover:bg-white/20 transition-all cursor-default">
-           <h4 className="text-[#00253e] text-xl mb-4 font-bold">Curated Prompts</h4>
-           <p className="text-[#fefaf1]">Meaningful, relationship-based questions to eliminate the blank page.</p>
-        </div>
-        
+        {/* CARD 3: CURATED PROMPTS (Alabaster White Version) */}
+        <motion.div 
+          whileHover="hover"
+          className="group relative bg-[#faf8f5] p-8 rounded-3xl border-2 border-[#00253e] text-center flex flex-col items-center cursor-pointer overflow-hidden transition-all duration-500 hover:border-[#c9a063] hover:shadow-2xl hover:shadow-[#00253e]/20"
+        >
+           {/* HIGH-FIDELITY PROTOTYPE (The CSS Doodle) */}
+           <div className="w-full h-44 mb-8 bg-[#00253e]/5 rounded-2xl p-4 flex flex-col items-center justify-center relative overflow-hidden border border-[#00253e]/10">
+              
+              {/* Background Card (The Stack) */}
+              <motion.div 
+                variants={{
+                  hover: { y: -12, rotate: -6, scale: 0.95, transition: { type: "spring", stiffness: 400, damping: 25 } }
+                }}
+                className="absolute bg-white/60 border border-[#00253e]/10 w-[80%] h-24 rounded-xl shadow-sm z-0"
+              />
+
+              {/* Foreground Card (The Active Prompt) */}
+              <motion.div 
+                variants={{
+                  hover: { y: -4, rotate: 3, scale: 1.05, transition: { type: "spring", stiffness: 400, damping: 25 } }
+                }}
+                className="relative z-10 bg-white border border-[#00253e]/15 p-4 rounded-xl shadow-md w-[90%] text-left flex flex-col gap-3 group-hover:border-[#c9a063]/50 transition-colors"
+              >
+                 <div className="flex items-center justify-between">
+                    <span className="text-[10px] text-[#c9a063] uppercase tracking-wider font-bold">Prompt 14</span>
+                    {/* Tiny Spark/Idea Icon */}
+                    <svg className="w-4 h-4 text-[#00253e]/30 group-hover:text-[#c9a063] transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                 </div>
+                 {/* The Question */}
+                 <p className="text-[#00253e] text-[13px] font-serif italic leading-snug">
+                   "What was the most rebellious thing you did in your twenties?"
+                 </p>
+              </motion.div>
+
+           </div>
+
+           {/* The Refined Text */}
+           <h4 className="text-[#00253e] text-2xl mb-3 font-serif transition-colors duration-300 group-hover:text-[#c9a063]">
+             Curated Prompts
+           </h4>
+           <p className="text-[#00253e]/70 leading-relaxed text-sm transition-colors duration-300 group-hover:text-[#00253e]">
+             Meaningful, relationship-based questions to eliminate the blank page.
+           </p>
+        </motion.div>
       </div>
     </section>
   );
