@@ -1,52 +1,43 @@
 // A wrapper file that defines layout elements shared accross webpages
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Playfair_Display } from "next/font/google";
+import { Playfair_Display, Caveat, Inter } from "next/font/google";
 import "./globals.css";
-import { Caveat } from "next/font/google"; 
-
 import AnnouncementBar from "../components/layout/AnnouncementBar";
 import Navbar from "../components/layout/Navbar";
+import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Configure fonts
+const inter = Inter({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-sans",
 });
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
+  variable: "--font-serif",
 });
+
+export const metadata: Metadata = {
+  title: "Memoir Archive",
+  description: "Preserve your life's legacy.",
+};
 
 const caveat = Caveat({
   subsets: ["latin"],
   variable: "--font-caveat",
 });
 
-export const metadata: Metadata = {
-  title: "Memoir",
-  description: "Memoir Project",
-};
-
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${caveat.variable} antialiased`}
-    >
-      <body className={`${playfair.className} min-h-screen bg-[#F8F2EF]`}>
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+      <body className="font-sans antialiased bg-[#FAF8F5] text-[#1D1D1D]">
         <AnnouncementBar />
         <Navbar />
-        {children}
+        <main>{children}</main>
       </body>
     </html>
   );

@@ -3,11 +3,11 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <nav className="flex items-center justify-between px-16 py-3 h-22 bg-[#eff1f3]">
+    <nav className="flex items-center justify-between px-8 md:px-16 py-2 bg-[#FAF8F5] border-b border-[#E6E2D8]">
 
       <Logo />
 
-      <ul className="flex items-center gap-10 text-[22px] font-bold text-[#1D1D1D] tracking-[0.2px]">
+      <ul className="flex items-center gap-8 text-sm md:text-base font-medium text-[#381c24] tracking-[0.2px]">
         <li>
           <Link href="/" className="hover:text-[#B7A79A] transition">
             Home
