@@ -5,8 +5,8 @@ import { Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Caveat } from "next/font/google"; 
 
-import AnnouncementBar from "../components/landingPage/AnnouncementBar";
-import Navbar from "../components/landingPage/Navbar";
+import AnnouncementBar from "../components/layout/AnnouncementBar";
+import Navbar from "../components/layout/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

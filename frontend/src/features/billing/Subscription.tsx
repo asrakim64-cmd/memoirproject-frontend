@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function Subscription() {
   return (
     <section className="flex justify-center items-center py-20">
