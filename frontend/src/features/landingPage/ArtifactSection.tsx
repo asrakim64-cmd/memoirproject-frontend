@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function ArtifactSection() {
   return (
-    <section className="py-24 flex flex-col items-center justify-center bg-[#381c24] p-8 overflow-hidden">
+    <section className="py-24 flex flex-col items-center justify-center bg-[#4a222a] p-8 overflow-hidden">
       
       {/* Refined Heading */}
       <motion.div 
