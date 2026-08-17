@@ -1,34 +1,11 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import ReactionPicker from "./components/ReactionPicker";
 import MemoryCard from "./components/MemoryCard";
 
 export default function MemoirPage() {
     const [activeTab, setActiveTab] = useState("chapter-1");
     const [isPlaying, setIsPlaying] = useState(false);
-
-    // Interactive Reaction State for the story (Facebook / Instagram style multiple reactions)
-    const [reactions, setReactions] = useState({
-        like: { count: 12, active: false, emoji: '👍' },
-        love: { count: 14, active: true, emoji: '❤️' },
-        laugh: { count: 5, active: false, emoji: '😂' },
-        wow: { count: 3, active: false, emoji: '😮' },
-        sad: { count: 2, active: false, emoji: '😢' },
-        angry: { count: 1, active: false, emoji: '😡' },
-    });
-
-   const handleReaction = (type: string) => {
-        const key = type as keyof typeof reactions;
-        setReactions((prev) => ({
-            ...prev,
-            [key]: {
-                ...prev[key],
-                count: prev[key].active ? prev[key].count - 1 : prev[key].count + 1,
-                active: !prev[key].active,
-            },
-        }));
-    };
 
     // States for Link Sharing & Modals
     const [isCopyModalOpen, setIsCopyModalOpen] = useState(false);
@@ -62,10 +39,12 @@ export default function MemoirPage() {
                         </h1>
                     </div>
 
-                    {/* Proper Framed Photograph (Fixed missing image source) */}
+                    {/* Proper Framed Photograph */}
                     <div className="relative group my-2">
                         <div className="w-32 h-32 md:w-36 md:h-36 rounded-2xl p-1.5 bg-white shadow-xl border border-[#f0e4d3] overflow-hidden">
                             <img
+                                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400"
+                                alt="Hussain Usman"
                                 className="w-full h-full object-cover rounded-xl grayscale-[15%] hover:grayscale-0 transition-all duration-500"
                             />
                         </div>
@@ -214,8 +193,6 @@ export default function MemoirPage() {
                             audioDuration="01:45"
                             isPlaying={isPlaying}
                             onTogglePlay={() => setIsPlaying(!isPlaying)}
-                            reactions={reactions}
-                            onReact={handleReaction}
                         />
 
                         {/* Story Card 2: Photograph Memoir */}
@@ -226,8 +203,6 @@ export default function MemoirPage() {
                             type="photo"
                             imageSrc="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=800"
                             content="Family gathering during Eid celebrations at the old ancestral home. Unforgettable moments of joy and shared meals."
-                            reactions={reactions}
-                            onReact={handleReaction}
                         />
 
                         {/* ================= LIVING COMMENT & REFLECTION LAYER ================= */}
@@ -277,6 +252,7 @@ export default function MemoirPage() {
                     </motion.div>
 
                 </main>
+
             </div>
 
             {/* ================= "BEFORE MOVING, ADD A LINE" COPY INTERSTITIAL ================= */}
