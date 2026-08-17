@@ -1,11 +1,12 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import ReactionPicker from "./components/ReactionPicker";
+import MemoryCard from "./components/MemoryCard";
 
 export default function MemoirPage() {
     const [activeTab, setActiveTab] = useState("chapter-1");
     const [isPlaying, setIsPlaying] = useState(false);
-    const [showReactionPicker, setShowReactionPicker] = useState(false);
 
     // Interactive Reaction State for the story (Facebook / Instagram style multiple reactions)
     const [reactions, setReactions] = useState({
@@ -17,13 +18,14 @@ export default function MemoirPage() {
         angry: { count: 1, active: false, emoji: '😡' },
     });
 
-    const handleReaction = (type: keyof typeof reactions) => {
+   const handleReaction = (type: string) => {
+        const key = type as keyof typeof reactions;
         setReactions((prev) => ({
             ...prev,
-            [type]: {
-                ...prev[type],
-                count: prev[type].active ? prev[type].count - 1 : prev[type].count + 1,
-                active: !prev[type].active,
+            [key]: {
+                ...prev[key],
+                count: prev[key].active ? prev[key].count - 1 : prev[key].count + 1,
+                active: !prev[key].active,
             },
         }));
     };
@@ -203,131 +205,30 @@ export default function MemoirPage() {
                         </div>
 
                         {/* Story Card 1: Voice Memoir */}
-                        <div className="bg-[#fdf8ed] p-7 rounded-2xl border border-[#f0e4d3] shadow-2xs flex flex-col gap-6">
-                            <div className="flex items-center justify-between flex-wrap gap-4">
-                                <div className="flex items-center gap-3.5">
-                                    <div className="w-11 h-11 rounded-full bg-[#381c24] text-white flex items-center justify-center font-serif font-bold text-sm shadow-sm">
-                                        HH
-                                    </div>
-                                    <div>
-                                        <h4 className="font-serif font-medium text-[#381c24] text-base">Aunt Hafsa</h4>
-                                        <span className="text-xs text-[#78716c]">Recorded July 2026 • Voice Memoir</span>
-                                    </div>
-                                </div>
+                        <MemoryCard 
+                            author="Aunt Hafsa"
+                            role="Recorded July 2026 • Voice Memoir"
+                            initials="HH"
+                            type="audio"
+                            content="I still remember the summer we spent in the old courtyard. The sound of the evening breeze through the trees always brings back those golden afternoons..."
+                            audioDuration="01:45"
+                            isPlaying={isPlaying}
+                            onTogglePlay={() => setIsPlaying(!isPlaying)}
+                            reactions={reactions}
+                            onReact={handleReaction}
+                        />
 
-                                {/* Tactile Audio Player */}
-                                <div className="flex items-center gap-3 bg-white px-4 py-2.5 rounded-xl border border-[#f0e4d3]">
-                                    <button
-                                        onClick={() => setIsPlaying(!isPlaying)}
-                                        className="w-8 h-8 rounded-full bg-[#381c24] text-white flex items-center justify-center hover:bg-[#4a222a] transition-colors cursor-pointer shadow-2xs"
-                                    >
-                                        {isPlaying ? "❚❚" : "▶"}
-                                    </button>
-                                    <div className="flex items-center gap-1">
-                                        {[1, 2, 3, 4, 3, 2, 4, 5, 3, 2].map((h, i) => (
-                                            <div
-                                                key={i}
-                                                style={{ height: `${h * 4}px` }}
-                                                className={`w-1 rounded-full transition-colors ${isPlaying ? "bg-[#c9a063] animate-pulse" : "bg-[#c9a063]/50"}`}
-                                            ></div>
-                                        ))}
-                                    </div>
-                                    <span className="text-xs font-mono text-[#57534e]">01:45</span>
-                                </div>
-                            </div>
-
-                            <p className="font-serif italic text-[#292524] text-lg leading-relaxed pl-5 border-l-2 border-[#c9a063]">
-                                "I still remember the summer we spent in the old courtyard. The sound of the evening breeze through the trees always brings back those golden afternoons..."
-                            </p>
-
-                            {/* ================= FACEBOOK/INSTAGRAM STYLE REACTIONS BAR ================= */}
-                            <div className="flex items-center justify-between pt-4 border-t border-[#f0e4d3] relative">
-                                <div className="relative">
-                                    {/* Floating Facebook-Style Reaction Picker Popup */}
-                                    {showReactionPicker && (
-                                        <div
-                                            onMouseLeave={() => setShowReactionPicker(false)}
-                                            className="absolute bottom-full mb-3 left-0 bg-white border border-[#f0e4d3] shadow-2xl rounded-full px-4 py-2 flex items-center gap-3 z-30 animate-in fade-in zoom-in-95 duration-200"
-                                        >
-                                            {Object.keys(reactions).map((key) => {
-                                                const rKey = key as keyof typeof reactions;
-                                                return (
-                                                    <button
-                                                        key={rKey}
-                                                        onClick={() => { handleReaction(rKey); setShowReactionPicker(false); }}
-                                                        className="hover:scale-135 transition-transform text-2xl cursor-pointer p-1 bg-transparent border-none"
-                                                        title={rKey}
-                                                    >
-                                                        {reactions[rKey].emoji}
-                                                    </button>
-                                                );
-                                            })}
-                                        </div>
-                                    )}
-
-                                    {/* Main Reaction Trigger Button & Summary Pill */}
-                                    <div 
-                                        className="relative inline-flex items-center gap-2 bg-white border border-[#f0e4d3] rounded-full px-4 py-2 shadow-2xs hover:border-[#c9a063] transition-all cursor-pointer"
-                                        onMouseEnter={() => setShowReactionPicker(true)}
-                                    >
-                                        <button
-                                            onClick={() => setShowReactionPicker(!showReactionPicker)}
-                                            className="flex items-center gap-1.5 text-xs font-medium text-[#381c24] cursor-pointer bg-transparent border-none p-0"
-                                        >
-                                            <span className="text-base">
-                                                {Object.values(reactions).find(r => r.active)?.emoji || '❤️'}
-                                            </span>
-                                            <span className="font-semibold">
-                                                {Object.values(reactions).reduce((acc, r) => acc + r.count, 0)}
-                                            </span>
-                                        </button>
-                                        <div className="flex items-center gap-1 text-[11px] text-[#78716c] border-l border-[#f0e4d3] pl-2">
-                                            <span>React</span>
-                                            <span className="text-[10px]">▼</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <span className="text-xs text-[#78716c] font-serif italic">Hover to choose reaction</span>
-                            </div>
-                        </div>
-
-                        {/* ================= STORY CARD 2: PHOTOGRAPH MEMOIR TYPE ================= */}
-                        <div className="bg-[#fdf8ed] p-7 rounded-2xl border border-[#f0e4d3] shadow-2xs flex flex-col gap-6">
-                            <div className="flex items-center justify-between flex-wrap gap-4">
-                                <div className="flex items-center gap-3.5">
-                                    <div className="w-11 h-11 rounded-full bg-[#381c24] text-white flex items-center justify-center font-serif font-bold text-sm shadow-sm">
-                                        HU
-                                    </div>
-                                    <div>
-                                        <h4 className="font-serif font-medium text-[#381c24] text-base">Uncle Hassan</h4>
-                                        <span className="text-xs text-[#78716c]">Added August 2026 • Photograph Archive</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="rounded-xl overflow-hidden border border-[#f0e4d3] bg-white shadow-sm max-h-96">
-                                <img 
-                                    src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=800" 
-                                    alt="Family Archive Memory"
-                                    className="w-full h-full object-cover"
-                                />
-                            </div>
-
-                            <p className="font-serif italic text-[#292524] text-sm leading-relaxed pl-4 border-l-2 border-[#c9a063]">
-                                "Family gathering during Eid celebrations at the old ancestral home. Unforgettable moments of joy and shared meals."
-                            </p>
-
-                            <div className="flex items-center justify-between pt-4 border-t border-[#f0e4d3]">
-                                <div className="flex items-center gap-2">
-                                    <button className="px-4 py-2 rounded-full text-xs font-medium border bg-white border-[#f0e4d3] text-[#381c24] hover:border-[#c9a063] transition-all shadow-2xs flex items-center gap-2 cursor-pointer">
-                                        <span>🫂</span>
-                                        <span className="font-semibold">9</span>
-                                    </button>
-                                </div>
-                                <span className="text-xs text-[#78716c] font-serif italic">Photograph memory</span>
-                            </div>
-                        </div>
+                        {/* Story Card 2: Photograph Memoir */}
+                        <MemoryCard 
+                            author="Uncle Hassan"
+                            role="Added August 2026 • Photograph Archive"
+                            initials="HU"
+                            type="photo"
+                            imageSrc="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=800"
+                            content="Family gathering during Eid celebrations at the old ancestral home. Unforgettable moments of joy and shared meals."
+                            reactions={reactions}
+                            onReact={handleReaction}
+                        />
 
                         {/* ================= LIVING COMMENT & REFLECTION LAYER ================= */}
                         <div className="mt-4 pt-6 border-t border-[#f0e4d3] flex flex-col gap-4">
@@ -376,7 +277,6 @@ export default function MemoirPage() {
                     </motion.div>
 
                 </main>
-
             </div>
 
             {/* ================= "BEFORE MOVING, ADD A LINE" COPY INTERSTITIAL ================= */}
