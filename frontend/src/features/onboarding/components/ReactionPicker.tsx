@@ -1,15 +1,23 @@
 "use client";
 import { useState } from "react";
 
+interface Reaction {
+    count: number;
+    active: boolean;
+    emoji: string;
+}
+
 interface ReactionPickerProps {
-    reactions: Record<string, { count: number; active: boolean; emoji: string }>;
+    reactions: Record<string, Reaction>;
     onReact: (type: string) => void;
 }
 
 export default function ReactionPicker({ reactions, onReact }: ReactionPickerProps) {
     const [showPicker, setShowPicker] = useState(false);
 
-    const activeReaction = Object.values(reactions).find(r => r.active) || Object.values(reactions)[0];
+    // Find the currently active reaction, or fallback to ❤️
+    const activeEntry = Object.entries(reactions).find(([_, r]) => r.active);
+    const displayEmoji = activeEntry ? activeEntry[1].emoji : '❤️';
     const totalCount = Object.values(reactions).reduce((acc, r) => acc + r.count, 0);
 
     return (
@@ -23,7 +31,10 @@ export default function ReactionPicker({ reactions, onReact }: ReactionPickerPro
                     {Object.entries(reactions).map(([key, data]) => (
                         <button
                             key={key}
-                            onClick={() => { onReact(key); setShowPicker(false); }}
+                            onClick={() => { 
+                                onReact(key); 
+                                setShowPicker(false); 
+                            }}
                             className="hover:scale-135 transition-transform text-2xl cursor-pointer p-1 bg-transparent border-none"
                             title={key}
                         >
@@ -42,7 +53,7 @@ export default function ReactionPicker({ reactions, onReact }: ReactionPickerPro
                     onClick={() => setShowPicker(!showPicker)}
                     className="flex items-center gap-1.5 text-xs font-medium text-[#381c24] cursor-pointer bg-transparent border-none p-0"
                 >
-                    <span className="text-base">{activeReaction.emoji}</span>
+                    <span className="text-base">{displayEmoji}</span>
                     <span className="font-semibold">{totalCount}</span>
                 </button>
                 <div className="flex items-center gap-1 text-[11px] text-[#78716c] border-l border-[#f0e4d3] pl-2">
