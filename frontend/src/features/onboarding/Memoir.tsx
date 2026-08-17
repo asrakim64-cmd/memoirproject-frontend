@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function MemoirPage() {
     const [activeTab, setActiveTab] = useState("chapter-1");
     const [isPlaying, setIsPlaying] = useState(false);
+    const [showReactionPicker, setShowReactionPicker] = useState(false);
 
     // Interactive Reaction State for the story
     const [reactions, setReactions] = useState({
@@ -139,10 +140,10 @@ export default function MemoirPage() {
                             </button>
                         </div>
                     </div>
-                    <h3 className="text-[11px] uppercase tracking-[0.25em] text-[#78716c] font-bold mb-1 px-3">
+                    {/* Table of Chapters */}
+                    <h5 className="text-[11px] uppercase tracking-widest text-[#57534e] font-bold mt-5">
                         Table of Chapters
-                    </h3>
-                    {[
+                    </h5>{[
                         { id: "chapter-1", title: "I. Early Roots & Childhood", count: "12 stories" },
                         { id: "chapter-2", title: "II. The Working Years", count: "18 stories" },
                         { id: "chapter-3", title: "III. Fatherhood & Wisdom", count: "24 stories" },
@@ -175,7 +176,7 @@ export default function MemoirPage() {
                     })}
                 </aside>
 
-{/* Center/Right: Rich Book Reader Canvas */}
+                {/* Center/Right: Rich Book Reader Canvas */}
                 <main className="lg:col-span-9 flex flex-col gap-10">
 
                     <motion.div
@@ -239,7 +240,7 @@ export default function MemoirPage() {
                                 <div className="relative">
                                     {/* Floating Reaction Picker Popup (Instagram / Facebook Style) */}
                                     {showReactionPicker && (
-                                        <div 
+                                        <div
                                             onMouseLeave={() => setShowReactionPicker(false)}
                                             className="absolute bottom-full mb-2 left-0 bg-white border border-[#f0e4d3] shadow-xl rounded-full px-4 py-2 flex items-center gap-3 z-30 animate-in fade-in zoom-in-95 duration-200"
                                         >
@@ -268,7 +269,7 @@ export default function MemoirPage() {
                                     )}
 
                                     {/* Main Reaction Trigger Button */}
-                                    <div 
+                                    <div
                                         className="relative inline-block"
                                         onMouseEnter={() => setShowReactionPicker(true)}
                                     >
@@ -290,10 +291,6 @@ export default function MemoirPage() {
                                 <span className="text-xs text-[#78716c] font-serif italic">Hover or tap to react</span>
                             </div>
                         </div>
-
-                    </motion.div>
-
-                </main>
                         {/* ================= LIVING COMMENT & REFLECTION LAYER ================= */}
                         <div className="mt-4 pt-6 border-t border-[#f0e4d3] flex flex-col gap-4">
                             <div className="flex items-center justify-between">
