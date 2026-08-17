@@ -7,17 +7,21 @@ export default function MemoirPage() {
     const [isPlaying, setIsPlaying] = useState(false);
     const [showReactionPicker, setShowReactionPicker] = useState(false);
 
-    // Interactive Reaction State for the story
+    // Interactive Reaction State for the story (Facebook / Instagram style multiple reactions)
     const [reactions, setReactions] = useState({
-        love: { count: 14, active: false },
-        heartwarm: { count: 8, active: false },
-        smile: { count: 5, active: false },
+        like: { count: 12, active: false, emoji: '👍' },
+        love: { count: 14, active: true, emoji: '❤️' },
+        laugh: { count: 5, active: false, emoji: '😂' },
+        wow: { count: 3, active: false, emoji: '😮' },
+        sad: { count: 2, active: false, emoji: '😢' },
+        angry: { count: 1, active: false, emoji: '😡' },
     });
 
     const handleReaction = (type: keyof typeof reactions) => {
         setReactions((prev) => ({
             ...prev,
             [type]: {
+                ...prev[type],
                 count: prev[type].active ? prev[type].count - 1 : prev[type].count + 1,
                 active: !prev[type].active,
             },
@@ -27,10 +31,10 @@ export default function MemoirPage() {
     // States for Link Sharing & Modals
     const [isCopyModalOpen, setIsCopyModalOpen] = useState(false);
     const [isPreviewOpen, setIsPreviewOpen] = useState(false);
-    const [customMessage, setCustomMessage] = useState("We are collecting stories and voice memories for Hafsa's permanent archive. Could you share your favorite memory?");
+    const [customMessage, setCustomMessage] = useState("We are collecting stories and voice memories for Hussain's permanent archive. Could you share your favorite memory?");
     const [copied, setCopied] = useState(false);
 
-    const shareLink = "https://archive.memoir.io/share/hafsahashmi-legacy";
+    const shareLink = "https://archive.memoir.io/share/hussainusman-legacy";
 
     const handleCopy = () => {
         const fullText = `${customMessage}\n\nLink to contribute: ${shareLink}`;
@@ -45,17 +49,18 @@ export default function MemoirPage() {
     return (
         <div className="min-h-screen bg-[#faf8f5] text-[#381c24] flex flex-col font-sans selection:bg-[#381c24] selection:text-white">
 
-            <header className="w-full text-[#381c24] py-16 px-8 text-center relative overflow-hidden border-b border-[#f0e4d3]">
-                <div className="max-w-3xl mx-auto relative z-10 flex flex-col items-center gap-6">
+            <header className="w-full text-[#381c24] py-16 px-8 text-center relative overflow-hidden border-b border-[#f0e4d3] bg-[#fdf8ed]/50">
+                <div className="max-w-3xl mx-auto relative z-10 flex flex-col items-center gap-5">
 
                     {/* Title Section */}
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-col items-center gap-2">
+                        <span className="text-xs uppercase tracking-[0.25em] text-[#c9a063] font-bold">Permanent Family Archive</span>
                         <h1 className="text-3xl md:text-5xl font-serif font-normal tracking-tight text-[#381c24]">
                             <span className="italic font-light">Hussain Usman</span>
                         </h1>
                     </div>
 
-                    {/* Proper Framed Photograph */}
+                    {/* Proper Framed Photograph (Fixed missing image source) */}
                     <div className="relative group my-2">
                         <div className="w-32 h-32 md:w-36 md:h-36 rounded-2xl p-1.5 bg-white shadow-xl border border-[#f0e4d3] overflow-hidden">
                             <img
@@ -197,7 +202,7 @@ export default function MemoirPage() {
                             </span>
                         </div>
 
-                        {/* Story Card with Rich Depth */}
+                        {/* Story Card 1: Voice Memoir */}
                         <div className="bg-[#fdf8ed] p-7 rounded-2xl border border-[#f0e4d3] shadow-2xs flex flex-col gap-6">
                             <div className="flex items-center justify-between flex-wrap gap-4">
                                 <div className="flex items-center gap-3.5">
@@ -235,62 +240,95 @@ export default function MemoirPage() {
                                 "I still remember the summer we spent in the old courtyard. The sound of the evening breeze through the trees always brings back those golden afternoons..."
                             </p>
 
-                            {/* ================= SOCIAL-STYLE REACTIONS BAR ================= */}
+                            {/* ================= FACEBOOK/INSTAGRAM STYLE REACTIONS BAR ================= */}
                             <div className="flex items-center justify-between pt-4 border-t border-[#f0e4d3] relative">
                                 <div className="relative">
-                                    {/* Floating Reaction Picker Popup (Instagram / Facebook Style) */}
+                                    {/* Floating Facebook-Style Reaction Picker Popup */}
                                     {showReactionPicker && (
                                         <div
                                             onMouseLeave={() => setShowReactionPicker(false)}
-                                            className="absolute bottom-full mb-2 left-0 bg-white border border-[#f0e4d3] shadow-xl rounded-full px-4 py-2 flex items-center gap-3 z-30 animate-in fade-in zoom-in-95 duration-200"
+                                            className="absolute bottom-full mb-3 left-0 bg-white border border-[#f0e4d3] shadow-2xl rounded-full px-4 py-2 flex items-center gap-3 z-30 animate-in fade-in zoom-in-95 duration-200"
                                         >
-                                            <button
-                                                onClick={() => { handleReaction('love'); setShowReactionPicker(false); }}
-                                                className="hover:scale-125 transition-transform text-xl cursor-pointer"
-                                                title="Love"
-                                            >
-                                                ❤️
-                                            </button>
-                                            <button
-                                                onClick={() => { handleReaction('heartwarm'); setShowReactionPicker(false); }}
-                                                className="hover:scale-125 transition-transform text-xl cursor-pointer"
-                                                title="Heartwarm"
-                                            >
-                                                🕊️
-                                            </button>
-                                            <button
-                                                onClick={() => { handleReaction('smile'); setShowReactionPicker(false); }}
-                                                className="hover:scale-125 transition-transform text-xl cursor-pointer"
-                                                title="Smile"
-                                            >
-                                                ☕
-                                            </button>
+                                            {Object.keys(reactions).map((key) => {
+                                                const rKey = key as keyof typeof reactions;
+                                                return (
+                                                    <button
+                                                        key={rKey}
+                                                        onClick={() => { handleReaction(rKey); setShowReactionPicker(false); }}
+                                                        className="hover:scale-135 transition-transform text-2xl cursor-pointer p-1 bg-transparent border-none"
+                                                        title={rKey}
+                                                    >
+                                                        {reactions[rKey].emoji}
+                                                    </button>
+                                                );
+                                            })}
                                         </div>
                                     )}
 
-                                    {/* Main Reaction Trigger Button */}
-                                    <div
-                                        className="relative inline-block"
+                                    {/* Main Reaction Trigger Button & Summary Pill */}
+                                    <div 
+                                        className="relative inline-flex items-center gap-2 bg-white border border-[#f0e4d3] rounded-full px-4 py-2 shadow-2xs hover:border-[#c9a063] transition-all cursor-pointer"
                                         onMouseEnter={() => setShowReactionPicker(true)}
                                     >
                                         <button
                                             onClick={() => setShowReactionPicker(!showReactionPicker)}
-                                            className="px-4 py-2 rounded-full text-xs font-medium border bg-white border-[#f0e4d3] text-[#381c24] hover:border-[#c9a063] transition-all shadow-2xs flex items-center gap-2 cursor-pointer"
+                                            className="flex items-center gap-1.5 text-xs font-medium text-[#381c24] cursor-pointer bg-transparent border-none p-0"
                                         >
-                                            <span className="text-sm">
-                                                {reactions.love.active ? '❤️' : reactions.heartwarm.active ? '🕊️' : reactions.smile.active ? '☕' : '❤️'}
+                                            <span className="text-base">
+                                                {Object.values(reactions).find(r => r.active)?.emoji || '❤️'}
                                             </span>
                                             <span className="font-semibold">
                                                 {Object.values(reactions).reduce((acc, r) => acc + r.count, 0)}
                                             </span>
-                                            <span className="text-[10px] text-[#78716c] ml-0.5">▼</span>
                                         </button>
+                                        <div className="flex items-center gap-1 text-[11px] text-[#78716c] border-l border-[#f0e4d3] pl-2">
+                                            <span>React</span>
+                                            <span className="text-[10px]">▼</span>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <span className="text-xs text-[#78716c] font-serif italic">Hover or tap to react</span>
+                                <span className="text-xs text-[#78716c] font-serif italic">Hover to choose reaction</span>
                             </div>
                         </div>
+
+                        {/* ================= STORY CARD 2: PHOTOGRAPH MEMOIR TYPE ================= */}
+                        <div className="bg-[#fdf8ed] p-7 rounded-2xl border border-[#f0e4d3] shadow-2xs flex flex-col gap-6">
+                            <div className="flex items-center justify-between flex-wrap gap-4">
+                                <div className="flex items-center gap-3.5">
+                                    <div className="w-11 h-11 rounded-full bg-[#381c24] text-white flex items-center justify-center font-serif font-bold text-sm shadow-sm">
+                                        HU
+                                    </div>
+                                    <div>
+                                        <h4 className="font-serif font-medium text-[#381c24] text-base">Uncle Hassan</h4>
+                                        <span className="text-xs text-[#78716c]">Added August 2026 • Photograph Archive</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="rounded-xl overflow-hidden border border-[#f0e4d3] bg-white shadow-sm max-h-96">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=800" 
+                                    alt="Family Archive Memory"
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+
+                            <p className="font-serif italic text-[#292524] text-sm leading-relaxed pl-4 border-l-2 border-[#c9a063]">
+                                "Family gathering during Eid celebrations at the old ancestral home. Unforgettable moments of joy and shared meals."
+                            </p>
+
+                            <div className="flex items-center justify-between pt-4 border-t border-[#f0e4d3]">
+                                <div className="flex items-center gap-2">
+                                    <button className="px-4 py-2 rounded-full text-xs font-medium border bg-white border-[#f0e4d3] text-[#381c24] hover:border-[#c9a063] transition-all shadow-2xs flex items-center gap-2 cursor-pointer">
+                                        <span>🫂</span>
+                                        <span className="font-semibold">9</span>
+                                    </button>
+                                </div>
+                                <span className="text-xs text-[#78716c] font-serif italic">Photograph memory</span>
+                            </div>
+                        </div>
+
                         {/* ================= LIVING COMMENT & REFLECTION LAYER ================= */}
                         <div className="mt-4 pt-6 border-t border-[#f0e4d3] flex flex-col gap-4">
                             <div className="flex items-center justify-between">
