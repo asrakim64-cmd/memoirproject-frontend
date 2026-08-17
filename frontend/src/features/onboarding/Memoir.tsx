@@ -9,7 +9,6 @@ export default function MemoirPage() {
 
     // States for Link Sharing & Modals
     const [isCopyModalOpen, setIsCopyModalOpen] = useState(false);
-    const [isPreviewOpen, setIsPreviewOpen] = useState(false);
     const [customMessage, setCustomMessage] = useState("We are collecting stories and voice memories for Hussain's permanent archive. Could you share your favorite memory?");
     const [copied, setCopied] = useState(false);
 
@@ -33,7 +32,6 @@ export default function MemoirPage() {
 
                     {/* Title Section */}
                     <div className="flex flex-col items-center gap-2">
-                        <span className="text-xs uppercase tracking-[0.25em] text-[#c9a063] font-bold">Permanent Family Archive</span>
                         <h1 className="text-3xl md:text-5xl font-serif font-normal tracking-tight text-[#381c24]">
                             <span className="italic font-light">Hussain Usman</span>
                         </h1>
@@ -43,8 +41,6 @@ export default function MemoirPage() {
                     <div className="relative group my-2">
                         <div className="w-32 h-32 md:w-36 md:h-36 rounded-2xl p-1.5 bg-white shadow-xl border border-[#f0e4d3] overflow-hidden">
                             <img
-                                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400"
-                                alt="Hussain Usman"
                                 className="w-full h-full object-cover rounded-xl grayscale-[15%] hover:grayscale-0 transition-all duration-500"
                             />
                         </div>
