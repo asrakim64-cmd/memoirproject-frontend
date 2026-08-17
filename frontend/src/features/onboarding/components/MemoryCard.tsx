@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import ReactionPicker from "./ReactionPicker";
 
 interface MemoryCardProps {
@@ -11,9 +12,9 @@ interface MemoryCardProps {
     audioDuration?: string;
     isPlaying?: boolean;
     onTogglePlay?: () => void;
-    reactions: Record<string, { count: number; active: boolean; emoji: string }>;
-    onReact: (type: string) => void; // Changed from strict union to string
-}export default function MemoryCard({
+}
+
+export default function MemoryCard({
     author,
     role,
     initials,
@@ -23,9 +24,55 @@ interface MemoryCardProps {
     audioDuration,
     isPlaying,
     onTogglePlay,
-    reactions,
-    onReact
 }: MemoryCardProps) {
+    const [reactions, setReactions] = useState({
+        like: { count: 12, active: false, emoji: '👍' },
+        love: { count: 14, active: true, emoji: '❤️' },
+        hug: { count: 8, active: false, emoji: '🥰' }, // Fixed rendering issue with reliable emoji
+        laugh: { count: 5, active: false, emoji: '😂' },
+        wow: { count: 3, active: false, emoji: '😮' },
+        sad: { count: 2, active: false, emoji: '😢' },
+        angry: { count: 1, active: false, emoji: '😡' },
+    });
+
+    const handleReaction = (type: string) => {
+        setReactions((prev) => {
+            const targetKey = type as keyof typeof prev;
+            const isCurrentlyActive = prev[targetKey].active;
+            const updated = { ...prev };
+
+            if (isCurrentlyActive) {
+                // If clicking the active emoji again, toggle it off
+                updated[targetKey] = {
+                    ...updated[targetKey],
+                    count: updated[targetKey].count - 1,
+                    active: false,
+                };
+            } else {
+                // Remove active status from any previously selected reaction
+                Object.keys(updated).forEach((k) => {
+                    const key = k as keyof typeof updated;
+                    if (updated[key].active) {
+                        updated[key] = {
+                            ...updated[key],
+                            count: updated[key].count - 1,
+                            active: false,
+                        };
+                    }
+                });
+
+                // Activate the newly selected reaction
+                updated[targetKey] = {
+                    ...updated[targetKey],
+                    count: updated[targetKey].count + 1,
+                    active: true,
+                };
+            }
+
+            return updated;
+        });
+    };
+
     return (
         <div className="bg-[#fdf8ed] p-7 rounded-2xl border border-[#f0e4d3] shadow-2xs flex flex-col gap-6">
             <div className="flex items-center justify-between flex-wrap gap-4">
@@ -63,8 +110,8 @@ interface MemoryCardProps {
 
             {type === "photo" && imageSrc && (
                 <div className="rounded-xl overflow-hidden border border-[#f0e4d3] bg-white shadow-sm max-h-96">
-                    <img
-                        src={imageSrc}
+                    <img 
+                        src={imageSrc} 
                         alt={author}
                         className="w-full h-full object-cover"
                     />
@@ -78,7 +125,7 @@ interface MemoryCardProps {
             )}
 
             <div className="flex items-center justify-between pt-4 border-t border-[#f0e4d3] relative">
-                <ReactionPicker reactions={reactions} onReact={onReact} />
+                <ReactionPicker reactions={reactions} onReact={handleReaction} />
                 <span className="text-xs text-[#78716c] font-serif italic">
                     {type === "audio" ? "Voice memory" : "Photograph memory"}
                 </span>
