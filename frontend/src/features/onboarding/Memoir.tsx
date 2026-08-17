@@ -9,6 +9,7 @@ export default function MemoirPage() {
 
     // States for Link Sharing & Modals
     const [isCopyModalOpen, setIsCopyModalOpen] = useState(false);
+    const [isPreviewOpen, setIsPreviewOpen] = useState(false);
     const [customMessage, setCustomMessage] = useState("We are collecting stories and voice memories for Hussain's permanent archive. Could you share your favorite memory?");
     const [copied, setCopied] = useState(false);
 
@@ -25,13 +26,14 @@ export default function MemoirPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#faf8f5] text-[#381c24] flex flex-col font-sans selection:bg-[#381c24] selection:text-white">
+        <div className="min-h-screen bg-white text-[#381c24] flex flex-col font-sans selection:bg-[#381c24] selection:text-white">
 
-            <header className="w-full text-[#381c24] py-16 px-8 text-center relative overflow-hidden border-b border-[#f0e4d3] bg-[#fdf8ed]/50">
+            <header className="w-full text-[#381c24] py-16 px-8 text-center relative overflow-hidden border-b border-[#f0e4d3] bg-white">
                 <div className="max-w-3xl mx-auto relative z-10 flex flex-col items-center gap-5">
 
                     {/* Title Section */}
                     <div className="flex flex-col items-center gap-2">
+                        <span className="text-xs uppercase tracking-[0.25em] text-[#c9a063] font-bold">Permanent Family Archive</span>
                         <h1 className="text-3xl md:text-5xl font-serif font-normal tracking-tight text-[#381c24]">
                             <span className="italic font-light">Hussain Usman</span>
                         </h1>
@@ -69,97 +71,100 @@ export default function MemoirPage() {
             </header>
 
             {/* ================= MAIN LAYOUT ================= */}
-            <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 px-8 py-16 gap-12">
+            <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 px-8 py-16 gap-12 bg-white">
 
-                {/* Left Sidebar: Chapter Navigator */}
-                <aside className="lg:col-span-3 flex flex-col gap-3 sticky top-24 h-fit">
-                    {/* ================= OWNER / CURATOR INPUT OPTIONS PANEL ================= */}
-                    <div className="bg-[#fdf8ed] border border-[#f0e4d3] p-6 rounded-2xl flex flex-col gap-4 shadow-2xs">
+                {/* Left Sidebar: Table of Chapters */}
+                <aside className="lg:col-span-3 flex flex-col gap-3 sticky top-24 h-[calc(100vh-8rem)] overflow-y-auto pr-2 custom-scrollbar bg-white">
+                    <h5 className="text-[11px] uppercase tracking-widest text-[#57534e] font-bold shrink-0">
+                        Table of Chapters
+                    </h5>
+                    <div className="flex flex-col gap-3 shrink-0 pb-6">
+                        {[
+                            { id: "chapter-1", title: "I. Early Roots & Childhood", count: "12 stories" },
+                            { id: "chapter-2", title: "II. The Working Years", count: "18 stories" },
+                            { id: "chapter-3", title: "III. Fatherhood & Wisdom", count: "24 stories" },
+                            { id: "chapter-4", title: "IV. Quiet Habits & Joys", count: "9 stories" },
+                        ].map((chap) => {
+                            const isActive = activeTab === chap.id;
+                            return (
+                                <motion.button
+                                    key={chap.id}
+                                    onClick={() => setActiveTab(chap.id)}
+                                    whileHover={{ scale: 1.01 }}
+                                    whileTap={{ scale: 0.99 }}
+                                    className={`text-left px-5 py-4 rounded-2xl transition-all duration-300 flex flex-col gap-1 relative cursor-pointer border ${isActive
+                                        ? "bg-[#381c24] text-white border-[#381c24] shadow-md"
+                                        : "bg-[#fdf8ed] border-[#f0e4d3] hover:border-[#c9a063] text-[#381c24] shadow-2xs"
+                                        }`}
+                                >
+                                    <span className="font-serif font-medium text-base">{chap.title}</span>
+                                    <span className={`text-xs ${isActive ? "text-[#c9a063]" : "text-[#78716c]"}`}>
+                                        {chap.count}
+                                    </span>
+                                    {isActive && (
+                                        <motion.div
+                                            layoutId="activeIndicator"
+                                            className="absolute left-0 top-3 bottom-3 w-1.5 bg-[#c9a063] rounded-r-full"
+                                        />
+                                    )}
+                                </motion.button>
+                            );
+                        })}
+                    </div>
+                </aside>
+
+                {/* Center/Right: Rich Book Reader Canvas */}
+                <main className="lg:col-span-9 flex flex-col gap-10">
+
+                    {/* ================= OWNER / CURATOR INPUT OPTIONS PANEL (Reduced width/padding, positioned above chapter canvas) ================= */}
+                    <div className="bg-white border border-[#f0e4d3] p-5 rounded-2xl shadow-2xs flex flex-col gap-3 w-full mx-auto">
                         <div className="flex items-center justify-between">
-                            <span className="text-[11px] uppercase tracking-widest text-[#381c24] font-bold">
+                            <span className="text-[10px] uppercase tracking-widest text-[#381c24] font-bold">
                                 Add New Story to Chapter
                             </span>
                             <span className="text-xs text-[#78716c] font-serif italic">Curator mode</span>
                         </div>
-                        <div className="flex flex-col gap-3">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
                             <button
                                 onClick={() => alert("Opening Audio Recorder...")}
-                                className="bg-white hover:bg-[#faf8f5] border border-[#f0e4d3] p-4 rounded-xl flex items-center text-left gap-4 transition-all cursor-pointer shadow-2xs group w-full"
+                                className="bg-[#fdf8ed] hover:bg-[#faeedb] border border-[#f0e4d3] p-3 rounded-xl flex items-center text-left gap-3 transition-all cursor-pointer shadow-2xs group"
                             >
-                                <div className="w-9 h-9 rounded-full bg-[#381c24] text-white flex items-center justify-center text-sm shrink-0 group-hover:scale-105 transition-transform">
+                                <div className="w-8 h-8 rounded-full bg-[#381c24] text-white flex items-center justify-center text-xs shrink-0 group-hover:scale-105 transition-transform">
                                     🎙️
                                 </div>
-                                <div>
-                                    <h6 className="font-serif font-medium text-xs text-[#381c24]">Record Audio</h6>
-                                    <p className="text-[10px] text-[#78716c]">Voice memory</p>
+                                <div className="overflow-hidden">
+                                    <h6 className="font-serif font-medium text-[11px] text-[#381c24] truncate">Record Audio</h6>
+                                    <p className="text-[9px] text-[#78716c] truncate">Voice memory</p>
                                 </div>
                             </button>
 
                             <button
                                 onClick={() => alert("Opening Text Story Editor...")}
-                                className="bg-white hover:bg-[#faf8f5] border border-[#f0e4d3] p-4 rounded-xl flex items-center text-left gap-4 transition-all cursor-pointer shadow-2xs group w-full"
+                                className="bg-[#fdf8ed] hover:bg-[#faeedb] border border-[#f0e4d3] p-3 rounded-xl flex items-center text-left gap-3 transition-all cursor-pointer shadow-2xs group"
                             >
-                                <div className="w-9 h-9 rounded-full bg-[#381c24] text-white flex items-center justify-center text-sm shrink-0 group-hover:scale-105 transition-transform">
+                                <div className="w-8 h-8 rounded-full bg-[#381c24] text-white flex items-center justify-center text-xs shrink-0 group-hover:scale-105 transition-transform">
                                     ✍️
                                 </div>
-                                <div>
-                                    <h6 className="font-serif font-medium text-xs text-[#381c24]">Write Text</h6>
-                                    <p className="text-[10px] text-[#78716c]">Written memory</p>
+                                <div className="overflow-hidden">
+                                    <h6 className="font-serif font-medium text-[11px] text-[#381c24] truncate">Write Text</h6>
+                                    <p className="text-[9px] text-[#78716c] truncate">Written memory</p>
                                 </div>
                             </button>
 
                             <button
                                 onClick={() => alert("Opening Photo Uploader...")}
-                                className="bg-white hover:bg-[#faf8f5] border border-[#f0e4d3] p-4 rounded-xl flex items-center text-left gap-4 transition-all cursor-pointer shadow-2xs group w-full"
+                                className="bg-[#fdf8ed] hover:bg-[#faeedb] border border-[#f0e4d3] p-3 rounded-xl flex items-center text-left gap-3 transition-all cursor-pointer shadow-2xs group"
                             >
-                                <div className="w-9 h-9 rounded-full bg-[#381c24] text-white flex items-center justify-center text-sm shrink-0 group-hover:scale-105 transition-transform">
+                                <div className="w-8 h-8 rounded-full bg-[#381c24] text-white flex items-center justify-center text-xs shrink-0 group-hover:scale-105 transition-transform">
                                     📷
                                 </div>
-                                <div>
-                                    <h6 className="font-serif font-medium text-xs text-[#381c24]">Add Photograph</h6>
-                                    <p className="text-[10px] text-[#78716c]">Image & caption</p>
+                                <div className="overflow-hidden">
+                                    <h6 className="font-serif font-medium text-[11px] text-[#381c24] truncate">Add Photograph</h6>
+                                    <p className="text-[9px] text-[#78716c] truncate">Image & caption</p>
                                 </div>
                             </button>
                         </div>
                     </div>
-                    {/* Table of Chapters */}
-                    <h5 className="text-[11px] uppercase tracking-widest text-[#57534e] font-bold mt-5">
-                        Table of Chapters
-                    </h5>{[
-                        { id: "chapter-1", title: "I. Early Roots & Childhood", count: "12 stories" },
-                        { id: "chapter-2", title: "II. The Working Years", count: "18 stories" },
-                        { id: "chapter-3", title: "III. Fatherhood & Wisdom", count: "24 stories" },
-                        { id: "chapter-4", title: "IV. Quiet Habits & Joys", count: "9 stories" },
-                    ].map((chap) => {
-                        const isActive = activeTab === chap.id;
-                        return (
-                            <motion.button
-                                key={chap.id}
-                                onClick={() => setActiveTab(chap.id)}
-                                whileHover={{ scale: 1.01 }}
-                                whileTap={{ scale: 0.99 }}
-                                className={`text-left px-5 py-4 rounded-2xl transition-all duration-300 flex flex-col gap-1 relative cursor-pointer border ${isActive
-                                    ? "bg-[#381c24] text-white border-[#381c24] shadow-md"
-                                    : "bg-[#fdf8ed] border-[#f0e4d3] hover:border-[#c9a063] text-[#381c24] shadow-2xs"
-                                    }`}
-                            >
-                                <span className="font-serif font-medium text-base">{chap.title}</span>
-                                <span className={`text-xs ${isActive ? "text-[#c9a063]" : "text-[#78716c]"}`}>
-                                    {chap.count}
-                                </span>
-                                {isActive && (
-                                    <motion.div
-                                        layoutId="activeIndicator"
-                                        className="absolute left-0 top-3 bottom-3 w-1.5 bg-[#c9a063] rounded-r-full"
-                                    />
-                                )}
-                            </motion.button>
-                        );
-                    })}
-                </aside>
-
-                {/* Center/Right: Rich Book Reader Canvas */}
-                <main className="lg:col-span-9 flex flex-col gap-10">
 
                     <motion.div
                         key={activeTab}
@@ -180,7 +185,7 @@ export default function MemoirPage() {
                         </div>
 
                         {/* Story Card 1: Voice Memoir */}
-                        <MemoryCard 
+                        <MemoryCard
                             author="Aunt Hafsa"
                             role="Recorded July 2026 • Voice Memoir"
                             initials="HH"
@@ -192,7 +197,7 @@ export default function MemoirPage() {
                         />
 
                         {/* Story Card 2: Photograph Memoir */}
-                        <MemoryCard 
+                        <MemoryCard
                             author="Uncle Hassan"
                             role="Added August 2026 • Photograph Archive"
                             initials="HU"
@@ -212,8 +217,8 @@ export default function MemoirPage() {
 
                             {/* Comments Feed List */}
                             <div className="flex flex-col gap-3">
-                                <div className="flex items-start gap-3 bg-white/60 p-3.5 rounded-xl border border-[#f0e4d3]/60 text-sm">
-                                    <div className="w-8 h-8 rounded-full bg-[#fdf8ed] text-[#381c24] font-bold text-xs flex items-center justify-center border border-[#f0e4d3] shrink-0 mt-0.5">
+                                <div className="flex items-start gap-3 bg-white p-3.5 rounded-xl border border-[#f0e4d3] text-sm">
+                                    <div className="w-8 h-8 rounded-full bg-white text-[#381c24] font-bold text-xs flex items-center justify-center border border-[#f0e4d3] shrink-0 mt-0.5">
                                         ZH
                                     </div>
                                     <div className="flex-1 flex flex-col gap-1">
@@ -251,64 +256,6 @@ export default function MemoirPage() {
 
             </div>
 
-            {/* ================= "BEFORE MOVING, ADD A LINE" COPY INTERSTITIAL ================= */}
-            <AnimatePresence>
-                {isCopyModalOpen && (
-                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.95, y: 15 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.95, y: 15 }}
-                            className="bg-white border border-[#f0e4d3] max-w-lg w-full p-8 rounded-3xl shadow-2xl flex flex-col gap-6"
-                        >
-                            <div>
-                                <span className="text-xs uppercase tracking-widest text-[#c9a063] font-bold">Share Link</span>
-                                <h3 className="text-2xl font-serif text-[#381c24] mt-1">Before moving, add a line</h3>
-                                <p className="text-xs text-[#78716c] mt-1">
-                                    Customize the introductory message that accompanies your shareable link when sent to family or friends.
-                                </p>
-                            </div>
-
-                            <div className="flex flex-col gap-2">
-                                <label className="text-xs uppercase tracking-wider text-[#57534e] font-semibold">Introductory Note</label>
-                                <textarea
-                                    value={customMessage}
-                                    onChange={(e) => setCustomMessage(e.target.value)}
-                                    rows={3}
-                                    className="w-full bg-[#faf8f5] border border-[#f0e4d3] p-4 rounded-xl text-sm focus:outline-none focus:border-[#c9a063] text-[#381c24] font-sans resize-none shadow-2xs"
-                                />
-                            </div>
-
-                            <div className="bg-[#faf8f5] p-4 rounded-xl border border-dashed border-[#f0e4d3] flex flex-col gap-1">
-                                <span className="text-[10px] uppercase text-[#c9a063] font-bold">Link Preview</span>
-                                <span className="text-xs font-mono text-[#57534e] break-all">{shareLink}</span>
-                            </div>
-
-                            <div className="flex items-center justify-end gap-3 pt-2">
-                                <button
-                                    onClick={() => setIsCopyModalOpen(false)}
-                                    className="px-5 py-2.5 rounded-xl text-sm text-[#57534e] hover:bg-[#faf8f5] transition-colors cursor-pointer"
-                                >
-                                    Cancel
-                                </button>
-                                <button
-                                    onClick={handleCopy}
-                                    className="bg-[#381c24] text-white px-6 py-2.5 rounded-xl text-sm font-medium hover:bg-[#4a222a] transition-all shadow-md flex items-center gap-2 cursor-pointer"
-                                >
-                                    {copied ? (
-                                        <>
-                                            <svg className="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg>
-                                            <span>Copied with Note!</span>
-                                        </>
-                                    ) : (
-                                        <span>Copy Link & Message</span>
-                                    )}
-                                </button>
-                            </div>
-                        </motion.div>
-                    </div>
-                )}
-            </AnimatePresence>
         </div>
     );
 }
