@@ -1,4 +1,4 @@
-import Welcome from "@/components/onboarding/Welcome";
+import Welcome from "../../features/onboarding/Welcome";
 
 export default function WelcomePage() {
   return <Welcome />;

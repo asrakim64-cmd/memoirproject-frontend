@@ -1,4 +1,4 @@
-import InviteFamilyFriends from "@/components/onboarding/InviteFamilyFriends";
+import InviteFamilyFriends from "../../features/onboarding/InviteFamilyFriends";
 
 export default function Page() {
   return <InviteFamilyFriends />;

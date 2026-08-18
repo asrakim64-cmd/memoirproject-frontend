@@ -1,4 +1,4 @@
-import DeeperStorytelling from "@/components/onboarding/DeeperStorytelling";
+import DeeperStorytelling from "../../features/onboarding/DeeperStorytelling";
 
 export default function Page() {
   return <DeeperStorytelling />;

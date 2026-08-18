@@ -1,4 +1,4 @@
-import EasyFirstInteraction from "@/components/onboarding/EasyFirstInteraction";
+import EasyFirstInteraction from "../../features/onboarding/EasyFirstInteraction";
 
 export default function Page() {
   return <EasyFirstInteraction />;
