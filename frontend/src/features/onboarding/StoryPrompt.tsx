@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { ArrowLeft, ArrowRight, Sparkles } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 export default function StoryPrompt() {
   const router = useRouter();
@@ -20,56 +21,58 @@ export default function StoryPrompt() {
       if (current.trim()) {
         return `${current}\n\n${prompt}: `;
       }
-
       return `${prompt}: `;
     });
   };
 
   return (
-    <main className="min-h-screen bg-white px-5 py-10 font-sans">
-      <div className="mx-auto flex min-h-[calc(100vh-5rem)] w-full max-w-3xl flex-col rounded-2xl border border-[#B8B1AD] bg-white px-8 py-10 shadow-sm">
+    <section className="min-h-screen bg-[#faf8f5] text-[#381c24] flex items-center justify-center px-6 py-16 relative z-10 font-sans selection:bg-[#381c24] selection:text-white">
+      <motion.div 
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+        className="w-full max-w-[680px] bg-white border border-[#f0e4d3] rounded-3xl px-8 md:px-12 py-10 shadow-sm"
+      >
 
         {/* Back */}
-        <button
-          onClick={() => router.back()}
-          className="mb-10 flex w-fit items-center gap-2 text-sm font-medium text-[#77716D] transition hover:text-[#765548]"
-        >
-          <ArrowLeft size={18} strokeWidth={1.7} />
-          Back
-        </button>
+        <div className="mb-8">
+          <button
+            onClick={() => router.back()}
+            className="text-[#78716c] hover:text-[#381c24] text-[15px] font-medium transition inline-flex items-center gap-1 cursor-pointer"
+          >
+            <ArrowLeft size={18} strokeWidth={1.7} />
+            Back
+          </button>
+        </div>
 
         {/* Heading */}
-        <div className="mx-auto w-full max-w-2xl text-center">
-
-          <p className="mb-4 font-serif text-[17px] italic text-[#765548]">
+        <div className="text-center mb-8">
+          <p className="mb-3 font-serif text-[16px] italic text-[#78716c]">
             A story can begin with just one moment.
           </p>
 
-          <h1 className="font-serif text-[38px] leading-[1.15] tracking-[-0.5px] text-[#2C2C2C] sm:text-[48px]">
+          <h1 className="font-serif text-3xl md:text-4xl text-[#381c24] mb-3">
             Let&apos;s bring one
             <br className="hidden sm:block" />
             memory to life.
           </h1>
 
-          <p className="mx-auto mt-5 max-w-lg text-[17px] leading-7 text-[#77716D]">
+          <p className="text-[#78716c] text-[15px] md:text-base leading-relaxed max-w-[520px] mx-auto font-serif italic">
             Start with a moment that still stays with you.
           </p>
-
         </div>
 
         {/* Writing Area */}
-        <div className="mx-auto mt-10 w-full max-w-2xl">
+        <div className="mb-6">
+          <div className="overflow-hidden rounded-2xl border border-[#f0e4d3] bg-[#faf8f5] shadow-xs transition-all duration-300 focus-within:border-[#c9a063] focus-within:ring-2 focus-within:ring-[#c9a063]/20">
 
-          <div className="overflow-hidden rounded-2xl border border-[#D8CEC8] bg-white shadow-sm transition-all duration-200 focus-within:border-[#765548] focus-within:shadow-md">
-
-            <div className="flex items-center gap-2 border-b border-[#D8CEC8] bg-[#F8F2EF] px-5 py-4">
+            <div className="flex items-center gap-2 border-b border-[#f0e4d3] bg-[#fdf8ed] px-5 py-3">
               <Sparkles
                 size={18}
                 strokeWidth={1.5}
-                className="text-[#765548]"
+                className="text-[#381c24]"
               />
-
-              <span className="font-serif text-[16px] italic text-[#765548]">
+              <span className="font-serif text-[15px] italic text-[#381c24]">
                 What comes to mind?
               </span>
             </div>
@@ -80,68 +83,67 @@ export default function StoryPrompt() {
               placeholder={`A birthday, a conversation, a place, a laugh…
 
 Just write whatever you remember.`}
-              className="min-h-[260px] w-full resize-none bg-white px-5 py-5 text-[16px] leading-7 text-[#2C2C2C] outline-none placeholder:text-[#A49A94]"
+              rows={6}
+              className="w-full resize-none bg-transparent px-5 py-4 text-[16px] leading-7 text-[#381c24] placeholder:text-[#78716c]/60 outline-none font-serif"
             />
 
-            <div className="flex justify-end border-t border-[#D8CEC8] px-5 py-3">
-              <span className="text-xs text-[#77716D]">
+            <div className="flex justify-end border-t border-[#f0e4d3] px-5 py-2.5 bg-white">
+              <span className="text-xs font-medium text-[#78716c]">
                 {story.length} characters
               </span>
             </div>
 
           </div>
-
         </div>
 
         {/* Inspiration */}
-        <div className="mx-auto mt-7 w-full max-w-2xl">
-
-          <p className="mb-3 text-center text-sm text-[#77716D]">
+        <div className="mb-8">
+          <p className="mb-3 text-center text-xs uppercase tracking-widest font-bold text-[#381c24]">
             Need a little inspiration?
           </p>
 
           <div className="flex flex-wrap justify-center gap-2">
-
             {prompts.map((prompt) => (
-              <button
+              <motion.button
                 key={prompt}
+                type="button"
                 onClick={() => handlePromptClick(prompt)}
-                className="rounded-full border border-[#D8CEC8] bg-white px-4 py-2 text-sm text-[#77716D] transition-all duration-200 hover:border-[#765548] hover:bg-[#F1E3DF] hover:text-[#765548]"
+                whileHover={{ scale: 1.03, y: -1 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                className="rounded-full border border-[#f0e4d3] bg-white px-4 py-2 text-sm font-serif text-[#78716c] transition-colors duration-200 hover:border-[#c9a063] hover:bg-[#fdf8ed] hover:text-[#381c24] cursor-pointer shadow-2xs"
               >
                 {prompt}
-              </button>
+              </motion.button>
             ))}
-
           </div>
-
         </div>
 
         {/* Closing Line */}
-        <div className="mt-8 text-center">
-          <p className="font-serif text-sm italic text-[#77716D]">
+        <div className="mb-8 text-center">
+          <p className="font-serif text-sm italic text-[#78716c]">
             There&apos;s no right way to remember.
           </p>
         </div>
 
         {/* Continue */}
-        <div className="mx-auto mt-6 w-full max-w-2xl">
+        <motion.button
+          type="button"
+          onClick={() => router.push('/memory-moment')}
+          disabled={!story.trim()}
+          whileHover={story.trim() ? { scale: 1.01 } : {}}
+          whileTap={story.trim() ? { scale: 0.99 } : {}}
+          className={`w-full py-4 rounded-xl text-[16px] font-semibold transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 shadow-md ${
+            story.trim()
+              ? 'bg-[#381c24] text-white hover:bg-[#4a222a] shadow-[#381c24]/10'
+              : 'bg-[#f0e4d3] text-[#78716c] cursor-not-allowed shadow-none'
+          }`}
+        >
+          Continue
+          <ArrowRight size={19} strokeWidth={2} />
+        </motion.button>
 
-          <button
-            onClick={() => router.push('/memory-moment')}
-            disabled={!story.trim()}
-            className={`flex w-full items-center justify-center gap-2 rounded-xl py-4 text-[18px] font-semibold transition-all duration-200 ${
-              story.trim()
-                ? 'bg-[#765548] text-white shadow-md hover:opacity-90'
-                : 'cursor-not-allowed bg-[#D8CEC8] text-[#77716D]'
-            }`}
-          >
-            Continue
-            <ArrowRight size={19} strokeWidth={2} />
-          </button>
-
-        </div>
-
-      </div>
-    </main>
+      </motion.div>
+    </section>
   );
 }
