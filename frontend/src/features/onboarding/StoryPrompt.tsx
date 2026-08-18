@@ -41,16 +41,11 @@ export default function StoryPrompt() {
             className="text-[#78716c] hover:text-[#381c24] text-[15px] font-medium transition inline-flex items-center gap-1 cursor-pointer"
           >
             <ArrowLeft size={18} strokeWidth={1.7} />
-            Back
           </button>
         </div>
 
         {/* Heading */}
         <div className="text-center mb-8">
-          <p className="mb-3 font-serif text-[16px] italic text-[#78716c]">
-            A story can begin with just one moment.
-          </p>
-
           <h1 className="font-serif text-3xl md:text-4xl text-[#381c24] mb-3">
             Let&apos;s bring one
             <br className="hidden sm:block" />
@@ -119,13 +114,6 @@ Just write whatever you remember.`}
           </div>
         </div>
 
-        {/* Closing Line */}
-        <div className="mb-8 text-center">
-          <p className="font-serif text-sm italic text-[#78716c]">
-            There&apos;s no right way to remember.
-          </p>
-        </div>
-
         {/* Continue */}
         <motion.button
           type="button"
@@ -140,7 +128,6 @@ Just write whatever you remember.`}
           }`}
         >
           Continue
-          <ArrowRight size={19} strokeWidth={2} />
         </motion.button>
 
       </motion.div>

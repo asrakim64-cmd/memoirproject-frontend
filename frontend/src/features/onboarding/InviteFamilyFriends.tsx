@@ -29,19 +29,11 @@ export default function InviteFamilyFriends() {
             className="text-[#78716c] hover:text-[#381c24] text-[15px] font-medium transition inline-flex items-center gap-1 cursor-pointer"
           >
             <ArrowLeft size={18} strokeWidth={1.7} />
-            Back
           </button>
         </div>
 
         {/* Main Content */}
         <div className="flex flex-1 flex-col items-center justify-center text-center">
-
-          {/* Decorative Icon */}
-          <div className="mb-5 flex items-center justify-center gap-3 text-[#381c24]">
-            <Sparkles size={17} strokeWidth={1.5} className="animate-pulse" />
-            <Heart size={24} fill="#fdf8ed" strokeWidth={1.5} />
-            <Sparkles size={17} strokeWidth={1.5} className="animate-pulse" />
-          </div>
 
           {/* Heading */}
           <h1 className="font-serif text-3xl md:text-4xl text-[#381c24] mb-3">
@@ -131,13 +123,12 @@ export default function InviteFamilyFriends() {
               className="w-full py-4 rounded-xl text-[16px] font-semibold transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 bg-[#381c24] text-white hover:bg-[#4a222a] shadow-md shadow-[#381c24]/10"
             >
               Invite Family & Friends
-              <ArrowRight size={19} strokeWidth={2} />
             </motion.button>
 
             {/* Secondary */}
             <button
               type="button"
-              onClick={() => router.push('/signup')}
+              onClick={() => router.push('/subscription')}
               className="py-2 text-sm font-medium text-[#78716c] hover:text-[#381c24] transition cursor-pointer font-serif"
             >
               Maybe later

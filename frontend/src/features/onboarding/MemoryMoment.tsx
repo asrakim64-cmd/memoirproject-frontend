@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowLeft, ArrowRight, Heart, PartyPopper, Sparkles } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Heart, Sparkles } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 
@@ -13,71 +13,73 @@ export default function MemoryMoment() {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="w-full max-w-[680px] bg-white border border-[#f0e4d3] rounded-3xl px-8 md:px-12 py-10 shadow-sm"
+        className="w-full max-w-[720px] bg-white border border-[#f0e4d3] rounded-3xl px-8 md:px-12 py-10 shadow-sm"
       >
 
         {/* Back */}
-        <div className="mb-8">
+        <div className="mb-6">
           <button
             onClick={() => router.back()}
             className="text-[#78716c] hover:text-[#381c24] text-[15px] font-medium transition inline-flex items-center gap-1 cursor-pointer"
           >
             <ArrowLeft size={18} strokeWidth={1.7} />
-            Back
           </button>
         </div>
 
-        {/* Celebration Heading */}
+        {/* Heading */}
         <div className="text-center mb-8">
-          <div className="mb-4 flex items-center justify-center gap-3 text-[#381c24]">
-            <Sparkles size={18} strokeWidth={1.5} className="animate-pulse" />
-            <PartyPopper size={24} strokeWidth={1.5} />
-            <Sparkles size={18} strokeWidth={1.5} className="animate-pulse" />
-          </div>
-
+          
           <h1 className="font-serif text-3xl md:text-4xl text-[#381c24] mb-3">
             Your first memory is ready
           </h1>
 
           <p className="text-[#78716c] text-[15px] md:text-base leading-relaxed max-w-[520px] mx-auto font-serif italic">
-            A little piece of your story, preserved and ready to keep close.
+            This is a glimpse of how your contributions will look inside your permanent family archive.
           </p>
         </div>
 
-        {/* Aha Moment Preview Card (Glimpse of Final Memoir Page) */}
+        {/* Memoir Preview Container (Mirrors Final Memoir Structure) */}
         <div className="mb-8">
           <motion.div 
             whileHover={{ scale: 1.01 }}
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-            className="relative overflow-hidden rounded-2xl border border-[#f0e4d3] bg-[#fdf8ed] p-6 shadow-xs"
+            className="overflow-hidden rounded-2xl border border-[#f0e4d3] bg-[#fdf8ed] p-6 md:p-8 shadow-xs relative"
           >
-            {/* Decorative corner accent */}
-            <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-[#f0e4d3]/40 pointer-events-none" />
+            {/* Header simulation */}
+            <div className="flex items-center justify-between border-b border-[#f0e4d3] pb-4 mb-6">
+              <div>
+                <span className="text-[10px] uppercase tracking-widest text-[#c9a063] font-bold">Chapter I</span>
+                <h3 className="font-serif text-lg text-[#381c24]">Early Roots & Childhood</h3>
+              </div>
+              <span className="text-[11px] text-[#78716c] font-mono bg-white px-3 py-1 rounded-lg border border-[#f0e4d3]">
+                Curated Memory
+              </span>
+            </div>
 
-            <div className="relative rounded-xl border border-[#f0e4d3] bg-white p-6 md:p-8 shadow-2xs">
-
-              {/* Memory Tag */}
-              <div className="flex items-center justify-center gap-2 text-[#381c24] mb-6">
-                <Heart size={14} fill="#381c24" strokeWidth={1.5} />
-                <span className="font-serif text-xs uppercase tracking-widest font-semibold">
-                  Memoir Preview
-                </span>
-                <Heart size={14} fill="#381c24" strokeWidth={1.5} />
+            {/* Memory Card Simulation */}
+            <div className="bg-white rounded-2xl border border-[#f0e4d3] p-6 shadow-2xs flex flex-col gap-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-[#381c24] text-white text-xs font-bold flex items-center justify-center">
+                    FH
+                  </div>
+                  <div>
+                    <h4 className="font-serif text-sm font-semibold text-[#381c24]">Hafsa Hashmi</h4>
+                    <p className="text-[11px] text-[#78716c]">Recorded recently • Voice & Text Memoir</p>
+                  </div>
+                </div>
+                <Heart size={16} fill="#381c24" className="text-[#381c24]" />
               </div>
 
-              {/* Memory Text Quote */}
-              <div className="text-center">
-                <p className="font-serif text-[20px] md:text-[22px] leading-relaxed text-[#381c24] italic">
-                  “Some memories are made of the smallest moments that stay with us forever.”
-                </p>
+              <p className="font-serif text-[16px] leading-relaxed text-[#292524] italic">
+                “Some memories are made of the smallest moments, the quiet mornings, and the voices you never want to lose...”
+              </p>
+            </div>
 
-                <div className="mx-auto mt-5 h-px w-12 bg-[#f0e4d3]" />
-
-                <p className="mt-4 text-sm leading-relaxed text-[#78716c] font-serif">
-                  This is how your gradual reflections come together into a timeless keepsake.
-                </p>
-              </div>
-
+            <div className="mt-4 text-center">
+              <p className="text-xs text-[#78716c] font-serif italic">
+                Your gradual reflections will automatically weave into chapters like this.
+              </p>
             </div>
           </motion.div>
         </div>
@@ -85,7 +87,7 @@ export default function MemoryMoment() {
         {/* Small Emotional Line */}
         <div className="mb-8 text-center">
           <p className="font-serif text-sm italic text-[#78716c]">
-            And this is only the beginning.
+            And this is only the beginning of your family&apos;s archive.
           </p>
         </div>
 
@@ -98,7 +100,6 @@ export default function MemoryMoment() {
           className="w-full py-4 rounded-xl text-[16px] font-semibold transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 bg-[#381c24] text-white hover:bg-[#4a222a] shadow-md shadow-[#381c24]/10"
         >
           Continue Memoir
-          <ArrowRight size={19} strokeWidth={2} />
         </motion.button>
 
       </motion.div>

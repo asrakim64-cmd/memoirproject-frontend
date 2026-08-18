@@ -8,7 +8,6 @@ import { motion } from 'framer-motion';
 
 export default function ChooseFormat() {
   const router = useRouter();
-  const [memory, setMemory] = useState('');
   const [selectedFormat, setSelectedFormat] = useState<string | null>(null);
 
   const formats = [
@@ -30,7 +29,7 @@ export default function ChooseFormat() {
   ];
 
   const handleContinue = () => {
-    router.push('/handwritten-note');
+    router.push('/story-prompt');
   };
 
   return (
@@ -45,7 +44,7 @@ export default function ChooseFormat() {
         {/* Back */}
         <div className="mb-8">
           <Link
-            href="/"
+            href="/handwritten-note"
             className="text-[#78716c] hover:text-[#381c24] text-[15px] font-medium transition inline-flex items-center gap-1"
           >
             ←
@@ -55,40 +54,20 @@ export default function ChooseFormat() {
         {/* Heading */}
         <div className="text-center mb-10">
           <h1 className="font-serif text-3xl md:text-4xl text-[#381c24] mb-3">
-            What would you like
+            How would you like
             <br />
             to remember?
           </h1>
 
           <p className="text-[#78716c] text-[15px] md:text-base leading-relaxed max-w-[520px] mx-auto font-serif italic">
-            Start with a thought, a moment, or someone you never want to forget.
-            There is no right or wrong way to begin.
+            Choose the format that feels right for you. There is no right or wrong way to begin.
           </p>
         </div>
 
-        {/* Memory Input */}
-        <div className="mb-8">
-          <label
-            htmlFor="memory"
-            className="block text-[#381c24] text-xs uppercase tracking-widest font-bold mb-3"
-          >
-            Start with a few words
-          </label>
-
-          <textarea
-            id="memory"
-            value={memory}
-            onChange={(e) => setMemory(e.target.value)}
-            placeholder="A summer with my grandparents..."
-            rows={4}
-            className="w-full resize-none rounded-xl border border-[#f0e4d3] bg-[#faf8f5] px-5 py-4 text-[16px] text-[#381c24] placeholder:text-[#78716c]/60 outline-none focus:border-[#c9a063] focus:ring-2 focus:ring-[#c9a063]/20 transition-all duration-300 font-serif shadow-2xs"
-          />
-        </div>
-
-        {/* Other ways */}
+        {/* Format Options */}
         <div className="mb-10">
           <p className="text-[#381c24] text-xs uppercase tracking-widest font-bold mb-4">
-            Or start another way
+            Select a format
           </p>
 
           <div className="grid grid-cols-3 gap-4">
@@ -134,11 +113,11 @@ export default function ChooseFormat() {
         <motion.button
           type="button"
           onClick={handleContinue}
-          disabled={!memory.trim() && !selectedFormat}
-          whileHover={memory.trim() || selectedFormat ? { scale: 1.01 } : {}}
-          whileTap={memory.trim() || selectedFormat ? { scale: 0.99 } : {}}
+          disabled={!selectedFormat}
+          whileHover={selectedFormat ? { scale: 1.01 } : {}}
+          whileTap={selectedFormat ? { scale: 0.99 } : {}}
           className={`w-full py-4 rounded-xl text-[16px] font-semibold transition-all duration-300 cursor-pointer shadow-md ${
-            memory.trim() || selectedFormat
+            selectedFormat
               ? 'bg-[#381c24] text-white hover:bg-[#4a222a] shadow-[#381c24]/10'
               : 'bg-[#f0e4d3] text-[#78716c] cursor-not-allowed shadow-none'
           }`}

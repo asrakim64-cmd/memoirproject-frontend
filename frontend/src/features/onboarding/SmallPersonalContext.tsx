@@ -38,7 +38,7 @@ export default function SmallPersonalContext() {
 
   return (
     <section className="min-h-screen bg-[#faf8f5] text-[#381c24] flex items-center justify-center px-6 py-16 relative z-10 font-sans selection:bg-[#381c24] selection:text-white">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
@@ -49,19 +49,14 @@ export default function SmallPersonalContext() {
         <div className="mb-8">
           <button
             onClick={() => router.back()}
-            className="text-[#78716c] hover:text-[#381c24] text-[15px] font-medium transition inline-flex items-center gap-1 cursor-pointer"
-          >
+            className="text-[#78716c] hover:text-[#381c24] text-[15px] font-medium transition inline-flex items-center gap-1"          >
             <ArrowLeft size={18} strokeWidth={1.7} />
-            Back
+
           </button>
         </div>
 
         {/* Heading */}
         <div className="text-center mb-10">
-          <p className="mb-3 font-serif text-[16px] italic text-[#78716c]">
-            Someone is always at the heart of a memory.
-          </p>
-
           <h1 className="font-serif text-3xl md:text-4xl text-[#381c24] mb-3">
             Who is this memory for?
           </h1>
@@ -87,30 +82,27 @@ export default function SmallPersonalContext() {
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                className={`relative flex flex-col p-6 rounded-2xl border text-left transition-colors duration-200 cursor-pointer ${
-                  isSelected
-                    ? 'border-[#381c24] bg-[#fdf8ed] shadow-xs'
-                    : 'border-[#f0e4d3] bg-white hover:border-[#c9a063]'
-                }`}
+                className={`relative flex flex-col p-6 rounded-2xl border text-left transition-colors duration-200 cursor-pointer ${isSelected
+                  ? 'border-[#381c24] bg-[#fdf8ed] shadow-xs'
+                  : 'border-[#f0e4d3] bg-white hover:border-[#c9a063]'
+                  }`}
               >
                 {/* Selection indicator */}
                 <div
-                  className={`absolute right-5 top-5 flex h-6 w-6 items-center justify-center rounded-full border transition-all duration-200 ${
-                    isSelected
-                      ? 'border-[#381c24] bg-[#381c24] text-white'
-                      : 'border-[#f0e4d3] bg-white text-transparent'
-                  }`}
+                  className={`absolute right-5 top-5 flex h-6 w-6 items-center justify-center rounded-full border transition-all duration-200 ${isSelected
+                    ? 'border-[#381c24] bg-[#381c24] text-white'
+                    : 'border-[#f0e4d3] bg-white text-transparent'
+                    }`}
                 >
                   <span className="text-xs">✓</span>
                 </div>
 
                 {/* Icon */}
                 <div
-                  className={`mb-4 flex h-11 w-11 items-center justify-center rounded-xl transition ${
-                    isSelected
-                      ? 'bg-[#381c24] text-white'
-                      : 'bg-[#faf8f5] text-[#381c24]'
-                  }`}
+                  className={`mb-4 flex h-11 w-11 items-center justify-center rounded-xl transition ${isSelected
+                    ? 'bg-[#381c24] text-white'
+                    : 'bg-[#faf8f5] text-[#381c24]'
+                    }`}
                 >
                   <Icon size={22} strokeWidth={1.5} />
                 </div>
@@ -138,15 +130,14 @@ export default function SmallPersonalContext() {
         {/* Continue */}
         <motion.button
           type="button"
-          onClick={() => router.push('/story-prompt')}
+          onClick={() => router.push('/handwritten-note')}
           disabled={!selected}
           whileHover={selected ? { scale: 1.01 } : {}}
           whileTap={selected ? { scale: 0.99 } : {}}
-          className={`w-full py-4 rounded-xl text-[16px] font-semibold transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 shadow-md ${
-            selected
-              ? 'bg-[#381c24] text-white hover:bg-[#4a222a] shadow-[#381c24]/10'
-              : 'bg-[#f0e4d3] text-[#78716c] cursor-not-allowed shadow-none'
-          }`}
+          className={`w-full py-4 rounded-xl text-[16px] font-semibold transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 shadow-md ${selected
+            ? 'bg-[#381c24] text-white hover:bg-[#4a222a] shadow-[#381c24]/10'
+            : 'bg-[#f0e4d3] text-[#78716c] cursor-not-allowed shadow-none'
+            }`}
         >
           Continue
           <ArrowRight size={19} strokeWidth={2} />

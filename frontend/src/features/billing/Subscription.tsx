@@ -15,7 +15,7 @@ export default function Subscription() {
     // Simulate payment processing
     setTimeout(() => {
       setLoading(false);
-      router.push('/welcome');
+      router.push('/memoir');
     }, 1000);
   };
 
@@ -30,10 +30,10 @@ export default function Subscription() {
         {/* Back */}
         <div className="mb-8">
           <Link
-            href="/signup"
+            href="/invite-family-friends"
             className="text-[#78716c] hover:text-[#381c24] text-[15px] font-medium transition inline-flex items-center gap-1"
           >
-            ← Back
+            ←
           </Link>
         </div>
 
@@ -71,7 +71,6 @@ export default function Subscription() {
             <input
               type="text"
               placeholder="Card number"
-              required
               className="w-full rounded-xl border border-[#f0e4d3] bg-[#faf8f5] px-5 py-4 text-[16px] text-[#381c24] placeholder:text-[#78716c]/60 outline-none focus:border-[#c9a063] focus:ring-2 focus:ring-[#c9a063]/20 transition-all duration-300 font-serif shadow-2xs"
             />
           </div>
@@ -80,14 +79,12 @@ export default function Subscription() {
             <input
               type="text"
               placeholder="Expiration date (MM/YY)"
-              required
               className="w-full rounded-xl border border-[#f0e4d3] bg-[#faf8f5] px-5 py-4 text-[16px] text-[#381c24] placeholder:text-[#78716c]/60 outline-none focus:border-[#c9a063] focus:ring-2 focus:ring-[#c9a063]/20 transition-all duration-300 font-serif shadow-2xs"
             />
 
             <input
               type="text"
               placeholder="Security code"
-              required
               className="w-full rounded-xl border border-[#f0e4d3] bg-[#faf8f5] px-5 py-4 text-[16px] text-[#381c24] placeholder:text-[#78716c]/60 outline-none focus:border-[#c9a063] focus:ring-2 focus:ring-[#c9a063]/20 transition-all duration-300 font-serif shadow-2xs"
             />
           </div>
@@ -96,7 +93,6 @@ export default function Subscription() {
             <input
               type="text"
               placeholder="Name on card"
-              required
               className="w-full rounded-xl border border-[#f0e4d3] bg-[#faf8f5] px-5 py-4 text-[16px] text-[#381c24] placeholder:text-[#78716c]/60 outline-none focus:border-[#c9a063] focus:ring-2 focus:ring-[#c9a063]/20 transition-all duration-300 font-serif shadow-2xs"
             />
           </div>

@@ -49,7 +49,7 @@ export default function SignupForm() {
         alert('Account created, but failed to save profile name.');
         console.error(dbError);
       } else {
-        router.push('/subscription');
+        router.push('/small-personal-context');
       }
     }
     setLoading(false);
@@ -66,10 +66,10 @@ export default function SignupForm() {
         {/* Back */}
         <div className="mb-8">
           <Link
-            href="/memoir-details"
+            href="/"
             className="text-[#78716c] hover:text-[#381c24] text-[15px] font-medium transition inline-flex items-center gap-1"
           >
-            ← Back
+            ←
           </Link>
         </div>
 
@@ -85,7 +85,7 @@ export default function SignupForm() {
               href="/login"
               className="text-[#381c24] font-semibold hover:underline transition mt-0.5"
             >
-              Login →
+              Login
             </Link>
           </div>
         </div>

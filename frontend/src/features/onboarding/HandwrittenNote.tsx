@@ -44,11 +44,11 @@ export default function HandwrittenNote() {
           href="/easy-first-interaction"
           className="flex-1 text-center bg-white border border-[#f0e4d3] text-[#381c24] text-[16px] font-semibold py-4 rounded-xl hover:border-[#c9a063] transition shadow-xs"
         >
-          ← Back
+          Back
         </Link>
 
         <Link
-          href="/small-personal-context"
+          href="/easy-first-interaction"
           className="flex-1 text-center bg-[#381c24] text-white text-[16px] font-semibold py-4 rounded-xl hover:bg-[#4a222a] transition shadow-md"
         >
           Continue
