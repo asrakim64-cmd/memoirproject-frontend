@@ -45,10 +45,10 @@ export default function ChooseFormat() {
         {/* Back */}
         <div className="mb-8">
           <Link
-            href="/welcome"
+            href="/"
             className="text-[#78716c] hover:text-[#381c24] text-[15px] font-medium transition inline-flex items-center gap-1"
           >
-            ← Back
+            ←
           </Link>
         </div>
 

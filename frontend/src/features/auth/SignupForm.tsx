@@ -1,24 +1,24 @@
-"use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { supabase } from "../../lib/api/client";
-import Link from "next/link";
+'use client';
 
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { supabase } from "../../lib/api/client";
+import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 export default function SignupForm() {
-  const [full_name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [full_name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const router = useRouter(); 
-
+  const router = useRouter();
 
   const handleSignup = async (e: React.FormEvent) => {
-    e.preventDefault(); 
+    e.preventDefault();
     if (password !== confirmPassword) {
-      alert("Passwords do not match!");
+      alert('Passwords do not match!');
       return;
     }
 
@@ -29,14 +29,14 @@ export default function SignupForm() {
     });
 
     if (authError) {
-      alert("Sign up failed: " + authError.message);
+      alert('Sign up failed: ' + authError.message);
       setLoading(false);
       return;
     }
 
     if (authData.user) {
       const { error: dbError } = await supabase
-        .from("user_account") 
+        .from('user_account')
         .insert([
           {
             id: authData.user.id,
@@ -46,72 +46,81 @@ export default function SignupForm() {
         ]);
 
       if (dbError) {
-        alert("Account created, but failed to save profile name.");
+        alert('Account created, but failed to save profile name.');
         console.error(dbError);
       } else {
-        router.push("/subscription");
+        router.push('/subscription');
       }
     }
     setLoading(false);
   };
-  return (
 
-    <section className="flex justify-center items-center py-20">
-      <div className="w-[650px] bg-white border border-[#D8CEC8] rounded-lg p-10">
-        <span className="mb-4 block text-left">
+  return (
+    <section className="min-h-screen bg-[#faf8f5] text-[#381c24] flex items-center justify-center px-6 py-16 relative z-10 font-sans selection:bg-[#381c24] selection:text-white">
+      <motion.div 
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
+        className="w-full max-w-[680px] bg-white border border-[#f0e4d3] rounded-3xl px-8 md:px-12 py-10 shadow-sm"
+      >
+        {/* Back */}
+        <div className="mb-8">
           <Link
             href="/memoir-details"
-            className="inline-flex text-[16px] font-medium text-[#6B5E53] hover:text-[#2C2C2C] transition -ml-2"
+            className="text-[#78716c] hover:text-[#381c24] text-[15px] font-medium transition inline-flex items-center gap-1"
           >
-            <span ><b>←</b></span>
+            ← Back
           </Link>
-        </span>
+        </div>
 
-        <div className="flex justify-between items-start gap-6 mb-1">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+          <h1 className="font-serif text-3xl md:text-4xl text-[#381c24] leading-snug">
+            Let’s create a safe space <br className="hidden sm:block" /> for your memories
+          </h1>
 
-          <h2 className="font-serif text-[32px] text-[#2C2C2C] leading-[40px] flex-1">
-            Let’s create a safe space <br /> for your memories
-          </h2>
-
-          <div className="flex flex-col text-[16px] text-[#77716D] whitespace-nowrap pt-2">
-            <p>Have an account?</p>
+          <div className="flex flex-col text-[15px] text-[#78716c] whitespace-nowrap">
+            <span>Have an account?</span>
             <Link
               href="/login"
-              className="text-[#3D7C47] font-bold mt-1 hover:underline transition ml-15"
+              className="text-[#381c24] font-semibold hover:underline transition mt-0.5"
             >
-              Login
+              Login →
             </Link>
           </div>
         </div>
 
-        <form onSubmit={handleSignup}>
+        <form onSubmit={handleSignup} className="flex flex-col gap-4">
+          <div>
+            <input
+              type="text"
+              placeholder="Full Name*"
+              value={full_name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              className="w-full rounded-xl border border-[#f0e4d3] bg-[#faf8f5] px-5 py-4 text-[16px] text-[#381c24] placeholder:text-[#78716c]/60 outline-none focus:border-[#c9a063] focus:ring-2 focus:ring-[#c9a063]/20 transition-all duration-300 font-serif shadow-2xs"
+            />
+          </div>
 
-          <input
-            type="text"
-            placeholder="Full Name*"
-            value={full_name} 
-            onChange={(e) => setName(e.target.value)}
-            required 
-            className="w-full mt-8 px-5 py-4 border border-black rounded-lg text-[18px] text-black placeholder:text-gray-500 outline-none"
-          />
+          <div>
+            <input
+              type="email"
+              placeholder="Email*"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full rounded-xl border border-[#f0e4d3] bg-[#faf8f5] px-5 py-4 text-[16px] text-[#381c24] placeholder:text-[#78716c]/60 outline-none focus:border-[#c9a063] focus:ring-2 focus:ring-[#c9a063]/20 transition-all duration-300 font-serif shadow-2xs"
+            />
+          </div>
 
-          <input
-            type="email"
-            placeholder="Email*"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="w-full mt-4 px-5 py-4 border border-black rounded-lg text-[18px] text-black placeholder:text-gray-500 outline-none"
-          />
-
-          <div className="grid grid-cols-2 gap-4 mt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <input
               type="password"
               placeholder="Password*"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-5 py-4 border border-black rounded-lg text-[18px] text-black placeholder:text-gray-500 outline-none"
+              className="w-full rounded-xl border border-[#f0e4d3] bg-[#faf8f5] px-5 py-4 text-[16px] text-[#381c24] placeholder:text-[#78716c]/60 outline-none focus:border-[#c9a063] focus:ring-2 focus:ring-[#c9a063]/20 transition-all duration-300 font-serif shadow-2xs"
             />
 
             <input
@@ -120,28 +129,32 @@ export default function SignupForm() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
-              className="w-full px-5 py-4 border border-black rounded-lg text-[18px] text-black placeholder:text-gray-500 outline-none"
+              className="w-full rounded-xl border border-[#f0e4d3] bg-[#faf8f5] px-5 py-4 text-[16px] text-[#381c24] placeholder:text-[#78716c]/60 outline-none focus:border-[#c9a063] focus:ring-2 focus:ring-[#c9a063]/20 transition-all duration-300 font-serif shadow-2xs"
             />
           </div>
 
-          <button
+          <motion.button
             type="submit"
             disabled={loading}
-            className="block w-full mt-6 py-3 rounded bg-[#a7cdbd] text-white text-[24px] font-bold text-center disabled:opacity-50"
+            whileHover={!loading ? { scale: 1.01 } : {}}
+            whileTap={!loading ? { scale: 0.99 } : {}}
+            className={`w-full mt-2 py-4 rounded-xl text-[16px] font-semibold transition-all duration-300 cursor-pointer shadow-md ${
+              !loading
+                ? 'bg-[#381c24] text-white hover:bg-[#4a222a] shadow-[#381c24]/10'
+                : 'bg-[#f0e4d3] text-[#78716c] cursor-not-allowed shadow-none'
+            }`}
           >
-            {loading ? "Loading..." : "Continue"}
-          </button>
-
+            {loading ? 'Creating account...' : 'Continue'}
+          </motion.button>
         </form>
-        <p className="text-center text-[18px] font-semibold text-black mt-6">
-          By clicking create an account you agree to the
-          <br />
-          <span className="text-[#3D7C47] text-[20px] font-normal cursor-pointer hover:underline">
+
+        <p className="text-center text-sm font-serif text-[#78716c] mt-8">
+          By clicking create an account you agree to the{' '}
+          <span className="text-[#381c24] font-medium cursor-pointer hover:underline underline-offset-2">
             Terms and Conditions
           </span>
         </p>
-
-      </div>
+      </motion.div>
     </section>
   );
 }

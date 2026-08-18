@@ -1,71 +1,120 @@
-export default function Subscription() {
-  return (
-    <section className="flex justify-center items-center py-20">
-      <div className="w-[650px] bg-white border border-[#D8CEC8] rounded-lg p-10">
+'use client';
 
-        <h1 className="text-[25px] font-bold text-center mb-10 text-black">
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+
+export default function Subscription() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    // Simulate payment processing
+    setTimeout(() => {
+      setLoading(false);
+      router.push('/welcome');
+    }, 1000);
+  };
+
+  return (
+    <section className="min-h-screen bg-[#faf8f5] text-[#381c24] flex items-center justify-center px-6 py-16 relative z-10 font-sans selection:bg-[#381c24] selection:text-white">
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
+        className="w-full max-w-[680px] bg-white border border-[#f0e4d3] rounded-3xl px-8 md:px-12 py-10 shadow-sm"
+      >
+        {/* Back */}
+        <div className="mb-8">
+          <Link
+            href="/signup"
+            className="text-[#78716c] hover:text-[#381c24] text-[15px] font-medium transition inline-flex items-center gap-1"
+          >
+            ← Back
+          </Link>
+        </div>
+
+        {/* Top Header */}
+        <h1 className="font-serif text-2xl md:text-3xl font-bold text-center mb-8 text-[#381c24]">
           Complete Your Subscription
         </h1>
 
         <div className="flex justify-between items-center mb-2">
-          <h2 className="font-serif text-[36px] text-[#2C2C2C] leading-[44px] mb-3">
-            Payment
-          </h2>
+          <Link href="/memoir" className="group inline-block">
+            <h2 className="font-serif text-2xl text-[#381c24] group-hover:underline transition-all">
+              Payment
+            </h2>
+          </Link>
 
           <div className="flex gap-2">
             <img
               src="/visa.png"
               alt="Visa"
-              className="w-10 h-10"
+              className="w-10 h-10 object-contain"
             />
-
             <img
               src="/masterCard.png"
               alt="Mastercard"
-              className="w-10 h-10"
+              className="w-10 h-10 object-contain"
             />
           </div>
         </div>
-
-        <p className="text-[18px] font-normal text-black mb-5">
+        <p className="text-[15px] font-serif italic text-[#78716c] mb-6">
           All transactions are secure and encrypted
         </p>
 
-        <input
-          type="text"
-          placeholder="Card number"
-          className="w-full h-14 border border-black rounded-lg px-5 mb-5 text-[18px] text-black placeholder:text-gray-500 outline-none"
-        />
+        <form onSubmit={handlePay} className="flex flex-col gap-4">
+          <div>
+            <input
+              type="text"
+              placeholder="Card number"
+              required
+              className="w-full rounded-xl border border-[#f0e4d3] bg-[#faf8f5] px-5 py-4 text-[16px] text-[#381c24] placeholder:text-[#78716c]/60 outline-none focus:border-[#c9a063] focus:ring-2 focus:ring-[#c9a063]/20 transition-all duration-300 font-serif shadow-2xs"
+            />
+          </div>
 
-        <div className="flex gap-3 mb-4">
-          <input
-            type="text"
-            placeholder="Expiration date (MM/YY)"
-            className="flex-1 h-14 border border-black rounded-lg px-4 text-[18px] text-black placeholder:text-gray-500 outline-none"
-          />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input
+              type="text"
+              placeholder="Expiration date (MM/YY)"
+              required
+              className="w-full rounded-xl border border-[#f0e4d3] bg-[#faf8f5] px-5 py-4 text-[16px] text-[#381c24] placeholder:text-[#78716c]/60 outline-none focus:border-[#c9a063] focus:ring-2 focus:ring-[#c9a063]/20 transition-all duration-300 font-serif shadow-2xs"
+            />
 
-          <input
-            type="text"
-            placeholder="Security code"
-            className="w-[140px] h-14 border border-black rounded-lg px-4 text-[18px] text-black placeholder:text-gray-500 outline-none"
-          />
-        </div>
+            <input
+              type="text"
+              placeholder="Security code"
+              required
+              className="w-full rounded-xl border border-[#f0e4d3] bg-[#faf8f5] px-5 py-4 text-[16px] text-[#381c24] placeholder:text-[#78716c]/60 outline-none focus:border-[#c9a063] focus:ring-2 focus:ring-[#c9a063]/20 transition-all duration-300 font-serif shadow-2xs"
+            />
+          </div>
 
-        <input
-          type="text"
-          placeholder="Name on card"
-          className="w-full h-14 border border-black rounded-lg px-5 mb-8 text-[18px] text-black placeholder:text-gray-500 outline-none"
-        />
+          <div>
+            <input
+              type="text"
+              placeholder="Name on card"
+              required
+              className="w-full rounded-xl border border-[#f0e4d3] bg-[#faf8f5] px-5 py-4 text-[16px] text-[#381c24] placeholder:text-[#78716c]/60 outline-none focus:border-[#c9a063] focus:ring-2 focus:ring-[#c9a063]/20 transition-all duration-300 font-serif shadow-2xs"
+            />
+          </div>
 
-        <div className="flex justify-between ">
-          <button
-            className="bg-[#a7cdbd] text-white text-[28px] font-bold w-full py-4 rounded-lg hover:bg-[#a7cdbd] transition"
+          <motion.button
+            type="submit"
+            disabled={loading}
+            whileHover={!loading ? { scale: 1.01 } : {}}
+            whileTap={!loading ? { scale: 0.99 } : {}}
+            className={`w-full mt-2 py-4 rounded-xl text-[16px] font-semibold transition-all duration-300 cursor-pointer shadow-md ${!loading
+                ? 'bg-[#381c24] text-white hover:bg-[#4a222a] shadow-[#381c24]/10'
+                : 'bg-[#f0e4d3] text-[#78716c] cursor-not-allowed shadow-none'
+              }`}
           >
-            Pay Now
-          </button>
-        </div>
-
-      </div>
+            {loading ? 'Processing...' : 'Pay Now'}
+          </motion.button>
+        </form>
+      </motion.div>
     </section>
   );
 }

@@ -1,13 +1,14 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { supabase } from "../../lib/api/client";
+import { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { supabase } from '../../lib/api/client';
+import { motion } from 'framer-motion';
 
 export default function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -27,88 +28,102 @@ export default function LoginForm() {
         await supabase
           .from("user_account")
           .update({ last_login_at: new Date().toISOString() })
-          .eq("id", data.user.id); 
+          .eq("id", data.user.id);
       }
-      alert("Login successful!");
-      router.push("/");
+      router.push("/memoir");
     }
     setLoading(false);
   };
-
   return (
-    <section className="flex justify-center items-center py-20">
-      <div className="w-[650px] bg-white border border-[#D8CEC8] rounded-lg p-10">
-        <span className="mb-4 block text-left">
+    <section className="min-h-screen bg-[#faf8f5] text-[#381c24] flex items-center justify-center px-6 py-16 relative z-10 font-sans selection:bg-[#381c24] selection:text-white">
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
+        className="w-full max-w-[680px] bg-white border border-[#f0e4d3] rounded-3xl px-8 md:px-12 py-10 shadow-sm"
+      >
+        {/* Back */}
+        <div className="mb-8">
           <Link
-            href="\"
-            className="inline-flex items-center gap-2 text-[16px] font-medium text-[#6B5E53] hover:text-[#2C2C2C] transition"
+            href="/"
+            className="text-[#78716c] hover:text-[#381c24] text-[15px] font-medium transition inline-flex items-center gap-1"
           >
-            <span><b>←</b></span>
+            ←
           </Link>
-        </span>
+        </div>
 
-        <h1 className="font-serif text-[36px] text-center text-[#2C2C2C] leading-[44px]">
-          Step back into <br/>your family's safe space<br/>
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="font-serif text-3xl md:text-4xl text-[#381c24] leading-snug">
+            Step back into <br /> your family&apos;s safe space
           </h1>
+        </div>
 
-        <form onSubmit={handleLogin}>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="w-full mt-10 px-5 py-4 border border-black rounded-lg text-[18px] text-black placeholder:text-gray-500 outline-none"
-          />
+        <form onSubmit={handleLogin} className="flex flex-col gap-4">
+          <div>
+            <input
+              type="email"
+              placeholder="Email*"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full rounded-xl border border-[#f0e4d3] bg-[#faf8f5] px-5 py-4 text-[16px] text-[#381c24] placeholder:text-[#78716c]/60 outline-none focus:border-[#c9a063] focus:ring-2 focus:ring-[#c9a063]/20 transition-all duration-300 font-serif shadow-2xs"
+            />
+          </div>
 
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="w-full mt-4 px-5 py-4 border border-black rounded-lg text-[18px] text-black placeholder:text-gray-500 outline-none"
-          />
+          <div>
+            <input
+              type="password"
+              placeholder="Password*"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="w-full rounded-xl border border-[#f0e4d3] bg-[#faf8f5] px-5 py-4 text-[16px] text-[#381c24] placeholder:text-[#78716c]/60 outline-none focus:border-[#c9a063] focus:ring-2 focus:ring-[#c9a063]/20 transition-all duration-300 font-serif shadow-2xs"
+            />
+          </div>
 
-          <div className="flex justify-between items-center mt-6 text-black text-[20px]">
-            <label className="flex items-center gap-3 cursor-pointer">
+          <div className="flex justify-between items-center text-sm text-[#78716c] font-serif py-1">
+            <label className="flex items-center gap-2 cursor-pointer">
               <input
                 type="checkbox"
-                className="w-5 h-5 accent-[#B7A79A]"
+                className="w-4 h-4 rounded border-[#f0e4d3] text-[#381c24] accent-[#381c24] cursor-pointer"
               />
-              <span className="text-[20px]">Remember me</span>
+              <span>Remember me</span>
             </label>
 
             <a
               href="#"
-              className="text-[20px] font-normal hover:underline"
+              className="hover:text-[#381c24] transition underline underline-offset-2"
             >
-              Forgot your Password?
+              Forgot your password?
             </a>
           </div>
 
-          <div className="mt-6">
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-[#a7cdbd] text-white rounded-lg py-4 text-[20px] font-semibold text-center flex items-center justify-center disabled:opacity-50"
-            >
-              {loading ? "Logging in..." : "Login"}
-            </button>
-          </div>
+          <motion.button
+            type="submit"
+            disabled={loading}
+            whileHover={!loading ? { scale: 1.01 } : {}}
+            whileTap={!loading ? { scale: 0.99 } : {}}
+            className={`w-full mt-2 py-4 rounded-xl text-[16px] font-semibold transition-all duration-300 cursor-pointer shadow-md ${!loading
+              ? 'bg-[#381c24] text-white hover:bg-[#4a222a] shadow-[#381c24]/10'
+              : 'bg-[#f0e4d3] text-[#78716c] cursor-not-allowed shadow-none'
+              }`}
+          >
+            {loading ? 'Logging in...' : 'Login'}
+          </motion.button>
         </form>
 
-        <div className="border border-black rounded-lg mt-7 py-4 text-center text-[20px] text-black">
-          Not a member yet ?
+        {/* Footer Link */}
+        <div className="border border-[#f0e4d3] rounded-2xl mt-8 py-4 text-center text-sm text-[#78716c] font-serif bg-[#faf8f5]">
+          Not a member yet?{' '}
           <Link
             href="/signup"
-            className="text-[#3D7C47] text-[20px] font-semibold ml-2"
+            className="text-[#381c24] font-semibold ml-1 hover:underline underline-offset-2"
           >
             Sign up
           </Link>
         </div>
-
-      </div>
+      </motion.div>
     </section>
   );
 }
