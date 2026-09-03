@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import MemoirLayout from "../../features/FinalMemoir/MemoirLayout";
 
 /* -------------------------------------------------------------------------- */
-/* Voice Memory - Frontend only                                               */
+/* Voice Memory                                                               */
 /* -------------------------------------------------------------------------- */
 
 function VoiceMemory() {
@@ -95,70 +96,70 @@ function VoiceMemory() {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
 
-    return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
+    return `${minutes}:${remainingingSeconds.toString().padStart(2, "0")}`;
   };
 
   return (
-    <div className="mx-auto w-full max-w-2xl">
-      {/* Transcription */}
-      <div className="rounded-xl border border-memory-maroon/10 bg-memory-light/40 p-6 md:p-8">
-        <span className="font-serif text-4xl leading-none text-memory-maroon/30">
-          “
-        </span>
+    <div className="mx-auto w-full max-w-4xl">
+      <div className="grid items-stretch gap-5 md:grid-cols-2">
+        {/* Transcription Box */}
+        <div className="rounded-xl border border-memory-maroon/10 bg-memory-light/40 p-5 md:p-6">
+          <span className="font-serif text-3xl leading-none text-memory-maroon/30">
+            “
+          </span>
 
-        <p className="font-serif text-lg leading-loose text-memory-primary/85">
-          I still remember those early mornings. Dad would wake up before
-          everyone else and sit quietly with his coffee. Those were simple
-          moments, but they are some of the memories I miss the most.
-        </p>
+          <p className="mt-1 font-serif text-base leading-relaxed text-memory-primary/85">
+            I still remember those early mornings. Dad would wake up before
+            everyone else and sit quietly with his coffee. Those were simple
+            moments, but they are some of the memories I miss the most.
+          </p>
 
-        <p className="mt-5 font-[cursive] text-base text-memory-maroon/70">
-          — Michael, Son
-        </p>
-      </div>
+          <p className="mt-4 font-[cursive] text-sm text-memory-maroon/70">
+            — Michael, Son
+          </p>
+        </div>
 
-      {/* Recording box */}
-      <div className="mt-6 rounded-xl bg-memory-primary p-6 shadow-sm">
-        <div className="flex flex-col items-center gap-5 text-center">
-          <div className="flex h-14 w-14 items-center justify-center rounded-full border border-memory-light/20 bg-memory-light/10">
-            <span className="text-xl text-memory-light">
-              {isRecording ? "●" : "🎙"}
-            </span>
-          </div>
-
-          <div>
-            <p className="font-serif text-lg text-memory-light">
-              {isRecording ? "Recording your memory..." : "Record a voice memory"}
-            </p>
-
-            <p className="mt-1 font-[cursive] text-sm text-memory-light/60">
-              {isRecording
-                ? formatTime(recordingTime)
-                : "Your voice stays on this page"}
-            </p>
-          </div>
-
-          <button
-            type="button"
-            onClick={isRecording ? stopRecording : startRecording}
-            className="rounded-full bg-memory-light px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-memory-primary transition hover:scale-[1.02]"
-          >
-            {isRecording ? "Stop Recording" : "Start Recording"}
-          </button>
-
-          {audioUrl && !isRecording && (
-            <div className="w-full rounded-lg bg-memory-light/10 p-3">
-              <audio
-                controls
-                src={audioUrl}
-                className="w-full"
-              />
+        {/* Recording Box */}
+        <div className="flex flex-col justify-center rounded-xl bg-memory-primary p-5 shadow-sm md:p-6">
+          <div className="flex flex-col items-center gap-4 text-center">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full border border-memory-light/20 bg-memory-light/10">
+              <span className="text-lg text-memory-light">
+                {isRecording ? "●" : "🎙"}
+              </span>
             </div>
-          )}
+
+            <div>
+              <p className="font-serif text-base text-memory-light">
+                {isRecording
+                  ? "Recording your memory..."
+                  : "Record a voice memory"}
+              </p>
+
+              <p className="mt-1 font-[cursive] text-xs text-memory-light/60">
+                {isRecording
+                  ? formatTime(recordingTime)
+                  : "Your voice stays on this page"}
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={isRecording ? stopRecording : startRecording}
+              className="rounded-full bg-memory-light px-5 py-2 text-xs font-semibold uppercase tracking-wider text-memory-primary transition hover:scale-[1.02]"
+            >
+              {isRecording ? "Stop Recording" : "Start Recording"}
+            </button>
+
+            {audioUrl && !isRecording && (
+              <div className="w-full rounded-lg bg-memory-light/10 p-2.5">
+                <audio controls src={audioUrl} className="w-full" />
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
-      <p className="mt-4 text-center font-[cursive] text-sm text-memory-muted">
+      <p className="mt-5 text-center font-[cursive] text-sm text-memory-muted">
         Record the memory in your own voice.
       </p>
     </div>
@@ -166,7 +167,7 @@ function VoiceMemory() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* Media Memories - Frontend only                                             */
+/* Media Memories                                                             */
 /* -------------------------------------------------------------------------- */
 
 function MediaMemories() {
@@ -210,7 +211,7 @@ function MediaMemories() {
 
   return (
     <div className="mx-auto w-full max-w-2xl">
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-5 md:grid-cols-2">
         {/* Photo */}
         <label className="group cursor-pointer rounded-xl bg-memory-primary p-3 shadow-sm transition hover:-translate-y-1">
           <input
@@ -276,7 +277,7 @@ function MediaMemories() {
         </label>
       </div>
 
-      <p className="mt-7 text-center font-[cursive] text-base text-memory-muted">
+      <p className="mt-6 text-center font-[cursive] text-sm text-memory-muted">
         Keep the moments that are easier to remember when you can see them.
       </p>
     </div>
@@ -404,8 +405,8 @@ const pages = [
   {
     type: "audio",
     content: (
-      <div className="flex min-h-[650px] h-full flex-col justify-center px-8 py-10 md:px-12">
-        <div className="mb-8 text-center">
+      <div className="flex min-h-[650px] h-full flex-col justify-center px-7 py-8 md:px-10">
+        <div className="mb-6 shrink-0 text-center">
           <p className="text-[10px] uppercase tracking-[0.3em] text-memory-muted">
             Voice Memory
           </p>
@@ -414,7 +415,7 @@ const pages = [
             A Voice I Still Remember
           </h2>
 
-          <div className="mx-auto mt-5 h-px w-12 bg-memory-maroon/30" />
+          <div className="mx-auto mt-4 h-px w-12 bg-memory-maroon/30" />
         </div>
 
         <VoiceMemory />
@@ -480,47 +481,152 @@ const pages = [
 
 export default function FinalMemoirPage() {
   const [currentPage, setCurrentPage] = useState(0);
+  const [turningPage, setTurningPage] = useState<number | null>(null);
+  const [direction, setDirection] = useState<"next" | "previous">("next");
 
   const isFirstPage = currentPage === 0;
   const isLastPage = currentPage === pages.length - 1;
+  const isFlipping = turningPage !== null;
 
   const goNext = () => {
-    if (!isLastPage) {
-      setCurrentPage((page) => page + 1);
-    }
+    if (isFlipping || isLastPage) return;
+
+    setDirection("next");
+    setTurningPage(currentPage);
   };
 
   const goPrevious = () => {
-    if (!isFirstPage) {
-      setCurrentPage((page) => page - 1);
-    }
+    if (isFlipping || isFirstPage) return;
+
+    setDirection("previous");
+    setTurningPage(currentPage);
   };
+
+  const finishFlip = () => {
+    if (turningPage === null) return;
+
+    if (direction === "next") {
+      setCurrentPage(turningPage + 1);
+    } else {
+      setCurrentPage(turningPage - 1);
+    }
+
+    setTurningPage(null);
+  };
+
+  const underlyingPage =
+    turningPage === null
+      ? currentPage
+      : direction === "next"
+        ? turningPage + 1
+        : turningPage - 1;
 
   return (
     <MemoirLayout>
       <div className="flex min-h-[calc(100vh-80px)] w-full flex-col items-center justify-center px-4 py-8">
-        <div className="relative w-full max-w-4xl">
+        <div
+          className="relative w-full max-w-4xl"
+          style={{
+            perspective: "2000px",
+          }}
+        >
           {/* Layered paper */}
           <div className="absolute inset-0 translate-x-2 translate-y-2 rounded-sm border border-memory-maroon/10 bg-memory-light/60" />
 
           <div className="absolute inset-0 translate-x-1 translate-y-1 rounded-sm border border-memory-maroon/10 bg-memory-light/80" />
 
-          {/* Main page */}
+          {/* Static page underneath */}
           <div className="relative min-h-[650px] overflow-hidden rounded-sm border border-memory-maroon/20 bg-[#fffdf9] shadow-sm">
-            {/* Inner paper border */}
             <div className="pointer-events-none absolute inset-4 border border-memory-maroon/10 md:inset-6" />
 
             <div className="relative min-h-[650px]">
-              {pages[currentPage].content}
+              {pages[underlyingPage].content}
             </div>
 
-            {/* Page number */}
             <div className="absolute bottom-5 left-0 right-0 text-center">
               <span className="font-[cursive] text-xs text-memory-muted">
-                {currentPage + 1} / {pages.length}
+                {underlyingPage + 1} / {pages.length}
               </span>
             </div>
           </div>
+
+          {/* Physical turning page */}
+          {turningPage !== null && (
+            <motion.div
+              key={`${turningPage}-${direction}`}
+              initial={{
+                rotateY: 0,
+              }}
+              animate={{
+                rotateY: direction === "next" ? -180 : 180,
+              }}
+              transition={{
+                duration: 0.95,
+                ease: [0.645, 0.045, 0.355, 1],
+              }}
+              onAnimationComplete={finishFlip}
+              style={{
+                transformOrigin:
+                  direction === "next" ? "left center" : "right center",
+                transformStyle: "preserve-3d",
+                backfaceVisibility: "hidden",
+              }}
+              className="absolute inset-0 z-20 min-h-[650px] overflow-hidden rounded-sm border border-memory-maroon/20 bg-[#fffdf9] shadow-[12px_0_30px_rgba(0,0,0,0.12)]"
+            >
+              {/* Front */}
+              <div
+                className="absolute inset-0 min-h-[650px] bg-[#fffdf9]"
+                style={{
+                  backfaceVisibility: "hidden",
+                }}
+              >
+                <div className="pointer-events-none absolute inset-4 border border-memory-maroon/10 md:inset-6" />
+
+                <div className="relative min-h-[650px]">
+                  {pages[turningPage].content}
+                </div>
+
+                <div className="absolute bottom-5 left-0 right-0 text-center">
+                  <span className="font-[cursive] text-xs text-memory-muted">
+                    {turningPage + 1} / {pages.length}
+                  </span>
+                </div>
+              </div>
+
+              {/* Back */}
+              <div
+                className="absolute inset-0 min-h-[650px] bg-[#fffdf9]"
+                style={{
+                  transform: "rotateY(180deg)",
+                  backfaceVisibility: "hidden",
+                }}
+              >
+                <div className="pointer-events-none absolute inset-4 border border-memory-maroon/10 md:inset-6" />
+
+                <div className="relative min-h-[650px]">
+                  {pages[underlyingPage].content}
+                </div>
+
+                <div className="absolute bottom-5 left-0 right-0 text-center">
+                  <span className="font-[cursive] text-xs text-memory-muted">
+                    {underlyingPage + 1} / {pages.length}
+                  </span>
+                </div>
+              </div>
+
+              {/* Page edge shadow */}
+              <div
+                className="pointer-events-none absolute bottom-0 top-0 w-10"
+                style={{
+                  [direction === "next" ? "left" : "right"]: 0,
+                  background:
+                    direction === "next"
+                      ? "linear-gradient(to right, rgba(0,0,0,0.16), transparent)"
+                      : "linear-gradient(to left, rgba(0,0,0,0.16), transparent)",
+                }}
+              />
+            </motion.div>
+          )}
         </div>
 
         {/* Navigation */}
@@ -528,7 +634,7 @@ export default function FinalMemoirPage() {
           <button
             type="button"
             onClick={goPrevious}
-            disabled={isFirstPage}
+            disabled={isFirstPage || isFlipping}
             className="font-[cursive] text-base text-memory-primary transition hover:text-memory-maroon disabled:cursor-not-allowed disabled:opacity-25"
           >
             ← Previous
@@ -541,7 +647,7 @@ export default function FinalMemoirPage() {
           <button
             type="button"
             onClick={goNext}
-            disabled={isLastPage}
+            disabled={isLastPage || isFlipping}
             className="font-[cursive] text-base text-memory-primary transition hover:text-memory-maroon disabled:cursor-not-allowed disabled:opacity-25"
           >
             Next →
