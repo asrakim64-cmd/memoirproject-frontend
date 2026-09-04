@@ -96,7 +96,7 @@ function VoiceMemory() {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
 
-    return `${minutes}:${remainingingSeconds.toString().padStart(2, "0")}`;
+    return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
   };
 
   return (
@@ -279,6 +279,155 @@ function MediaMemories() {
 
       <p className="mt-6 text-center font-[cursive] text-sm text-memory-muted">
         Keep the moments that are easier to remember when you can see them.
+      </p>
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Family Notes & Reactions                                                   */
+/* -------------------------------------------------------------------------- */
+
+function FamilyNotes() {
+  const [notes, setNotes] = useState([
+    {
+      name: "Sarah",
+      relation: "Daughter",
+      message:
+        "This brought back so many memories. I remember those mornings too. ❤️",
+    },
+    {
+      name: "Michael",
+      relation: "Son",
+      message:
+        "Dad used to tell this story all the time. I am so glad we kept it.",
+    },
+  ]);
+
+  const [newNote, setNewNote] = useState("");
+  const [reaction, setReaction] = useState<string | null>(null);
+
+  const addNote = () => {
+    const trimmedNote = newNote.trim();
+
+    if (!trimmedNote) return;
+
+    setNotes((currentNotes) => [
+      ...currentNotes,
+      {
+        name: "You",
+        relation: "Family",
+        message: trimmedNote,
+      },
+    ]);
+
+    setNewNote("");
+  };
+
+  return (
+    <div className="mx-auto flex w-full max-w-2xl flex-col">
+      {/* Heading */}
+      <div className="mb-5 text-center">
+        <p className="text-[10px] uppercase tracking-[0.3em] text-memory-muted">
+          Family Notes
+        </p>
+
+        <h2 className="mt-2 font-serif text-3xl text-memory-primary md:text-4xl">
+          Memories Shared
+        </h2>
+
+        <div className="mx-auto mt-4 flex items-center justify-center gap-2">
+          <span className="h-px w-8 bg-memory-accent/60" />
+          <span className="text-xs text-memory-accent">❦</span>
+          <span className="h-px w-8 bg-memory-accent/60" />
+        </div>
+      </div>
+
+      {/* Intro */}
+      <p className="mx-auto max-w-lg text-center font-[cursive] text-sm leading-relaxed text-memory-muted">
+        A memoir becomes even more meaningful when the people who shared the
+        moments can leave a little piece of themselves behind.
+      </p>
+
+      {/* Reactions */}
+      <div className="mt-5 flex items-center justify-center gap-2">
+        <button
+          type="button"
+          onClick={() => setReaction(reaction === "heart" ? null : "heart")}
+          className={`rounded-full border px-3 py-1.5 text-xs transition ${
+            reaction === "heart"
+              ? "border-memory-accent bg-memory-accent/10 text-memory-primary"
+              : "border-memory-maroon/15 text-memory-muted hover:border-memory-accent/50"
+          }`}
+        >
+          ❤️ Remembered
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setReaction(reaction === "love" ? null : "love")}
+          className={`rounded-full border px-3 py-1.5 text-xs transition ${
+            reaction === "love"
+              ? "border-memory-accent bg-memory-accent/10 text-memory-primary"
+              : "border-memory-maroon/15 text-memory-muted hover:border-memory-accent/50"
+          }`}
+        >
+          ✨ Loved this
+        </button>
+
+        <span className="ml-1 text-xs text-memory-muted">
+          {reaction ? "Thank you for remembering." : ""}
+        </span>
+      </div>
+
+      {/* Notes */}
+      <div className="mt-5 space-y-3">
+        {notes.map((note, index) => (
+          <div
+            key={`${note.name}-${index}`}
+            className="rounded-lg border border-memory-maroon/10 bg-memory-light/40 px-4 py-3"
+          >
+            <div className="flex items-baseline justify-between gap-3">
+              <p className="font-serif text-sm font-medium text-memory-primary">
+                {note.name}
+              </p>
+
+              <span className="text-[10px] text-memory-muted">
+                {note.relation}
+              </span>
+            </div>
+
+            <p className="mt-1 font-[cursive] text-sm leading-relaxed text-memory-primary/75">
+              “{note.message}”
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {/* Add Note */}
+      <div className="mt-5">
+        <textarea
+          value={newNote}
+          onChange={(event) => setNewNote(event.target.value)}
+          placeholder="Leave a note or a memory..."
+          rows={2}
+          className="w-full resize-none rounded-lg border border-memory-maroon/15 bg-memory-light/50 px-4 py-3 font-[cursive] text-sm text-memory-primary outline-none placeholder:text-memory-muted/60 focus:border-memory-accent/60"
+        />
+
+        <div className="mt-2 flex justify-end">
+          <button
+            type="button"
+            onClick={addNote}
+            disabled={!newNote.trim()}
+            className="rounded-full bg-memory-primary px-4 py-2 text-xs font-semibold text-memory-light transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-30"
+          >
+            Add Note
+          </button>
+        </div>
+      </div>
+
+      <p className="mt-4 text-center font-[cursive] text-xs italic text-memory-muted">
+        Keep their words close to the memories.
       </p>
     </div>
   );
@@ -470,6 +619,19 @@ const pages = [
             The End
           </p>
         </div>
+      </div>
+    ),
+  },
+
+  /* ---------------------------------------------------------------------- */
+  /* Family Notes Page                                                      */
+  /* ---------------------------------------------------------------------- */
+
+  {
+    type: "family-notes",
+    content: (
+      <div className="flex min-h-[650px] h-full flex-col justify-center px-8 py-8 md:px-12">
+        <FamilyNotes />
       </div>
     ),
   },
