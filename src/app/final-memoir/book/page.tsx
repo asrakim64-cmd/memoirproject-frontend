@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import MemoirLayout from "../../features/FinalMemoir/MemoirLayout";
+import MemoirLayout from "../../../features/FinalMemoir/MemoirLayout";
 
 /* -------------------------------------------------------------------------- */
 /* Voice Memory                                                               */
