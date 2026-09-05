@@ -32,21 +32,21 @@ export default function FinalMemoirCover() {
           <div className="pointer-events-none absolute bottom-3 left-3 h-8 w-8 border-b border-l border-[#B99555]" />
           <div className="pointer-events-none absolute bottom-3 right-3 h-8 w-8 border-b border-r border-[#B99555]" />
 
-          {/* SUBTLE HANDWRITTEN MEMORY DOODLES */}
-          <div className="pointer-events-none absolute left-[13%] top-[24%] rotate-[-12deg] font-[cursive] text-lg text-[#713C48]/25">
-            ♡
-          </div>
-
-          <div className="pointer-events-none absolute right-[6%] top-[36%] rotate-[8deg] font-[cursive] text-sm text-[#B99555]/35">
+          {/* SUBTLE DECORATIVE STARS */}
+          <div className="pointer-events-none absolute left-[13%] top-[24%] rotate-[-8deg] font-serif text-xs text-[#B99555]/25">
             ✦
           </div>
 
-          <div className="pointer-events-none absolute left-[46%] bottom-[18%] rotate-[-7deg] font-[cursive] text-xs text-[#713C48]/20">
-            always remembered
+          <div className="pointer-events-none absolute right-[6%] top-[36%] rotate-[8deg] font-serif text-sm text-[#B99555]/35">
+            ✦
           </div>
 
-          <div className="pointer-events-none absolute right-[8%] bottom-[25%] rotate-[14deg] font-[cursive] text-base text-[#B99555]/25">
-            ❦
+          <div className="pointer-events-none absolute left-[46%] bottom-[18%] rotate-[-5deg] font-serif text-xs text-[#B99555]/20">
+            ✦
+          </div>
+
+          <div className="pointer-events-none absolute right-[8%] bottom-[25%] rotate-[10deg] font-serif text-xs text-[#B99555]/25">
+            ✦
           </div>
 
           {/* HEADER */}
@@ -172,11 +172,6 @@ export default function FinalMemoirCover() {
                       A life worth remembering
                     </span>
                   </div>
-
-                  {/* Tiny handwritten emotional trace */}
-                  <p className="mt-1 -rotate-[2deg] text-[7px] font-[cursive] italic text-[#713C48]/35">
-                    kept close, always
-                  </p>
                 </div>
 
                 <div className="my-4 flex items-center gap-2">
@@ -503,13 +498,6 @@ export default function FinalMemoirCover() {
                     <p className="font-[cursive] text-[10px] italic leading-relaxed text-[#713C48] sm:text-xs">
                       Some memories are too precious to be left behind.
                     </p>
-
-                    {/* Tiny handwritten heart */}
-                    <div className="mt-1 flex justify-end pr-2">
-                      <span className="rotate-[-8deg] font-[cursive] text-[11px] text-[#713C48]/35">
-                        ♡
-                      </span>
-                    </div>
                   </div>
                 </div>
 
