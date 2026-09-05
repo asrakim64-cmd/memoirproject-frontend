@@ -1,12 +1,43 @@
 "use client";
 
-import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 
 export default function FinalMemoirCover() {
+  const router = useRouter();
+  const [isOpening, setIsOpening] = useState(false);
+
+  const handleContinueReading = () => {
+    if (isOpening) return;
+
+    setIsOpening(true);
+
+    setTimeout(() => {
+      router.push("/final-memoir/book");
+    }, 650);
+  };
+
   return (
     <main className="min-h-screen bg-[#DED4CB] px-2 py-2 text-[#2E171F] sm:px-3 sm:py-3 lg:px-4 lg:py-4">
       <div className="mx-auto max-w-[1580px]">
-        <section
+        <motion.section
+          initial={{ x: 0, opacity: 1 }}
+          animate={
+            isOpening
+              ? {
+                  x: "-100%",
+                  opacity: 0,
+                }
+              : {
+                  x: 0,
+                  opacity: 1,
+                }
+          }
+          transition={{
+            duration: 0.65,
+            ease: [0.645, 0.045, 0.355, 1],
+          }}
           className="relative overflow-hidden border-[1.5px] border-[#351A23] bg-[#FBF8F1] shadow-[0_25px_80px_rgba(45,23,31,0.20)]"
           style={{
             backgroundImage: `
@@ -587,19 +618,21 @@ export default function FinalMemoirCover() {
                 </div>
               </div>
 
-              <Link
-                href="/final-memoir/book"
-                className="group flex shrink-0 items-center gap-3 border border-[#D8B66D] bg-[#713C48] px-5 py-3 text-[8px] font-bold uppercase tracking-[0.2em] text-[#FBF8F1] shadow-[0_7px_22px_rgba(0,0,0,0.2)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#824A56] hover:shadow-[0_10px_30px_rgba(0,0,0,0.28)] sm:px-7 sm:py-3.5 sm:text-[9px]"
+              <button
+                type="button"
+                onClick={handleContinueReading}
+                disabled={isOpening}
+                className="group flex shrink-0 items-center gap-3 border border-[#D8B66D] bg-[#713C48] px-5 py-3 text-[8px] font-bold uppercase tracking-[0.2em] text-[#FBF8F1] shadow-[0_7px_22px_rgba(0,0,0,0.2)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#824A56] hover:shadow-[0_10px_30px_rgba(0,0,0,0.28)] disabled:cursor-default sm:px-7 sm:py-3.5 sm:text-[9px]"
               >
                 <span>Continue Reading</span>
 
                 <span className="text-base text-[#D8B66D] transition-transform duration-300 group-hover:translate-x-1">
                   →
                 </span>
-              </Link>
+              </button>
             </div>
           </footer>
-        </section>
+        </motion.section>
       </div>
     </main>
   );
