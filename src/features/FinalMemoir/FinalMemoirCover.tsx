@@ -49,6 +49,23 @@ export default function FinalMemoirCover() {
             ✦
           </div>
 
+          {/* EXTRA SUBTLE DECORATIVE STARS */}
+          <div className="pointer-events-none absolute left-[8%] top-[48%] rotate-[-12deg] font-serif text-xs text-[#B99555]/25">
+            ✦
+          </div>
+
+          <div className="pointer-events-none absolute right-[14%] top-[58%] rotate-[10deg] font-serif text-sm text-[#B99555]/30">
+            ✦
+          </div>
+
+          <div className="pointer-events-none absolute left-[28%] bottom-[12%] rotate-[7deg] font-serif text-xs text-[#B99555]/25">
+            ✦
+          </div>
+
+          <div className="pointer-events-none absolute right-[35%] bottom-[8%] rotate-[-8deg] font-serif text-xs text-[#B99555]/20">
+            ✦
+          </div>
+
           {/* HEADER */}
           <header className="relative z-10">
             <div className="flex items-center justify-between border-b border-[#B99555]/50 bg-[#351A23] px-4 py-2 sm:px-8">
