@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import MemoirLayout from "../../../features/FinalMemoir/MemoirLayout";
 
 /* -------------------------------------------------------------------------- */
@@ -642,23 +643,26 @@ const pages = [
 /* -------------------------------------------------------------------------- */
 
 export default function FinalMemoirPage() {
+  const router = useRouter();
+
   const [currentPage, setCurrentPage] = useState(0);
   const [turningPage, setTurningPage] = useState<number | null>(null);
   const [direction, setDirection] = useState<"next" | "previous">("next");
+  const [isReturning, setIsReturning] = useState(false);
 
   const isFirstPage = currentPage === 0;
   const isLastPage = currentPage === pages.length - 1;
   const isFlipping = turningPage !== null;
 
   const goNext = () => {
-    if (isFlipping || isLastPage) return;
+    if (isFlipping || isLastPage || isReturning) return;
 
     setDirection("next");
     setTurningPage(currentPage);
   };
 
   const goPrevious = () => {
-    if (isFlipping || isFirstPage) return;
+    if (isFlipping || isFirstPage || isReturning) return;
 
     setDirection("previous");
     setTurningPage(currentPage);
@@ -676,6 +680,16 @@ export default function FinalMemoirPage() {
     setTurningPage(null);
   };
 
+  const handleBackToCover = () => {
+    if (isReturning || isFlipping || !isFirstPage) return;
+
+    setIsReturning(true);
+
+    setTimeout(() => {
+      router.push("/final-memoir");
+    }, 650);
+  };
+
   const underlyingPage =
     turningPage === null
       ? currentPage
@@ -685,7 +699,25 @@ export default function FinalMemoirPage() {
 
   return (
     <MemoirLayout>
-      <div className="flex min-h-[calc(100vh-80px)] w-full flex-col items-center justify-center px-4 py-8">
+      <motion.div
+        initial={{ x: 0, opacity: 1 }}
+        animate={
+          isReturning
+            ? {
+                x: "100%",
+                opacity: 0,
+              }
+            : {
+                x: 0,
+                opacity: 1,
+              }
+        }
+        transition={{
+          duration: 0.65,
+          ease: [0.645, 0.045, 0.355, 1],
+        }}
+        className="flex min-h-[calc(100vh-80px)] w-full flex-col items-center justify-center px-4 py-8"
+      >
         <div
           className="relative w-full max-w-4xl"
           style={{
@@ -700,6 +732,22 @@ export default function FinalMemoirPage() {
           {/* Static page underneath */}
           <div className="relative min-h-[650px] overflow-hidden rounded-sm border border-memory-maroon/20 bg-[#fffdf9] shadow-sm">
             <div className="pointer-events-none absolute inset-4 border border-memory-maroon/10 md:inset-6" />
+
+            {/* Back to Cover */}
+            {isFirstPage && (
+              <button
+                type="button"
+                onClick={handleBackToCover}
+                disabled={isReturning || isFlipping}
+                className="group absolute left-6 top-6 z-30 flex items-center gap-2 font-[cursive] text-sm text-memory-primary/70 transition-all duration-300 hover:-translate-x-0.5 hover:text-memory-maroon disabled:cursor-default disabled:opacity-50 md:left-8 md:top-8"
+              >
+                <span className="text-base transition-transform duration-300 group-hover:-translate-x-1">
+                  ←
+                </span>
+
+                <span>Back to Cover</span>
+              </button>
+            )}
 
             <div className="relative min-h-[650px]">
               {pages[underlyingPage].content}
@@ -796,7 +844,7 @@ export default function FinalMemoirPage() {
           <button
             type="button"
             onClick={goPrevious}
-            disabled={isFirstPage || isFlipping}
+            disabled={isFirstPage || isFlipping || isReturning}
             className="font-[cursive] text-base text-memory-primary transition hover:text-memory-maroon disabled:cursor-not-allowed disabled:opacity-25"
           >
             ← Previous
@@ -809,13 +857,13 @@ export default function FinalMemoirPage() {
           <button
             type="button"
             onClick={goNext}
-            disabled={isLastPage || isFlipping}
+            disabled={isLastPage || isFlipping || isReturning}
             className="font-[cursive] text-base text-memory-primary transition hover:text-memory-maroon disabled:cursor-not-allowed disabled:opacity-25"
           >
             Next →
           </button>
         </div>
-      </div>
+      </motion.div>
     </MemoirLayout>
   );
 }
