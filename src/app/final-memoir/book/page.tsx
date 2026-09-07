@@ -105,14 +105,18 @@ function VoiceMemory() {
       <div className="grid items-stretch gap-5 md:grid-cols-2">
         {/* Transcription Box */}
         <div className="rounded-xl border border-memory-maroon/10 bg-memory-light/40 p-5 md:p-6">
-          <span className="font-serif text-3xl leading-none text-memory-maroon/30">
-            “
-          </span>
+          <div className="mb-2 flex items-center justify-between">
+            <span className="text-[9px] uppercase tracking-[0.25em] text-memory-muted">
+              Transcription
+            </span>
 
-          <p className="mt-1 font-serif text-base leading-relaxed text-memory-primary/85">
-            I still remember those early mornings. Dad would wake up before
+            <span className="text-[10px] text-memory-maroon/40">✦</span>
+          </div>
+
+          <p className="font-serif text-base leading-relaxed text-memory-primary/85">
+            “I still remember those early mornings. Dad would wake up before
             everyone else and sit quietly with his coffee. Those were simple
-            moments, but they are some of the memories I miss the most.
+            moments, but they are some of the memories I miss the most.”
           </p>
 
           <p className="mt-4 font-[cursive] text-sm text-memory-maroon/70">
@@ -121,14 +125,42 @@ function VoiceMemory() {
         </div>
 
         {/* Recording Box */}
-        <div className="flex flex-col justify-center rounded-xl bg-memory-primary p-5 shadow-sm md:p-6">
+        <div className="group flex flex-col justify-center rounded-xl bg-memory-primary p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(0,0,0,0.15)] md:p-6">
           <div className="flex flex-col items-center gap-4 text-center">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full border border-memory-light/20 bg-memory-light/10">
+            {/* Microphone */}
+            <motion.div
+              animate={
+                isRecording
+                  ? {
+                      scale: [1, 1.07, 1],
+                    }
+                  : {
+                      scale: 1,
+                    }
+              }
+              transition={
+                isRecording
+                  ? {
+                      duration: 1.2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }
+                  : {
+                      duration: 0.2,
+                    }
+              }
+              className={`flex h-12 w-12 items-center justify-center rounded-full border transition-all duration-300 ${
+                isRecording
+                  ? "border-memory-light/40 bg-memory-light/20 shadow-[0_0_0_7px_rgba(255,255,255,0.04)]"
+                  : "border-memory-light/20 bg-memory-light/10"
+              }`}
+            >
               <span className="text-lg text-memory-light">
                 {isRecording ? "●" : "🎙"}
               </span>
-            </div>
+            </motion.div>
 
+            {/* Text */}
             <div>
               <p className="font-serif text-base text-memory-light">
                 {isRecording
@@ -143,18 +175,49 @@ function VoiceMemory() {
               </p>
             </div>
 
+            {/* Recording Wave */}
+            {isRecording && (
+              <div className="flex h-5 items-center justify-center gap-1">
+                {[1, 2, 3, 4, 5].map((bar) => (
+                  <motion.span
+                    key={bar}
+                    animate={{
+                      height: [4, 13, 6, 16, 5],
+                    }}
+                    transition={{
+                      duration: 0.8,
+                      repeat: Infinity,
+                      delay: bar * 0.08,
+                      ease: "easeInOut",
+                    }}
+                    className="w-px bg-memory-light/60"
+                  />
+                ))}
+              </div>
+            )}
+
+            {/* Button */}
             <button
               type="button"
               onClick={isRecording ? stopRecording : startRecording}
-              className="rounded-full bg-memory-light px-5 py-2 text-xs font-semibold uppercase tracking-wider text-memory-primary transition hover:scale-[1.02]"
+              className="rounded-full bg-memory-light px-5 py-2 text-xs font-semibold uppercase tracking-wider text-memory-primary transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_7px_20px_rgba(0,0,0,0.16)]"
             >
               {isRecording ? "Stop Recording" : "Start Recording"}
             </button>
 
+            {/* Audio Preview */}
             {audioUrl && !isRecording && (
-              <div className="w-full rounded-lg bg-memory-light/10 p-2.5">
+              <motion.div
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="w-full rounded-lg border border-memory-light/10 bg-memory-light/10 p-2.5"
+              >
+                <p className="mb-2 font-[cursive] text-[10px] text-memory-light/50">
+                  Your recorded memory
+                </p>
+
                 <audio controls src={audioUrl} className="w-full" />
-              </div>
+              </motion.div>
             )}
           </div>
         </div>
@@ -233,9 +296,7 @@ function MediaMemories() {
               <div className="text-center text-memory-light">
                 <div className="mb-3 text-3xl">▧</div>
 
-                <p className="font-serif text-lg">
-                  Add a photograph
-                </p>
+                <p className="font-serif text-lg">Add a photograph</p>
 
                 <p className="mt-1 font-[cursive] text-sm text-memory-light/60">
                   Click to choose a photo
@@ -265,9 +326,7 @@ function MediaMemories() {
               <div className="text-center text-memory-light">
                 <div className="mb-3 text-3xl">▷</div>
 
-                <p className="font-serif text-lg">
-                  Add a video memory
-                </p>
+                <p className="font-serif text-lg">Add a video memory</p>
 
                 <p className="mt-1 font-[cursive] text-sm text-memory-light/60">
                   Click to choose a video
@@ -521,10 +580,10 @@ const pages = [
           <div className="mx-auto mt-5 h-px w-12 bg-memory-maroon/30" />
         </div>
 
-        <div className="grid items-center gap-10 md:grid-cols-2 md:px-6">
+        <div className="grid items-stretch gap-10 md:grid-cols-2 md:px-6">
           {/* Memory Text Box */}
-          <div className="flex flex-col justify-center">
-            <div className="rounded-xl border border-memory-maroon/15 bg-memory-light/30 px-5 py-5">
+          <div className="flex h-full flex-col">
+            <div className="flex h-full flex-col justify-center rounded-xl border border-memory-maroon/15 bg-memory-light/30 px-5 py-5">
               <p className="font-serif text-lg leading-loose text-memory-primary/85">
                 “Dad always woke up before the sun. He claimed it was to get a
                 head start on the day, but I think he just liked the quiet
@@ -538,9 +597,9 @@ const pages = [
           </div>
 
           {/* Photograph */}
-          <div className="flex items-center justify-center">
-            <div className="group w-full max-w-sm overflow-hidden rounded-xl bg-memory-primary p-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-[0_14px_30px_rgba(0,0,0,0.16)]">
-              <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-lg bg-memory-light/10 transition-all duration-300 group-hover:bg-memory-light/15">
+          <div className="flex h-full items-stretch justify-center">
+            <div className="group flex h-full w-full max-w-sm flex-col overflow-hidden rounded-xl bg-memory-primary p-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-[0_14px_30px_rgba(0,0,0,0.16)]">
+              <div className="relative flex min-h-0 flex-1 items-center justify-center overflow-hidden rounded-lg bg-memory-light/10 transition-all duration-300 group-hover:bg-memory-light/15">
                 <span className="font-[cursive] text-base text-memory-light/70 transition-transform duration-300 group-hover:scale-105">
                   A cherished photograph
                 </span>
