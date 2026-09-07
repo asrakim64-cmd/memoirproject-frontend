@@ -355,17 +355,22 @@ function FamilyNotes() {
       relation: "Daughter",
       message:
         "This brought back so many memories. I remember those mornings too. ❤️",
+      reaction: null as string | null,
+      reply: "",
     },
     {
       name: "Michael",
       relation: "Son",
       message:
         "Dad used to tell this story all the time. I am so glad we kept it.",
+      reaction: null as string | null,
+      reply: "",
     },
   ]);
 
   const [newNote, setNewNote] = useState("");
-  const [reaction, setReaction] = useState<string | null>(null);
+  const [replyOpen, setReplyOpen] = useState<number | null>(null);
+  const [replyText, setReplyText] = useState("");
 
   const addNote = () => {
     const trimmedNote = newNote.trim();
@@ -378,10 +383,50 @@ function FamilyNotes() {
         name: "You",
         relation: "Family",
         message: trimmedNote,
+        reaction: null,
+        reply: "",
       },
     ]);
 
     setNewNote("");
+  };
+
+  const toggleReaction = (index: number) => {
+    setNotes((currentNotes) =>
+      currentNotes.map((note, noteIndex) =>
+        noteIndex === index
+          ? {
+              ...note,
+              reaction: note.reaction === "heart" ? null : "heart",
+            }
+          : note,
+      ),
+    );
+  };
+
+  const toggleReply = (index: number) => {
+    setReplyOpen((current) => (current === index ? null : index));
+    setReplyText("");
+  };
+
+  const addReply = (index: number) => {
+    const trimmedReply = replyText.trim();
+
+    if (!trimmedReply) return;
+
+    setNotes((currentNotes) =>
+      currentNotes.map((note, noteIndex) =>
+        noteIndex === index
+          ? {
+              ...note,
+              reply: trimmedReply,
+            }
+          : note,
+      ),
+    );
+
+    setReplyText("");
+    setReplyOpen(null);
   };
 
   return (
@@ -409,37 +454,6 @@ function FamilyNotes() {
         moments can leave a little piece of themselves behind.
       </p>
 
-      {/* Reactions */}
-      <div className="mt-5 flex items-center justify-center gap-2">
-        <button
-          type="button"
-          onClick={() => setReaction(reaction === "heart" ? null : "heart")}
-          className={`rounded-full border px-3 py-1.5 text-xs transition ${
-            reaction === "heart"
-              ? "border-memory-accent bg-memory-accent/10 text-memory-primary"
-              : "border-memory-maroon/15 text-memory-muted hover:border-memory-accent/50"
-          }`}
-        >
-          ❤️ Remembered
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setReaction(reaction === "love" ? null : "love")}
-          className={`rounded-full border px-3 py-1.5 text-xs transition ${
-            reaction === "love"
-              ? "border-memory-accent bg-memory-accent/10 text-memory-primary"
-              : "border-memory-maroon/15 text-memory-muted hover:border-memory-accent/50"
-          }`}
-        >
-          ✨ Loved this
-        </button>
-
-        <span className="ml-1 text-xs text-memory-muted">
-          {reaction ? "Thank you for remembering." : ""}
-        </span>
-      </div>
-
       {/* Notes */}
       <div className="mt-5 space-y-3">
         {notes.map((note, index) => (
@@ -460,6 +474,70 @@ function FamilyNotes() {
             <p className="mt-1 font-[cursive] text-sm leading-relaxed text-memory-primary/75">
               “{note.message}”
             </p>
+
+            {/* Reaction + Reply */}
+            <div className="mt-3 flex items-center gap-4 border-t border-memory-maroon/10 pt-2">
+              <button
+                type="button"
+                onClick={() => toggleReaction(index)}
+                className={`font-[cursive] text-xs transition ${
+                  note.reaction === "heart"
+                    ? "text-memory-maroon"
+                    : "text-memory-muted hover:text-memory-maroon"
+                }`}
+              >
+                {note.reaction === "heart"
+                  ? "♥ Remembered"
+                  : "♡ Reaction"}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => toggleReply(index)}
+                className="font-[cursive] text-xs text-memory-muted transition hover:text-memory-maroon"
+              >
+                Reply
+              </button>
+            </div>
+
+            {/* Inline Reply */}
+            {replyOpen === index && (
+              <div className="mt-3 flex items-center gap-2">
+                <input
+                  type="text"
+                  value={replyText}
+                  onChange={(event) => setReplyText(event.target.value)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                      addReply(index);
+                    }
+                  }}
+                  autoFocus
+                  placeholder="Write a reply..."
+                  className="min-w-0 flex-1 rounded-md border border-memory-maroon/15 bg-memory-light/50 px-3 py-2 font-[cursive] text-xs text-memory-primary outline-none placeholder:text-memory-muted/60 focus:border-memory-accent/60"
+                />
+
+                <button
+                  type="button"
+                  onClick={() => addReply(index)}
+                  disabled={!replyText.trim()}
+                  className="shrink-0 rounded-full bg-memory-primary px-3 py-2 text-[10px] font-semibold text-memory-light transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-30"
+                >
+                  Reply
+                </button>
+              </div>
+            )}
+
+            {/* Submitted Reply */}
+            {note.reply && (
+              <div className="mt-3 ml-4 border-l border-memory-maroon/15 pl-3">
+                <p className="text-[10px] text-memory-muted">You replied</p>
+
+                <p className="mt-1 font-[cursive] text-xs leading-relaxed text-memory-primary/70">
+                  “{note.reply}”
+                </p>
+              </div>
+            )}
           </div>
         ))}
       </div>
