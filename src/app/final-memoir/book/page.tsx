@@ -522,24 +522,30 @@ const pages = [
         </div>
 
         <div className="grid items-center gap-10 md:grid-cols-2 md:px-6">
+          {/* Memory Text Box */}
           <div className="flex flex-col justify-center">
-            <p className="font-serif text-lg leading-loose text-memory-primary/85">
-              Dad always woke up before the sun. He claimed it was to get a
-              head start on the day, but I think he just liked the quiet before
-              the house woke up.
-            </p>
+            <div className="rounded-xl border border-memory-maroon/15 bg-memory-light/30 px-5 py-5">
+              <p className="font-serif text-lg leading-loose text-memory-primary/85">
+                “Dad always woke up before the sun. He claimed it was to get a
+                head start on the day, but I think he just liked the quiet
+                before the house woke up.”
+              </p>
 
-            <p className="mt-6 font-[cursive] text-base text-memory-maroon/70">
-              — Sara, Daughter
-            </p>
+              <p className="mt-6 font-[cursive] text-base text-memory-maroon/70">
+                — Sara, Daughter
+              </p>
+            </div>
           </div>
 
+          {/* Photograph */}
           <div className="flex items-center justify-center">
-            <div className="w-full max-w-sm overflow-hidden rounded-xl bg-memory-primary p-2 shadow-sm">
-              <div className="flex aspect-[4/3] items-center justify-center rounded-lg bg-memory-light/10">
-                <span className="font-[cursive] text-base text-memory-light/70">
+            <div className="group w-full max-w-sm overflow-hidden rounded-xl bg-memory-primary p-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-[0_14px_30px_rgba(0,0,0,0.16)]">
+              <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-lg bg-memory-light/10 transition-all duration-300 group-hover:bg-memory-light/15">
+                <span className="font-[cursive] text-base text-memory-light/70 transition-transform duration-300 group-hover:scale-105">
                   A cherished photograph
                 </span>
+
+                <div className="pointer-events-none absolute inset-3 rounded-md border border-memory-light/0 transition-all duration-300 group-hover:border-memory-light/25" />
               </div>
 
               <p className="px-3 py-3 text-center font-[cursive] text-xs text-memory-light/70">
