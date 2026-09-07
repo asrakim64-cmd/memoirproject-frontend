@@ -25,14 +25,8 @@ export default function FinalMemoirCover() {
           initial={{ x: 0, opacity: 1 }}
           animate={
             isOpening
-              ? {
-                  x: "-100%",
-                  opacity: 0,
-                }
-              : {
-                  x: 0,
-                  opacity: 1,
-                }
+              ? { x: "-100%", opacity: 0 }
+              : { x: 0, opacity: 1 }
           }
           transition={{
             duration: 0.65,
@@ -54,45 +48,34 @@ export default function FinalMemoirCover() {
             `,
           }}
         >
-          {/* Inner border */}
           <div className="pointer-events-none absolute inset-[7px] border border-[#B99555]/35" />
 
-          {/* Corner ornaments */}
           <div className="pointer-events-none absolute left-3 top-3 h-8 w-8 border-l border-t border-[#B99555]" />
           <div className="pointer-events-none absolute right-3 top-3 h-8 w-8 border-r border-t border-[#B99555]" />
           <div className="pointer-events-none absolute bottom-3 left-3 h-8 w-8 border-b border-l border-[#B99555]" />
           <div className="pointer-events-none absolute bottom-3 right-3 h-8 w-8 border-b border-r border-[#B99555]" />
 
-          {/* SUBTLE DECORATIVE STARS */}
           <div className="pointer-events-none absolute left-[13%] top-[24%] rotate-[-8deg] font-serif text-xs text-[#B99555]/25">
             ✦
           </div>
-
           <div className="pointer-events-none absolute right-[6%] top-[36%] rotate-[8deg] font-serif text-sm text-[#B99555]/35">
             ✦
           </div>
-
           <div className="pointer-events-none absolute left-[46%] bottom-[18%] rotate-[-5deg] font-serif text-xs text-[#B99555]/20">
             ✦
           </div>
-
           <div className="pointer-events-none absolute right-[8%] bottom-[25%] rotate-[10deg] font-serif text-xs text-[#B99555]/25">
             ✦
           </div>
-
-          {/* EXTRA SUBTLE DECORATIVE STARS */}
           <div className="pointer-events-none absolute left-[8%] top-[48%] rotate-[-12deg] font-serif text-xs text-[#B99555]/25">
             ✦
           </div>
-
           <div className="pointer-events-none absolute right-[14%] top-[58%] rotate-[10deg] font-serif text-sm text-[#B99555]/30">
             ✦
           </div>
-
           <div className="pointer-events-none absolute left-[28%] bottom-[12%] rotate-[7deg] font-serif text-xs text-[#B99555]/25">
             ✦
           </div>
-
           <div className="pointer-events-none absolute right-[35%] bottom-[8%] rotate-[-8deg] font-serif text-xs text-[#B99555]/20">
             ✦
           </div>
@@ -137,11 +120,9 @@ export default function FinalMemoirCover() {
 
                 <div className="mt-2 flex items-center justify-center gap-3">
                   <span className="h-px w-10 bg-[#B99555]" />
-
                   <span className="text-[7px] uppercase tracking-[0.48em] text-[#80612F] sm:text-[8px]">
                     Memory • Love • Legacy
                   </span>
-
                   <span className="h-px w-10 bg-[#B99555]" />
                 </div>
               </div>
@@ -177,10 +158,10 @@ export default function FinalMemoirCover() {
                   </span>
 
                   <span className="h-px flex-1 bg-[#351A23]/25" />
-
                   <span className="text-xs text-[#B99555]">✦</span>
                 </div>
 
+                {/* UPDATED UNIQUE COVER HEADING */}
                 <div className="mt-5">
                   <p
                     className="font-serif text-[clamp(1rem,2vw,1.45rem)] italic tracking-wide text-[#8A6634]"
@@ -188,7 +169,7 @@ export default function FinalMemoirCover() {
                       textShadow: "0 3px 12px rgba(138,102,52,0.12)",
                     }}
                   >
-                    Remembering
+                    Preserving
                   </p>
 
                   <h2
@@ -197,25 +178,23 @@ export default function FinalMemoirCover() {
                       textShadow: "0 4px 22px rgba(53,26,35,0.09)",
                     }}
                   >
-                    A Life
+                    The Moments
                     <br />
 
                     <span
-                      className="font-normal italic text-[#713C48]"
+                      className="font-normal text-[#713C48]"
                       style={{
                         textShadow:
-                          "0 4px 20px rgba(113,60,72,0.12)",
+                           "0 4px 22px rgba(53,26,35,0.09)",
                       }}
                     >
-                      Remembered
+                      That Made A Life
                     </span>
                   </h2>
 
                   <div className="mt-2 flex items-center gap-2">
                     <span className="text-[7px] text-[#B99555]">✦</span>
-
                     <span className="h-px w-10 bg-[#B99555]/50" />
-
                     <span className="text-[6px] uppercase tracking-[0.28em] text-[#80612F]">
                       A life worth remembering
                     </span>
@@ -245,14 +224,13 @@ export default function FinalMemoirCover() {
 
                 <div className="mt-5 grid grid-cols-2 gap-5">
 
-                  {/* First editorial column */}
                   <div>
                     <p className="font-serif text-[10px] leading-[1.55] text-[#28171C]/75 sm:text-xs lg:text-sm">
                       <span className="float-left mr-1 font-serif text-6xl font-medium leading-[0.68] text-[#713C48]">
                         S
                       </span>
                       ome lives are remembered in milestones. Others live on in
-                      the smallest things — a familiar laugh, a well-known
+                      the smallest things a familiar laugh, a well-known
                       story, a hand on your shoulder, a moment everyone still
                       talks about.
                     </p>
@@ -264,12 +242,8 @@ export default function FinalMemoirCover() {
                       quietly became part of everyone&apos;s history.
                     </p>
 
-                    {/* Quote */}
+                    {/* QUOTE */}
                     <div className="relative mt-5 border-y border-[#B99555] px-3 py-4">
-                      <span className="absolute -left-1 -top-4 font-serif text-3xl text-[#B99555]">
-                        “
-                      </span>
-
                       <p
                         className="font-[cursive] text-sm italic leading-[1.25] text-[#713C48] sm:text-base lg:text-lg"
                         style={{
@@ -277,39 +251,29 @@ export default function FinalMemoirCover() {
                             "0 2px 10px rgba(113,60,72,0.08)",
                         }}
                       >
-                        Where memory lives,
+                        <span>“Where memory lives,</span>
                         <br />
                         <span className="relative inline-block">
-                          love never fades.
+                          love never fades.”
                           <span className="absolute -bottom-1 left-0 h-px w-full rotate-[-1deg] bg-[#B99555]/45" />
                         </span>
                       </p>
-
-                      <span className="absolute -bottom-5 right-1 font-serif text-3xl text-[#B99555]">
-                        ”
-                      </span>
                     </div>
 
                     <div className="mt-5 flex items-center gap-2">
                       <span className="text-[8px] text-[#B99555]">✦</span>
-
                       <span className="h-px flex-1 bg-[#351A23]/20" />
-
                       <span className="font-serif text-[10px] text-[#B99555]">
                         ❦
                       </span>
-
                       <span className="h-px flex-1 bg-[#351A23]/20" />
-
                       <span className="text-[8px] text-[#B99555]">✦</span>
                     </div>
                   </div>
 
-                  {/* Legacy column */}
                   <div className="border-l border-[#351A23]/25 pl-5">
                     <div className="flex items-center gap-2">
                       <span className="text-[9px] text-[#B99555]">✦</span>
-
                       <p className="text-[6px] font-bold uppercase tracking-[0.3em] text-[#80612F] sm:text-[7px]">
                         The Legacy
                       </p>
@@ -318,7 +282,6 @@ export default function FinalMemoirCover() {
                     <h3 className="mt-2 font-serif text-xl font-medium leading-[0.95] text-[#351A23] sm:text-2xl lg:text-3xl">
                       More than
                       <br />
-
                       <span className="font-normal italic text-[#713C48]">
                         a memory.
                       </span>
@@ -326,7 +289,7 @@ export default function FinalMemoirCover() {
 
                     <p className="mt-4 font-serif text-[9px] leading-[1.6] text-[#28171C]/65 sm:text-[10px] lg:text-xs">
                       His legacy was never something written in dates. It was
-                      left quietly — in the people he loved, the lessons he
+                      left quietly in the people he loved, the lessons he
                       passed on, and the little parts of him that remain in
                       those who knew him.
                     </p>
@@ -336,7 +299,6 @@ export default function FinalMemoirCover() {
                         <span className="text-[6px] uppercase tracking-[0.2em] text-[#8A6B55]">
                           Born
                         </span>
-
                         <span className="font-serif text-sm text-[#351A23]">
                           1942
                         </span>
@@ -346,7 +308,6 @@ export default function FinalMemoirCover() {
                         <span className="text-[6px] uppercase tracking-[0.2em] text-[#8A6B55]">
                           Remembered
                         </span>
-
                         <span className="font-serif text-sm text-[#351A23]">
                           2024
                         </span>
@@ -356,7 +317,6 @@ export default function FinalMemoirCover() {
                         <span className="text-[6px] uppercase tracking-[0.2em] text-[#8A6B55]">
                           Legacy
                         </span>
-
                         <span className="font-serif text-sm italic text-[#713C48]">
                           Always
                         </span>
@@ -365,7 +325,6 @@ export default function FinalMemoirCover() {
 
                     <div className="mt-4 flex items-center gap-2">
                       <span className="h-px w-7 bg-[#B99555]" />
-
                       <span className="text-[6px] uppercase tracking-[0.18em] text-[#713C48]">
                         Preserved for generations
                       </span>
@@ -381,11 +340,9 @@ export default function FinalMemoirCover() {
               {/* RIGHT COLUMN */}
               <aside className="col-span-12 pt-6 sm:col-span-5 sm:pt-0 sm:pl-7 lg:pl-9">
 
-                {/* Section heading */}
                 <div className="flex items-center justify-between border-b border-[#351A23]/50 pb-2">
                   <div className="flex items-center gap-2">
                     <span className="text-[9px] text-[#B99555]">✦</span>
-
                     <p className="text-[7px] font-bold uppercase tracking-[0.3em] text-[#713C48]">
                       Remembering Robert
                     </p>
@@ -396,20 +353,14 @@ export default function FinalMemoirCover() {
                   </span>
                 </div>
 
-                {/* SIMPLE MAROON + GOLD PORTRAIT */}
                 <div className="group mt-4 flex justify-center">
                   <div className="relative w-full max-w-[235px] transition-all duration-500 ease-out group-hover:-translate-y-1">
-
                     <div className="absolute -inset-1 border border-[#B99555]/35 transition-all duration-500 group-hover:-inset-1.5 group-hover:border-[#B99555]/55" />
 
                     <div className="border-[1.5px] border-[#351A23] bg-[#351A23] p-2 shadow-[0_12px_35px_rgba(53,26,35,0.15)] transition-shadow duration-500 group-hover:shadow-[0_17px_38px_rgba(53,26,35,0.22)]">
-
                       <div className="border border-[#B99555] bg-[#351A23] p-2">
-
                         <div className="relative flex aspect-[4/4.7] items-center justify-center overflow-hidden border border-[#B99555]/45 bg-[#351A23]">
-
                           <div className="relative text-center">
-
                             <div
                               className="mx-auto flex h-24 w-24 items-center justify-center rounded-full border-[1.5px] border-[#D8B66D] bg-[#713C48] font-serif text-5xl font-medium italic text-[#D8B66D] shadow-[0_7px_20px_rgba(0,0,0,0.18)] transition-transform duration-500 group-hover:scale-105 sm:h-28 sm:w-28 sm:text-6xl"
                               style={{
@@ -426,11 +377,9 @@ export default function FinalMemoirCover() {
 
                             <div className="mx-auto mt-2 flex items-center justify-center gap-2">
                               <span className="h-px w-6 bg-[#B99555]" />
-
                               <span className="text-[7px] text-[#D8B66D]">
                                 ✦
                               </span>
-
                               <span className="h-px w-6 bg-[#B99555]" />
                             </div>
 
@@ -442,7 +391,6 @@ export default function FinalMemoirCover() {
                       </div>
                     </div>
 
-                    {/* Gold corner accents */}
                     <span className="absolute -left-1 -top-1 h-7 w-7 border-l-2 border-t-2 border-[#B99555]" />
                     <span className="absolute -right-1 -top-1 h-7 w-7 border-r-2 border-t-2 border-[#B99555]" />
                     <span className="absolute -bottom-1 -left-1 h-7 w-7 border-b-2 border-l-2 border-[#B99555]" />
@@ -450,7 +398,6 @@ export default function FinalMemoirCover() {
                   </div>
                 </div>
 
-                {/* Name beneath portrait */}
                 <div className="mt-3 text-center">
                   <h3
                     className="font-serif text-2xl font-normal italic text-[#713C48]"
@@ -467,56 +414,41 @@ export default function FinalMemoirCover() {
                   </p>
                 </div>
 
-                {/* Memory categories */}
                 <div className="mt-4 grid grid-cols-3 border-y border-[#351A23]/40">
                   <div className="group px-2 py-3 text-center transition-transform duration-300 hover:-translate-y-0.5">
-                    <span className="font-serif text-base text-[#B99555]">
-                      ✎
-                    </span>
-
+                    <span className="font-serif text-base text-[#B99555]">✎</span>
                     <p className="mt-1 text-[6px] uppercase tracking-[0.18em] text-[#8A6B55]">
                       His Words
                     </p>
-
                     <p className="mt-1 font-serif text-xs font-medium text-[#351A23]">
                       Stories
                     </p>
                   </div>
 
                   <div className="group border-x border-[#351A23]/20 px-2 py-3 text-center transition-transform duration-300 hover:-translate-y-0.5">
-                    <span className="font-serif text-base text-[#B99555]">
-                      ♫
-                    </span>
-
+                    <span className="font-serif text-base text-[#B99555]">♫</span>
                     <p className="mt-1 text-[6px] uppercase tracking-[0.18em] text-[#8A6B55]">
                       His Voice
                     </p>
-
                     <p className="mt-1 font-serif text-xs font-medium text-[#351A23]">
                       Memories
                     </p>
                   </div>
 
                   <div className="group px-2 py-3 text-center transition-transform duration-300 hover:-translate-y-0.5">
-                    <span className="font-serif text-base text-[#B99555]">
-                      ◇
-                    </span>
-
+                    <span className="font-serif text-base text-[#B99555]">◇</span>
                     <p className="mt-1 text-[6px] uppercase tracking-[0.18em] text-[#8A6B55]">
                       His Moments
                     </p>
-
                     <p className="mt-1 font-serif text-xs font-medium text-[#351A23]">
                       Photographs
                     </p>
                   </div>
                 </div>
 
-                {/* Family archive */}
                 <div className="mt-4 border-b border-[#351A23]/35 pb-4">
                   <div className="flex items-center gap-2">
                     <span className="text-[8px] text-[#B99555]">◆</span>
-
                     <p className="text-[6px] font-bold uppercase tracking-[0.28em] text-[#80612F]">
                       From the Family Archive
                     </p>
@@ -525,7 +457,6 @@ export default function FinalMemoirCover() {
                   <h3 className="mt-2 font-serif text-xl font-medium leading-[0.95] text-[#351A23] sm:text-2xl">
                     The little things
                     <br />
-
                     <span className="font-normal italic text-[#713C48]">
                       we never forget.
                     </span>
@@ -549,34 +480,26 @@ export default function FinalMemoirCover() {
                   </div>
                 </div>
 
-                {/* SMALL INSPIRATIONAL NOTE */}
                 <div className="mt-4 flex justify-center">
                   <div className="relative w-[245px] border border-[#B99555]/70 bg-[#F1DDE0] px-4 py-2.5 shadow-[0_6px_18px_rgba(113,60,72,0.08)]">
-
-                    {/* Tiny gold accent */}
                     <span className="absolute -left-[4px] top-1/2 -translate-y-1/2 text-[8px] text-[#B99555]">
                       ✦
                     </span>
 
-                    {/* Centered label */}
                     <div className="flex items-center justify-center gap-2">
                       <span className="h-px w-5 bg-[#B99555]/50" />
-
                       <span className="text-center text-[6px] font-semibold uppercase tracking-[0.25em] text-[#80612F]">
                         A Little Reminder
                       </span>
-
                       <span className="h-px w-5 bg-[#B99555]/50" />
                     </div>
 
-                    {/* Inspirational line */}
                     <p className="mt-1.5 text-center font-[cursive] text-[11px] italic leading-snug text-[#713C48] sm:text-xs">
                       What we love deeply,
                       <br />
                       we carry with us.
                     </p>
 
-                    {/* Tiny handwritten signature */}
                     <div className="mt-1 flex justify-end pr-1">
                       <span className="rotate-[-6deg] font-[cursive] text-[8px] italic text-[#713C48]/35">
                         — with love
@@ -591,7 +514,6 @@ export default function FinalMemoirCover() {
           {/* FOOTER */}
           <footer className="relative z-20 border-t-[2px] border-[#351A23] bg-[#351A23] px-4 py-3 sm:px-7">
             <div className="flex items-center justify-between gap-4">
-
               <div className="hidden min-w-[170px] sm:block">
                 <p className="text-[6px] uppercase tracking-[0.25em] text-[#F8F0E6]/55">
                   The Memorial Times
@@ -609,11 +531,9 @@ export default function FinalMemoirCover() {
 
                 <div className="mt-1 flex items-center justify-center gap-2">
                   <span className="h-px w-8 bg-[#D8B66D]/35" />
-
                   <span className="text-[6px] uppercase tracking-[0.28em] text-[#F8F0E6]/50">
                     Open the complete memoir
                   </span>
-
                   <span className="h-px w-8 bg-[#D8B66D]/35" />
                 </div>
               </div>
@@ -625,7 +545,6 @@ export default function FinalMemoirCover() {
                 className="group flex shrink-0 items-center gap-3 border border-[#D8B66D] bg-[#713C48] px-5 py-3 text-[8px] font-bold uppercase tracking-[0.2em] text-[#FBF8F1] shadow-[0_7px_22px_rgba(0,0,0,0.2)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#824A56] hover:shadow-[0_10px_30px_rgba(0,0,0,0.28)] disabled:cursor-default sm:px-7 sm:py-3.5 sm:text-[9px]"
               >
                 <span>Continue Reading</span>
-
                 <span className="text-base text-[#D8B66D] transition-transform duration-300 group-hover:translate-x-1">
                   →
                 </span>
