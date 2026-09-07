@@ -51,11 +51,13 @@ export default function MemoirLayout({ children }: MemoirLayoutProps) {
               <span className="h-px w-7 bg-memory-accent/70" />
             </div>
 
-            <h1 className="font-serif text-xl font-medium tracking-wide md:text-2xl">
+            {/* Center Memoir Title */}
+            <h1 className="relative -top-1 font-serif text-xl font-medium tracking-wide md:text-2xl">
               Robert’s Memoir
             </h1>
 
-            <p className="mt-0 font-serif text-[11px] italic text-memory-light/60">
+            {/* Center Memoir Subtitle */}
+            <p className="relative -top-1 font-serif text-[11px] italic text-memory-light/60">
               A life remembered
             </p>
           </div>
