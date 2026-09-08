@@ -1,4 +1,3 @@
-// PDF table of contents component
 import { Page, StyleSheet, Text, View } from "@react-pdf/renderer";
 
 interface TOCItem {
@@ -13,9 +12,16 @@ interface MemoirPDFTableOfContentsProps {
 const styles = StyleSheet.create({
   page: {
     backgroundColor: "#FBF8F1",
-    padding: 54,
+    padding: 48,
     color: "#351A23",
     fontFamily: "Times-Roman",
+  },
+
+  border: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: "#80612F",
+    padding: 28,
   },
 
   header: {
@@ -82,27 +88,29 @@ export default function MemoirPDFTableOfContents({
 }: MemoirPDFTableOfContentsProps) {
   return (
     <Page size="A4" style={styles.page}>
-      <View style={styles.header}>
-        <Text style={styles.eyebrow}>CONTENTS</Text>
+      <View style={styles.border}>
+        <View style={styles.header}>
+          <Text style={styles.eyebrow}>CONTENTS</Text>
 
-        <Text style={styles.title}>Table of Contents</Text>
+          <Text style={styles.title}>Table of Contents</Text>
 
-        <View style={styles.divider} />
-      </View>
-
-      {items.map((item) => (
-        <View key={`${item.title}-${item.page}`} style={styles.item}>
-          <Text style={styles.itemTitle}>{item.title}</Text>
-
-          <View style={styles.dots} />
-
-          <Text style={styles.pageNumber}>{item.page}</Text>
+          <View style={styles.divider} />
         </View>
-      ))}
 
-      <Text style={styles.footer}>
-        MEMORIES PRESERVED WITH LOVE
-      </Text>
+        {items.map((item) => (
+          <View key={`${item.title}-${item.page}`} style={styles.item}>
+            <Text style={styles.itemTitle}>{item.title}</Text>
+
+            <View style={styles.dots} />
+
+            <Text style={styles.pageNumber}>{item.page}</Text>
+          </View>
+        ))}
+
+        <Text style={styles.footer}>
+          MEMORIES PRESERVED WITH LOVE
+        </Text>
+      </View>
     </Page>
   );
 }
