@@ -40,6 +40,73 @@ const styles = StyleSheet.create({
     marginBottom: 26,
   },
 
+  recordingBox: {
+    borderWidth: 1,
+    borderColor: "#D8CFC4",
+    padding: 20,
+    marginBottom: 28,
+    alignItems: "center",
+  },
+
+  microphoneCircle: {
+    width: 46,
+    height: 46,
+    borderWidth: 1,
+    borderColor: "#B99555",
+    borderRadius: 23,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 14,
+  },
+
+  microphone: {
+    fontSize: 20,
+    color: "#713C48",
+  },
+
+  recordingLabel: {
+    fontSize: 9,
+    letterSpacing: 2,
+    color: "#80612F",
+    marginBottom: 16,
+  },
+
+  waveform: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    height: 34,
+    width: "100%",
+  },
+
+  waveLineShort: {
+    width: 2,
+    height: 10,
+    backgroundColor: "#B99555",
+    marginHorizontal: 3,
+  },
+
+  waveLineMedium: {
+    width: 2,
+    height: 20,
+    backgroundColor: "#B99555",
+    marginHorizontal: 3,
+  },
+
+  waveLineTall: {
+    width: 2,
+    height: 30,
+    backgroundColor: "#B99555",
+    marginHorizontal: 3,
+  },
+
+  transcriptionLabel: {
+    fontSize: 9,
+    letterSpacing: 2,
+    color: "#80612F",
+    marginBottom: 12,
+  },
+
   transcript: {
     fontSize: 12,
     lineHeight: 1.7,
@@ -70,6 +137,41 @@ export default function MemoirPDFVoiceMemory({
         <Text style={styles.title}>{title}</Text>
 
         <View style={styles.divider} />
+
+        {/* Voice Recording Visual */}
+        <View style={styles.recordingBox}>
+          <View style={styles.microphoneCircle}>
+            <Text style={styles.microphone}>♫</Text>
+          </View>
+
+          <Text style={styles.recordingLabel}>
+            VOICE RECORDING
+          </Text>
+
+          <View style={styles.waveform}>
+            <View style={styles.waveLineShort} />
+            <View style={styles.waveLineMedium} />
+            <View style={styles.waveLineTall} />
+            <View style={styles.waveLineMedium} />
+            <View style={styles.waveLineShort} />
+            <View style={styles.waveLineTall} />
+            <View style={styles.waveLineMedium} />
+            <View style={styles.waveLineTall} />
+            <View style={styles.waveLineShort} />
+            <View style={styles.waveLineMedium} />
+            <View style={styles.waveLineTall} />
+            <View style={styles.waveLineMedium} />
+            <View style={styles.waveLineShort} />
+            <View style={styles.waveLineTall} />
+            <View style={styles.waveLineMedium} />
+            <View style={styles.waveLineShort} />
+          </View>
+        </View>
+
+        {/* Transcription */}
+        <Text style={styles.transcriptionLabel}>
+          TRANSCRIPTION
+        </Text>
 
         <Text style={styles.transcript}>{transcript}</Text>
 
