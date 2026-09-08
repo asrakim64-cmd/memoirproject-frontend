@@ -1,21 +1,7 @@
-// PDF viewer component
 "use client";
 
-import dynamic from "next/dynamic";
-
-const PDFViewer = dynamic(
-  () => import("@react-pdf/renderer").then((mod) => mod.PDFViewer),
-  {
-    ssr: false,
-  }
-);
-
-const MemoirPDFDocument = dynamic(
-  () => import("./MemoirPDFDocument"),
-  {
-    ssr: false,
-  }
-);
+import { PDFViewer } from "@react-pdf/renderer";
+import MemoirPDFDocument from "./MemoirPDFDocument";
 
 export default function MemoirPDFViewer() {
   return (
