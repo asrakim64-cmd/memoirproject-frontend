@@ -1,4 +1,3 @@
-// PDF voice memory component
 import { Page, StyleSheet, Text, View } from "@react-pdf/renderer";
 
 interface MemoirPDFVoiceMemoryProps {
@@ -9,9 +8,16 @@ interface MemoirPDFVoiceMemoryProps {
 const styles = StyleSheet.create({
   page: {
     backgroundColor: "#FBF8F1",
-    padding: 54,
+    padding: 48,
     fontFamily: "Times-Roman",
     color: "#351A23",
+  },
+
+  border: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: "#80612F",
+    padding: 28,
   },
 
   eyebrow: {
@@ -58,17 +64,19 @@ export default function MemoirPDFVoiceMemory({
 }: MemoirPDFVoiceMemoryProps) {
   return (
     <Page size="A4" style={styles.page} wrap>
-      <Text style={styles.eyebrow}>VOICE MEMORY</Text>
+      <View style={styles.border}>
+        <Text style={styles.eyebrow}>VOICE MEMORY</Text>
 
-      <Text style={styles.title}>{title}</Text>
+        <Text style={styles.title}>{title}</Text>
 
-      <View style={styles.divider} />
+        <View style={styles.divider} />
 
-      <Text style={styles.transcript}>{transcript}</Text>
+        <Text style={styles.transcript}>{transcript}</Text>
 
-      <Text style={styles.footer}>
-        MEMORIES PRESERVED WITH LOVE
-      </Text>
+        <Text style={styles.footer}>
+          MEMORIES PRESERVED WITH LOVE
+        </Text>
+      </View>
     </Page>
   );
 }
