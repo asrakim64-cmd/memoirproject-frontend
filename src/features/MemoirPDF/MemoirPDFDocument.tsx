@@ -69,20 +69,12 @@ export default function MemoirPDFDocument() {
             )}
 
             {/* Media Memories */}
-            {mediaMemories.length > 0 &&
-              mediaMemories.map((memory) => {
-                const firstMedia = memory.media[0];
-
-                return (
-                  <MemoirPDFMediaMemory
-                    key={memory.id}
-                    title={chapter.title}
-                    type={firstMedia?.type ?? "image"}
-                    src={firstMedia?.src ?? ""}
-                    caption={firstMedia?.caption ?? memory.story}
-                  />
-                );
-              })}
+            {mediaMemories.length > 0 && (
+              <MemoirPDFMediaMemory
+                title={chapter.title}
+                memories={mediaMemories}
+              />
+            )}
           </React.Fragment>
         );
       })}
