@@ -1,7 +1,20 @@
-// PDF page entry point
 "use client";
 
-import MemoirPDFViewer from "../../features/MemoirPDF/MemoirPDFViewer";
+import dynamic from "next/dynamic";
+
+const MemoirPDFViewer = dynamic(
+  () => import("../../features/MemoirPDF/MemoirPDFViewer"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex h-full items-center justify-center bg-[#FBF8F1]">
+        <p className="text-sm tracking-wide text-[#80612F]">
+          Preparing your memoir...
+        </p>
+      </div>
+    ),
+  }
+);
 
 export default function MemoirPDFPage() {
   return (
