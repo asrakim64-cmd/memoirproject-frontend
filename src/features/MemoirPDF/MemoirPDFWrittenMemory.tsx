@@ -1,8 +1,18 @@
 import { Page, StyleSheet, Text, View } from "@react-pdf/renderer";
 
+interface WrittenMemory {
+  id: string;
+  contributor: {
+    name: string;
+    relationship: string;
+    storyDate: string;
+  };
+  paragraphs: string[];
+}
+
 interface MemoirPDFWrittenMemoryProps {
   title: string;
-  content: string;
+  memories: WrittenMemory[];
 }
 
 const styles = StyleSheet.create({
@@ -37,13 +47,34 @@ const styles = StyleSheet.create({
     width: 70,
     borderBottomWidth: 1,
     borderBottomColor: "#B99555",
-    marginBottom: 26,
+    marginBottom: 22,
+  },
+
+  memoryBlock: {
+    marginBottom: 18,
+  },
+
+  contributorName: {
+    fontSize: 11,
+    color: "#351A23",
+    fontFamily: "Helvetica-Bold",
+    marginBottom: 4,
+  },
+
+  contributorInfo: {
+    fontSize: 8,
+    color: "#80612F",
+    marginBottom: 9,
   },
 
   content: {
-    fontSize: 12,
-    lineHeight: 1.7,
+    fontSize: 11,
+    lineHeight: 1.6,
     color: "#4A3028",
+  },
+
+  paragraph: {
+    marginBottom: 7,
   },
 
   footer: {
@@ -60,7 +91,7 @@ const styles = StyleSheet.create({
 
 export default function MemoirPDFWrittenMemory({
   title,
-  content,
+  memories,
 }: MemoirPDFWrittenMemoryProps) {
   return (
     <Page size="A4" style={styles.page} wrap>
@@ -71,7 +102,23 @@ export default function MemoirPDFWrittenMemory({
 
         <View style={styles.divider} />
 
-        <Text style={styles.content}>{content}</Text>
+        {memories.map((memory) => (
+          <View key={memory.id} style={styles.memoryBlock}>
+            <Text style={styles.contributorName}>
+              {memory.contributor.name}
+            </Text>
+
+            <Text style={styles.contributorInfo}>
+              {memory.contributor.relationship} · {memory.contributor.storyDate}
+            </Text>
+
+            {memory.paragraphs.map((paragraph, index) => (
+              <Text key={index} style={[styles.content, styles.paragraph]}>
+                {paragraph}
+              </Text>
+            ))}
+          </View>
+        ))}
 
         <Text style={styles.footer}>
           MEMORIES PRESERVED WITH LOVE
