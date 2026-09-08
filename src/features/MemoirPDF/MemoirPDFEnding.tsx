@@ -104,7 +104,7 @@ export default function MemoirPDFEnding({
 
         <Text style={styles.quote}>
           People we love never truly leave us. They remain in the stories we
-          tell, the laughter we remember, and the love we carry forward.
+          tell, the laughter we remember and the love we carry forward.
         </Text>
 
         <Text style={styles.personName}>{personName}</Text>
@@ -113,7 +113,7 @@ export default function MemoirPDFEnding({
 
         <Text style={styles.closing}>
           This memoir is not an ending. It is a place where memories can
-          continue to live, be remembered, and be shared for generations to
+          continue to live,be remembered and be shared for generations to
           come.
         </Text>
 

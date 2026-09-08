@@ -72,7 +72,7 @@ export const memoirPDFData: MemoirPDFData = {
             storyDate: "August 28, 2026",
           },
           paragraphs: [
-            "Robert had a way of making ordinary moments feel meaningful. His kindness, quiet humor, and presence stayed with the people around him.",
+            "Robert had a way of making ordinary moments feel meaningful. His kindness, quiet humor and presence stayed with the people around him.",
             "Some of my favorite memories are from family gatherings where he would tell stories and make everyone feel at home.",
           ],
         },
@@ -110,7 +110,7 @@ export const memoirPDFData: MemoirPDFData = {
           },
           duration: "0:42",
           transcript:
-            "I still remember how Robert could make everyone laugh, even during the simplest family gatherings. His stories, his gentle humor, and the way he looked after everyone are memories I will always keep close to my heart.",
+            "I still remember how Robert could make everyone laugh, even during the simplest family gatherings. His stories, his gentle humor and the way he looked after everyone are memories I will always keep close to my heart.",
         },
 
         {
@@ -125,7 +125,7 @@ export const memoirPDFData: MemoirPDFData = {
           },
           duration: "0:35",
           transcript:
-            "Robert had a beautiful way of bringing people together. Whenever we were around him, there was always laughter, warmth, and a story to remember.",
+            "Robert had a beautiful way of bringing people together. Whenever we were around him, there was always laughter, warmth and a story to remember.",
         },
       ],
     },

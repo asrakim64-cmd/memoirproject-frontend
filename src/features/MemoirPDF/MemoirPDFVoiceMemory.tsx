@@ -1,8 +1,19 @@
 import { Page, StyleSheet, Text, View, Svg, Path } from "@react-pdf/renderer";
 
+interface VoiceMemory {
+  id: string;
+  contributor: {
+    name: string;
+    relationship: string;
+    storyDate: string;
+  };
+  duration: string;
+  transcript: string;
+}
+
 interface MemoirPDFVoiceMemoryProps {
   title: string;
-  transcript: string;
+  memories: VoiceMemory[];
 }
 
 const styles = StyleSheet.create({
@@ -37,7 +48,24 @@ const styles = StyleSheet.create({
     width: 70,
     borderBottomWidth: 1,
     borderBottomColor: "#B99555",
-    marginBottom: 26,
+    marginBottom: 22,
+  },
+
+  memoryBlock: {
+    marginBottom: 18,
+  },
+
+  contributorName: {
+    fontSize: 11,
+    color: "#351A23",
+    fontFamily: "Helvetica-Bold",
+    marginBottom: 4,
+  },
+
+  contributorInfo: {
+    fontSize: 8,
+    color: "#80612F",
+    marginBottom: 10,
   },
 
   voiceNote: {
@@ -50,7 +78,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#D8CFC4",
     borderRadius: 29,
-    marginBottom: 28,
+    marginBottom: 14,
   },
 
   micCircle: {
@@ -61,11 +89,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginRight: 10,
-  },
-
-  microphoneIcon: {
-    fontSize: 18,
-    color: "#B99555",
   },
 
   playButton: {
@@ -117,12 +140,12 @@ const styles = StyleSheet.create({
     fontSize: 9,
     letterSpacing: 2,
     color: "#80612F",
-    marginBottom: 12,
+    marginBottom: 10,
   },
 
   transcript: {
-    fontSize: 12,
-    lineHeight: 1.7,
+    fontSize: 11,
+    lineHeight: 1.6,
     color: "#4A3028",
   },
 
@@ -140,7 +163,7 @@ const styles = StyleSheet.create({
 
 export default function MemoirPDFVoiceMemory({
   title,
-  transcript,
+  memories,
 }: MemoirPDFVoiceMemoryProps) {
   return (
     <Page size="A4" style={styles.page} wrap>
@@ -151,73 +174,87 @@ export default function MemoirPDFVoiceMemory({
 
         <View style={styles.divider} />
 
-        <View style={styles.voiceNote}>
-          <View style={styles.micCircle}>
-            <Svg width="20" height="24" viewBox="0 0 24 24">
-              <Path
-                 d="M12 15C14.2 15 16 13.2 16 11V6C16 3.8 14.2 2 12 2C9.8 2 8 3.8 8 6V11C8 13.2 9.8 15 12 15Z"
-                 fill="#B99555"
-                 />
-               <Path
-                  d="M19 11C19 14.87 15.87 18 12 18C8.13 18 5 14.87 5 11"
-                  fill="none"
-                  stroke="#B99555"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                />
-               <Path
-                  d="M12 18V22M9 22H15"
-                  fill="none"
-                  stroke="#B99555"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                />
-            </Svg>
+        {memories.map((memory) => (
+          <View key={memory.id} style={styles.memoryBlock}>
+            <Text style={styles.contributorName}>
+              {memory.contributor.name}
+            </Text>
+
+            <Text style={styles.contributorInfo}>
+              {memory.contributor.relationship} · {memory.contributor.storyDate}
+            </Text>
+
+            <View style={styles.voiceNote}>
+              <View style={styles.micCircle}>
+                <Svg width="20" height="24" viewBox="0 0 24 24">
+                  <Path
+                    d="M12 15C14.2 15 16 13.2 16 11V6C16 3.8 14.2 2 12 2C9.8 2 8 3.8 8 6V11C8 13.2 9.8 15 12 15Z"
+                    fill="#B99555"
+                  />
+                  <Path
+                    d="M19 11C19 14.87 15.87 18 12 18C8.13 18 5 14.87 5 11"
+                    fill="none"
+                    stroke="#B99555"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                  />
+                  <Path
+                    d="M12 18V22M9 22H15"
+                    fill="none"
+                    stroke="#B99555"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                  />
+                </Svg>
+              </View>
+
+              <View style={styles.playButton}>
+                <Text style={styles.playIcon}>▶</Text>
+              </View>
+
+              <View style={styles.waveform}>
+                <View style={styles.waveShort} />
+                <View style={styles.waveMedium} />
+                <View style={styles.waveTall} />
+                <View style={styles.waveMedium} />
+                <View style={styles.waveShort} />
+                <View style={styles.waveTall} />
+                <View style={styles.waveMedium} />
+                <View style={styles.waveShort} />
+                <View style={styles.waveTall} />
+                <View style={styles.waveMedium} />
+                <View style={styles.waveShort} />
+                <View style={styles.waveMedium} />
+                <View style={styles.waveTall} />
+                <View style={styles.waveShort} />
+                <View style={styles.waveMedium} />
+                <View style={styles.waveTall} />
+                <View style={styles.waveShort} />
+                <View style={styles.waveMedium} />
+                <View style={styles.waveTall} />
+                <View style={styles.waveShort} />
+                <View style={styles.waveMedium} />
+                <View style={styles.waveTall} />
+                <View style={styles.waveShort} />
+                <View style={styles.waveMedium} />
+                <View style={styles.waveTall} />
+                <View style={styles.waveShort} />
+                <View style={styles.waveMedium} />
+                <View style={styles.waveTall} />
+              </View>
+
+              <Text style={styles.duration}>{memory.duration}</Text>
+            </View>
+
+            <Text style={styles.transcriptionLabel}>
+              TRANSCRIPTION
+            </Text>
+
+            <Text style={styles.transcript}>
+              {memory.transcript}
+            </Text>
           </View>
-
-          <View style={styles.playButton}>
-            <Text style={styles.playIcon}>▶</Text>
-          </View>
-
-          <View style={styles.waveform}>
-            <View style={styles.waveShort} />
-            <View style={styles.waveMedium} />
-            <View style={styles.waveTall} />
-            <View style={styles.waveMedium} />
-            <View style={styles.waveShort} />
-            <View style={styles.waveTall} />
-            <View style={styles.waveMedium} />
-            <View style={styles.waveShort} />
-            <View style={styles.waveTall} />
-            <View style={styles.waveMedium} />
-            <View style={styles.waveShort} />
-            <View style={styles.waveMedium} />
-            <View style={styles.waveTall} />
-            <View style={styles.waveShort} />
-            <View style={styles.waveMedium} />
-            <View style={styles.waveTall} />
-            <View style={styles.waveShort} />
-            <View style={styles.waveMedium} />
-            <View style={styles.waveTall} />
-            <View style={styles.waveShort} />
-            <View style={styles.waveMedium} />
-            <View style={styles.waveTall} />
-            <View style={styles.waveShort} />
-            <View style={styles.waveMedium} />
-            <View style={styles.waveTall} />
-            <View style={styles.waveShort} />
-            <View style={styles.waveMedium} />
-            <View style={styles.waveTall} />
-          </View>
-
-          <Text style={styles.duration}>0:42</Text>
-        </View>
-
-        <Text style={styles.transcriptionLabel}>
-          TRANSCRIPTION
-        </Text>
-
-        <Text style={styles.transcript}>{transcript}</Text>
+        ))}
 
         <Text style={styles.footer}>
           MEMORIES PRESERVED WITH LOVE
