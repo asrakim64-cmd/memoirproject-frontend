@@ -1,10 +1,24 @@
 import { Image, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
 
+interface MediaMemory {
+  id: string;
+  contributor: {
+    name: string;
+    relationship: string;
+    storyDate: string;
+  };
+  media: {
+    id: string;
+    type: "image" | "video";
+    src: string;
+    caption?: string;
+  }[];
+  story?: string;
+}
+
 interface MemoirPDFMediaMemoryProps {
   title: string;
-  type: "image" | "video";
-  src: string;
-  caption?: string;
+  memories: MediaMemory[];
 }
 
 const styles = StyleSheet.create({
@@ -39,12 +53,29 @@ const styles = StyleSheet.create({
     width: 70,
     borderBottomWidth: 1,
     borderBottomColor: "#B99555",
-    marginBottom: 26,
+    marginBottom: 22,
+  },
+
+  memoryBlock: {
+    marginBottom: 20,
+  },
+
+  contributorName: {
+    fontSize: 11,
+    color: "#351A23",
+    fontFamily: "Helvetica-Bold",
+    marginBottom: 4,
+  },
+
+  contributorInfo: {
+    fontSize: 8,
+    color: "#80612F",
+    marginBottom: 12,
   },
 
   imageContainer: {
     alignItems: "center",
-    marginBottom: 18,
+    marginBottom: 10,
   },
 
   image: {
@@ -60,7 +91,7 @@ const styles = StyleSheet.create({
     borderColor: "#D8CFC4",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 18,
+    marginBottom: 10,
   },
 
   videoText: {
@@ -73,6 +104,14 @@ const styles = StyleSheet.create({
     lineHeight: 1.5,
     color: "#80612F",
     textAlign: "center",
+    marginTop: 6,
+    marginBottom: 8,
+  },
+
+  story: {
+    fontSize: 11,
+    lineHeight: 1.6,
+    color: "#4A3028",
     marginTop: 8,
   },
 
@@ -90,12 +129,10 @@ const styles = StyleSheet.create({
 
 export default function MemoirPDFMediaMemory({
   title,
-  type,
-  src,
-  caption,
+  memories,
 }: MemoirPDFMediaMemoryProps) {
   return (
-    <Page size="A4" style={styles.page}>
+    <Page size="A4" style={styles.page} wrap>
       <View style={styles.border}>
         <Text style={styles.eyebrow}>MEDIA MEMORY</Text>
 
@@ -103,17 +140,39 @@ export default function MemoirPDFMediaMemory({
 
         <View style={styles.divider} />
 
-        {type === "image" ? (
-          <View style={styles.imageContainer}>
-            <Image src={src} style={styles.image} />
-          </View>
-        ) : (
-          <View style={styles.videoPlaceholder}>
-            <Text style={styles.videoText}>Video Memory</Text>
-          </View>
-        )}
+        {memories.map((memory) => (
+          <View key={memory.id} style={styles.memoryBlock}>
+            <Text style={styles.contributorName}>
+              {memory.contributor.name}
+            </Text>
 
-        {caption && <Text style={styles.caption}>{caption}</Text>}
+            <Text style={styles.contributorInfo}>
+              {memory.contributor.relationship} · {memory.contributor.storyDate}
+            </Text>
+
+            {memory.media.map((item) => (
+              <View key={item.id}>
+                {item.type === "image" && item.src ? (
+                  <View style={styles.imageContainer}>
+                    <Image src={item.src} style={styles.image} />
+                  </View>
+                ) : (
+                  <View style={styles.videoPlaceholder}>
+                    <Text style={styles.videoText}>Video Memory</Text>
+                  </View>
+                )}
+
+                {item.caption && (
+                  <Text style={styles.caption}>{item.caption}</Text>
+                )}
+              </View>
+            ))}
+
+            {memory.story && (
+              <Text style={styles.story}>{memory.story}</Text>
+            )}
+          </View>
+        ))}
 
         <Text style={styles.footer}>
           MEMORIES PRESERVED WITH LOVE
