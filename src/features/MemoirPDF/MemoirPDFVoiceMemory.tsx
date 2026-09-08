@@ -40,65 +40,77 @@ const styles = StyleSheet.create({
     marginBottom: 26,
   },
 
-  /* WhatsApp-style voice note */
   voiceNote: {
     flexDirection: "row",
     alignItems: "center",
     width: "100%",
-    paddingVertical: 12,
-    paddingHorizontal: 14,
+    minHeight: 58,
+    paddingVertical: 9,
+    paddingHorizontal: 12,
     borderWidth: 1,
     borderColor: "#D8CFC4",
+    borderRadius: 29,
     marginBottom: 28,
   },
 
-  playButton: {
-    width: 34,
-    height: 34,
-    borderRadius: 17,
+  micCircle: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
     backgroundColor: "#713C48",
     alignItems: "center",
     justifyContent: "center",
-    marginRight: 12,
+    marginRight: 10,
+  },
+
+  microphoneIcon: {
+    fontSize: 18,
+    color: "#B99555",
+  },
+
+  playButton: {
+    width: 24,
+    height: 24,
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 6,
   },
 
   playIcon: {
-    fontSize: 13,
-    color: "#FBF8F1",
+    fontSize: 12,
+    color: "#80612F",
   },
 
   waveform: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    height: 28,
+    justifyContent: "space-between",
+    height: 30,
   },
 
   waveShort: {
     width: 2,
-    height: 7,
+    height: 8,
     backgroundColor: "#B99555",
-    marginHorizontal: 2,
   },
 
   waveMedium: {
     width: 2,
-    height: 14,
+    height: 16,
     backgroundColor: "#B99555",
-    marginHorizontal: 2,
   },
 
   waveTall: {
     width: 2,
-    height: 22,
+    height: 27,
     backgroundColor: "#B99555",
-    marginHorizontal: 2,
   },
 
   duration: {
     fontSize: 8,
     color: "#80612F",
-    marginLeft: 10,
+    marginLeft: 8,
   },
 
   transcriptionLabel: {
@@ -139,8 +151,11 @@ export default function MemoirPDFVoiceMemory({
 
         <View style={styles.divider} />
 
-        {/* WhatsApp-style voice note */}
         <View style={styles.voiceNote}>
+          <View style={styles.micCircle}>
+            <Text style={styles.microphoneIcon}>♩</Text>
+          </View>
+
           <View style={styles.playButton}>
             <Text style={styles.playIcon}>▶</Text>
           </View>
@@ -163,12 +178,22 @@ export default function MemoirPDFVoiceMemory({
             <View style={styles.waveMedium} />
             <View style={styles.waveTall} />
             <View style={styles.waveShort} />
+            <View style={styles.waveMedium} />
+            <View style={styles.waveTall} />
+            <View style={styles.waveShort} />
+            <View style={styles.waveMedium} />
+            <View style={styles.waveTall} />
+            <View style={styles.waveShort} />
+            <View style={styles.waveMedium} />
+            <View style={styles.waveTall} />
+            <View style={styles.waveShort} />
+            <View style={styles.waveMedium} />
+            <View style={styles.waveTall} />
           </View>
 
           <Text style={styles.duration}>0:42</Text>
         </View>
 
-        {/* Transcription */}
         <Text style={styles.transcriptionLabel}>
           TRANSCRIPTION
         </Text>
