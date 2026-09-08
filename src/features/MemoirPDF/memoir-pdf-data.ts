@@ -28,7 +28,7 @@ export interface MemoirPDFData {
 }
 
 /*
- * Temporary data for PDF design/testing.
+ * Temporary demo data for PDF design/testing.
  *
  * Later this will be replaced with the actual
  * user's memoir data from the application/database.
@@ -49,7 +49,26 @@ export const memoirPDFData: MemoirPDFData = {
     },
   ],
 
-  voiceMemories: [],
+  voiceMemories: [
+    {
+      id: "voice-1",
+      title: "Remembering His Laughter",
+      transcript:
+        "I still remember how Robert could make everyone laugh, even " +
+        "during the simplest family gatherings. His stories, his gentle " +
+        "humor, and the way he looked after everyone are memories I will " +
+        "always keep close to my heart.",
+    },
+  ],
 
-  mediaMemories: [],
+  mediaMemories: [
+    {
+      id: "media-1",
+      title: "A Cherished Moment",
+      type: "video",
+      src: "",
+      caption:
+        "A special moment remembered and preserved as part of Robert's life story.",
+    },
+  ],
 };
