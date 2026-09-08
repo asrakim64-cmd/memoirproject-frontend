@@ -40,64 +40,65 @@ const styles = StyleSheet.create({
     marginBottom: 26,
   },
 
-  recordingBox: {
+  /* WhatsApp-style voice note */
+  voiceNote: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+    paddingVertical: 12,
+    paddingHorizontal: 14,
     borderWidth: 1,
     borderColor: "#D8CFC4",
-    padding: 20,
     marginBottom: 28,
-    alignItems: "center",
   },
 
-  microphoneCircle: {
-    width: 46,
-    height: 46,
-    borderWidth: 1,
-    borderColor: "#B99555",
-    borderRadius: 23,
+  playButton: {
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    backgroundColor: "#713C48",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 14,
+    marginRight: 12,
   },
 
-  microphone: {
-    fontSize: 20,
-    color: "#713C48",
-  },
-
-  recordingLabel: {
-    fontSize: 9,
-    letterSpacing: 2,
-    color: "#80612F",
-    marginBottom: 16,
+  playIcon: {
+    fontSize: 13,
+    color: "#FBF8F1",
   },
 
   waveform: {
+    flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    height: 34,
-    width: "100%",
+    height: 28,
   },
 
-  waveLineShort: {
+  waveShort: {
     width: 2,
-    height: 10,
+    height: 7,
     backgroundColor: "#B99555",
-    marginHorizontal: 3,
+    marginHorizontal: 2,
   },
 
-  waveLineMedium: {
+  waveMedium: {
     width: 2,
-    height: 20,
+    height: 14,
     backgroundColor: "#B99555",
-    marginHorizontal: 3,
+    marginHorizontal: 2,
   },
 
-  waveLineTall: {
+  waveTall: {
     width: 2,
-    height: 30,
+    height: 22,
     backgroundColor: "#B99555",
-    marginHorizontal: 3,
+    marginHorizontal: 2,
+  },
+
+  duration: {
+    fontSize: 8,
+    color: "#80612F",
+    marginLeft: 10,
   },
 
   transcriptionLabel: {
@@ -138,34 +139,33 @@ export default function MemoirPDFVoiceMemory({
 
         <View style={styles.divider} />
 
-        {/* Voice Recording Visual */}
-        <View style={styles.recordingBox}>
-          <View style={styles.microphoneCircle}>
-            <Text style={styles.microphone}>♫</Text>
+        {/* WhatsApp-style voice note */}
+        <View style={styles.voiceNote}>
+          <View style={styles.playButton}>
+            <Text style={styles.playIcon}>▶</Text>
           </View>
-
-          <Text style={styles.recordingLabel}>
-            VOICE RECORDING
-          </Text>
 
           <View style={styles.waveform}>
-            <View style={styles.waveLineShort} />
-            <View style={styles.waveLineMedium} />
-            <View style={styles.waveLineTall} />
-            <View style={styles.waveLineMedium} />
-            <View style={styles.waveLineShort} />
-            <View style={styles.waveLineTall} />
-            <View style={styles.waveLineMedium} />
-            <View style={styles.waveLineTall} />
-            <View style={styles.waveLineShort} />
-            <View style={styles.waveLineMedium} />
-            <View style={styles.waveLineTall} />
-            <View style={styles.waveLineMedium} />
-            <View style={styles.waveLineShort} />
-            <View style={styles.waveLineTall} />
-            <View style={styles.waveLineMedium} />
-            <View style={styles.waveLineShort} />
+            <View style={styles.waveShort} />
+            <View style={styles.waveMedium} />
+            <View style={styles.waveTall} />
+            <View style={styles.waveMedium} />
+            <View style={styles.waveShort} />
+            <View style={styles.waveTall} />
+            <View style={styles.waveMedium} />
+            <View style={styles.waveShort} />
+            <View style={styles.waveTall} />
+            <View style={styles.waveMedium} />
+            <View style={styles.waveShort} />
+            <View style={styles.waveMedium} />
+            <View style={styles.waveTall} />
+            <View style={styles.waveShort} />
+            <View style={styles.waveMedium} />
+            <View style={styles.waveTall} />
+            <View style={styles.waveShort} />
           </View>
+
+          <Text style={styles.duration}>0:42</Text>
         </View>
 
         {/* Transcription */}
