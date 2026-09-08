@@ -1,0 +1,1 @@
+// PDF written memory component
