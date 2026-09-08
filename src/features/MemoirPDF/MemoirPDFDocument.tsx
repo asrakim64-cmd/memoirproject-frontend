@@ -1,3 +1,4 @@
+import React from "react";
 import { Document } from "@react-pdf/renderer";
 
 import MemoirPDFCover from "./MemoirPDFCover";
@@ -12,7 +13,7 @@ export default function MemoirPDFDocument() {
 
   // Page 1 = Cover
   // Page 2 = Table of Contents
-  // Page 3 onwards = Chapters / Memories
+  // Page 3 onwards = Chapters
 
   const tocItems: { title: string; page: number }[] = [];
 
@@ -24,10 +25,8 @@ export default function MemoirPDFDocument() {
       page: currentPage,
     });
 
-    // For now each memory component renders as one PDF page.
-    // This will be refined later when the individual memory
-    // components support multiple contributors/content flow.
-    currentPage += chapter.memories.length;
+    // Each chapter is counted as one page for the TOC.
+    currentPage += 1;
   });
 
   return (
@@ -42,46 +41,56 @@ export default function MemoirPDFDocument() {
       {/* Page 2 — Table of Contents */}
       <MemoirPDFTableOfContents items={tocItems} />
 
-      {/* Chapters */}
-      {chapters.map((chapter) =>
-        chapter.memories.map((memory) => {
-          if (memory.type === "written") {
-            return (
-              <MemoirPDFWrittenMemory
-                key={memory.id}
-                title={chapter.title}
-                content={memory.paragraphs.join("\n\n")}
-              />
-            );
-          }
+      {/* Memoir Chapters */}
+      {chapters.map((chapter) => {
+        const writtenMemories = chapter.memories.filter(
+          (memory) => memory.type === "written"
+        );
 
-          if (memory.type === "voice") {
-            return (
+        const voiceMemories = chapter.memories.filter(
+          (memory) => memory.type === "voice"
+        );
+
+        const mediaMemories = chapter.memories.filter(
+          (memory) => memory.type === "media"
+        );
+
+        return (
+          <React.Fragment key={chapter.id}>
+            {/* Written Memories */}
+            {writtenMemories.length > 0 && (
+              <MemoirPDFWrittenMemory
+                title={chapter.title}
+                memories={writtenMemories}
+              />
+            )}
+
+            {/* Voice Memories */}
+            {voiceMemories.map((memory) => (
               <MemoirPDFVoiceMemory
                 key={memory.id}
                 title={chapter.title}
                 transcript={memory.transcript}
               />
-            );
-          }
+            ))}
 
-          if (memory.type === "media") {
-            const firstMedia = memory.media[0];
+            {/* Media Memories */}
+            {mediaMemories.map((memory) => {
+              const firstMedia = memory.media[0];
 
-            return (
-              <MemoirPDFMediaMemory
-                key={memory.id}
-                title={chapter.title}
-                type={firstMedia?.type ?? "image"}
-                src={firstMedia?.src ?? ""}
-                caption={firstMedia?.caption ?? memory.story}
-              />
-            );
-          }
-
-          return null;
-        })
-      )}
+              return (
+                <MemoirPDFMediaMemory
+                  key={memory.id}
+                  title={chapter.title}
+                  type={firstMedia?.type ?? "image"}
+                  src={firstMedia?.src ?? ""}
+                  caption={firstMedia?.caption ?? memory.story}
+                />
+              );
+            })}
+          </React.Fragment>
+        );
+      })}
     </Document>
   );
 }
