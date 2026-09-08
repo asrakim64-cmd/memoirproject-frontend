@@ -8,46 +8,27 @@ import MemoirPDFMediaMemory from "./MemoirPDFMediaMemory";
 import { memoirPDFData } from "./memoir-pdf-data";
 
 export default function MemoirPDFDocument() {
-  const {
-    memoirTitle,
-    personName,
-    years,
-    writtenMemories,
-    voiceMemories,
-    mediaMemories,
-  } = memoirPDFData;
+  const { memoirTitle, personName, years, chapters } = memoirPDFData;
 
   // Page 1 = Cover
   // Page 2 = Table of Contents
-  // Page 3 onwards = Memory sections
-  const tocItems = [];
+  // Page 3 onwards = Chapters / Memories
+
+  const tocItems: { title: string; page: number }[] = [];
 
   let currentPage = 3;
 
-  if (writtenMemories.length > 0) {
+  chapters.forEach((chapter) => {
     tocItems.push({
-      title: "Written Memories",
+      title: chapter.title,
       page: currentPage,
     });
 
-    currentPage += writtenMemories.length;
-  }
-
-  if (voiceMemories.length > 0) {
-    tocItems.push({
-      title: "Voice Memories",
-      page: currentPage,
-    });
-
-    currentPage += voiceMemories.length;
-  }
-
-  if (mediaMemories.length > 0) {
-    tocItems.push({
-      title: "Media Memories",
-      page: currentPage,
-    });
-  }
+    // For now each memory component renders as one PDF page.
+    // This will be refined later when the individual memory
+    // components support multiple contributors/content flow.
+    currentPage += chapter.memories.length;
+  });
 
   return (
     <Document>
@@ -61,34 +42,46 @@ export default function MemoirPDFDocument() {
       {/* Page 2 — Table of Contents */}
       <MemoirPDFTableOfContents items={tocItems} />
 
-      {/* Written Memories */}
-      {writtenMemories.map((memory) => (
-        <MemoirPDFWrittenMemory
-          key={memory.id}
-          title={memory.title}
-          content={memory.content}
-        />
-      ))}
+      {/* Chapters */}
+      {chapters.map((chapter) =>
+        chapter.memories.map((memory) => {
+          if (memory.type === "written") {
+            return (
+              <MemoirPDFWrittenMemory
+                key={memory.id}
+                title={chapter.title}
+                content={memory.paragraphs.join("\n\n")}
+              />
+            );
+          }
 
-      {/* Voice Memories */}
-      {voiceMemories.map((memory) => (
-        <MemoirPDFVoiceMemory
-          key={memory.id}
-          title={memory.title}
-          transcript={memory.transcript}
-        />
-      ))}
+          if (memory.type === "voice") {
+            return (
+              <MemoirPDFVoiceMemory
+                key={memory.id}
+                title={chapter.title}
+                transcript={memory.transcript}
+              />
+            );
+          }
 
-      {/* Media Memories */}
-      {mediaMemories.map((memory) => (
-        <MemoirPDFMediaMemory
-          key={memory.id}
-          title={memory.title}
-          type={memory.type}
-          src={memory.src}
-          caption={memory.caption}
-        />
-      ))}
+          if (memory.type === "media") {
+            const firstMedia = memory.media[0];
+
+            return (
+              <MemoirPDFMediaMemory
+                key={memory.id}
+                title={chapter.title}
+                type={firstMedia?.type ?? "image"}
+                src={firstMedia?.src ?? ""}
+                caption={firstMedia?.caption ?? memory.story}
+              />
+            );
+          }
+
+          return null;
+        })
+      )}
     </Document>
   );
 }
