@@ -1,4 +1,3 @@
-// PDF document component
 import { Document } from "@react-pdf/renderer";
 
 import MemoirPDFCover from "./MemoirPDFCover";
@@ -18,26 +17,35 @@ export default function MemoirPDFDocument() {
     mediaMemories,
   } = memoirPDFData;
 
+  // Page 1 = Cover
+  // Page 2 = Table of Contents
+  // Page 3 onwards = Memory sections
   const tocItems = [];
+
+  let currentPage = 3;
 
   if (writtenMemories.length > 0) {
     tocItems.push({
       title: "Written Memories",
-      page: 3,
+      page: currentPage,
     });
+
+    currentPage += writtenMemories.length;
   }
 
   if (voiceMemories.length > 0) {
     tocItems.push({
       title: "Voice Memories",
-      page: 3 + writtenMemories.length,
+      page: currentPage,
     });
+
+    currentPage += voiceMemories.length;
   }
 
   if (mediaMemories.length > 0) {
     tocItems.push({
       title: "Media Memories",
-      page: 3 + writtenMemories.length + voiceMemories.length,
+      page: currentPage,
     });
   }
 
