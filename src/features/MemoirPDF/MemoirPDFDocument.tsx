@@ -6,6 +6,7 @@ import MemoirPDFTableOfContents from "./MemoirPDFTableOfContents";
 import MemoirPDFWrittenMemory from "./MemoirPDFWrittenMemory";
 import MemoirPDFVoiceMemory from "./MemoirPDFVoiceMemory";
 import MemoirPDFMediaMemory from "./MemoirPDFMediaMemory";
+import MemoirPDFEnding from "./MemoirPDFEnding";
 import { memoirPDFData } from "./memoir-pdf-data";
 
 export default function MemoirPDFDocument() {
@@ -78,6 +79,12 @@ export default function MemoirPDFDocument() {
           </React.Fragment>
         );
       })}
+
+      {/* Final Ending Page */}
+      <MemoirPDFEnding
+        personName={personName}
+        years={years}
+      />
     </Document>
   );
 }
