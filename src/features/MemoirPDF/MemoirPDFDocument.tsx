@@ -11,10 +11,6 @@ import { memoirPDFData } from "./memoir-pdf-data";
 export default function MemoirPDFDocument() {
   const { memoirTitle, personName, years, chapters } = memoirPDFData;
 
-  // Page 1 = Cover
-  // Page 2 = Table of Contents
-  // Page 3 onwards = Chapters
-
   const tocItems: { title: string; page: number }[] = [];
 
   let currentPage = 3;
@@ -25,7 +21,6 @@ export default function MemoirPDFDocument() {
       page: currentPage,
     });
 
-    // Each chapter is counted as one page for the TOC.
     currentPage += 1;
   });
 
@@ -66,28 +61,28 @@ export default function MemoirPDFDocument() {
             )}
 
             {/* Voice Memories */}
-            {voiceMemories.map((memory) => (
+            {voiceMemories.length > 0 && (
               <MemoirPDFVoiceMemory
-                key={memory.id}
                 title={chapter.title}
-                transcript={memory.transcript}
+                memories={voiceMemories}
               />
-            ))}
+            )}
 
             {/* Media Memories */}
-            {mediaMemories.map((memory) => {
-              const firstMedia = memory.media[0];
+            {mediaMemories.length > 0 &&
+              mediaMemories.map((memory) => {
+                const firstMedia = memory.media[0];
 
-              return (
-                <MemoirPDFMediaMemory
-                  key={memory.id}
-                  title={chapter.title}
-                  type={firstMedia?.type ?? "image"}
-                  src={firstMedia?.src ?? ""}
-                  caption={firstMedia?.caption ?? memory.story}
-                />
-              );
-            })}
+                return (
+                  <MemoirPDFMediaMemory
+                    key={memory.id}
+                    title={chapter.title}
+                    type={firstMedia?.type ?? "image"}
+                    src={firstMedia?.src ?? ""}
+                    caption={firstMedia?.caption ?? memory.story}
+                  />
+                );
+              })}
           </React.Fragment>
         );
       })}
