@@ -51,18 +51,6 @@ export interface MemoirPDFData {
   chapters: MemoirChapter[];
 }
 
-/*
- * Temporary demo data for PDF design/testing.
- *
- * This structure represents a real memoir:
- * - One memoir person
- * - Multiple chapters
- * - Multiple contributors inside a chapter
- * - Different memory types inside chapters
- *
- * Later this will be replaced with the actual
- * user's memoir data from the application/database.
- */
 export const memoirPDFData: MemoirPDFData = {
   memoirTitle: "A Life Remembered",
   personName: "Robert Harrison",
@@ -123,6 +111,21 @@ export const memoirPDFData: MemoirPDFData = {
           duration: "0:42",
           transcript:
             "I still remember how Robert could make everyone laugh, even during the simplest family gatherings. His stories, his gentle humor, and the way he looked after everyone are memories I will always keep close to my heart.",
+        },
+
+        {
+          id: "voice-2",
+          type: "voice",
+          chapterTitle: "Remembering His Laughter",
+          contributor: {
+            id: "contributor-5",
+            name: "David Harrison",
+            relationship: "Brother",
+            storyDate: "September 3, 2026",
+          },
+          duration: "0:35",
+          transcript:
+            "Robert had a beautiful way of bringing people together. Whenever we were around him, there was always laughter, warmth, and a story to remember.",
         },
       ],
     },
