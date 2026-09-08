@@ -1,4 +1,4 @@
-import { Page, StyleSheet, Text, View } from "@react-pdf/renderer";
+import { Page, StyleSheet, Text, View, Svg, Path } from "@react-pdf/renderer";
 
 interface MemoirPDFVoiceMemoryProps {
   title: string;
@@ -153,7 +153,26 @@ export default function MemoirPDFVoiceMemory({
 
         <View style={styles.voiceNote}>
           <View style={styles.micCircle}>
-            <Text style={styles.microphoneIcon}>♩</Text>
+            <Svg width="20" height="24" viewBox="0 0 24 24">
+              <Path
+                 d="M12 15C14.2 15 16 13.2 16 11V6C16 3.8 14.2 2 12 2C9.8 2 8 3.8 8 6V11C8 13.2 9.8 15 12 15Z"
+                 fill="#B99555"
+                 />
+               <Path
+                  d="M19 11C19 14.87 15.87 18 12 18C8.13 18 5 14.87 5 11"
+                  fill="none"
+                  stroke="#B99555"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                />
+               <Path
+                  d="M12 18V22M9 22H15"
+                  fill="none"
+                  stroke="#B99555"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                />
+            </Svg>
           </View>
 
           <View style={styles.playButton}>
