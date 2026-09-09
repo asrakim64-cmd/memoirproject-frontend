@@ -73,39 +73,62 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
 
+  mediaGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+  },
+
+  mediaCard: {
+    width: "48%",
+    marginBottom: 16,
+  },
+
   imageContainer: {
-    alignItems: "center",
-    marginBottom: 10,
-  },
-
-  image: {
-    maxWidth: 440,
-    maxHeight: 500,
-    objectFit: "contain",
-  },
-
-  videoPlaceholder: {
-    width: 440,
-    height: 260,
+    width: "100%",
+    height: 145,
+    backgroundColor: "#F3EEE6",
     borderWidth: 1,
     borderColor: "#D8CFC4",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 10,
+    marginBottom: 6,
+  },
+
+  image: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+  },
+
+  videoPlaceholder: {
+    width: "100%",
+    height: 145,
+    backgroundColor: "#F3EEE6",
+    borderWidth: 1,
+    borderColor: "#D8CFC4",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 6,
   },
 
   videoText: {
     fontSize: 12,
     color: "#713C48",
+    marginBottom: 4,
+  },
+
+  videoSubtext: {
+    fontSize: 8,
+    color: "#80612F",
   },
 
   caption: {
-    fontSize: 10,
-    lineHeight: 1.5,
+    fontSize: 8.5,
+    lineHeight: 1.4,
     color: "#80612F",
-    textAlign: "center",
-    marginTop: 6,
-    marginBottom: 8,
+    textAlign: "left",
+    marginTop: 4,
   },
 
   story: {
@@ -132,52 +155,68 @@ export default function MemoirPDFMediaMemory({
   memories,
 }: MemoirPDFMediaMemoryProps) {
   return (
-    <Page size="A4" style={styles.page} wrap>
-      <View style={styles.border}>
-        <Text style={styles.eyebrow}>MEDIA MEMORY</Text>
+    <>
+      {memories.map((memory) => (
+        <Page key={memory.id} size="A4" style={styles.page}>
+          <View style={styles.border}>
+            <Text style={styles.eyebrow}>MEDIA MEMORY</Text>
 
-        <Text style={styles.title}>{title}</Text>
+            <Text style={styles.title}>{title}</Text>
 
-        <View style={styles.divider} />
+            <View style={styles.divider} />
 
-        {memories.map((memory) => (
-          <View key={memory.id} style={styles.memoryBlock}>
-            <Text style={styles.contributorName}>
-              {memory.contributor.name}
-            </Text>
+            <View style={styles.memoryBlock}>
+              <Text style={styles.contributorName}>
+                {memory.contributor.name}
+              </Text>
 
-            <Text style={styles.contributorInfo}>
-              {memory.contributor.relationship} · {memory.contributor.storyDate}
-            </Text>
+              <Text style={styles.contributorInfo}>
+                {memory.contributor.relationship} ·{" "}
+                {memory.contributor.storyDate}
+              </Text>
 
-            {memory.media.map((item) => (
-              <View key={item.id}>
-                {item.type === "image" && item.src ? (
-                  <View style={styles.imageContainer}>
-                    <Image src={item.src} style={styles.image} />
+              <View style={styles.mediaGrid}>
+                {memory.media.map((item) => (
+                  <View key={item.id} style={styles.mediaCard}>
+                    {item.type === "image" && item.src ? (
+                      <View style={styles.imageContainer}>
+                        <Image
+                          src={item.src}
+                          style={styles.image}
+                        />
+                      </View>
+                    ) : (
+                      <View style={styles.videoPlaceholder}>
+                        <Text style={styles.videoText}>
+                          ▶ Video Memory
+                        </Text>
+
+                        <Text style={styles.videoSubtext}>
+                          A moment captured in motion
+                        </Text>
+                      </View>
+                    )}
+
+                    {item.caption && (
+                      <Text style={styles.caption}>
+                        {item.caption}
+                      </Text>
+                    )}
                   </View>
-                ) : (
-                  <View style={styles.videoPlaceholder}>
-                    <Text style={styles.videoText}>Video Memory</Text>
-                  </View>
-                )}
-
-                {item.caption && (
-                  <Text style={styles.caption}>{item.caption}</Text>
-                )}
+                ))}
               </View>
-            ))}
 
-            {memory.story && (
-              <Text style={styles.story}>{memory.story}</Text>
-            )}
+              {memory.story && (
+                <Text style={styles.story}>{memory.story}</Text>
+              )}
+            </View>
+
+            <Text style={styles.footer}>
+              MEMORIES PRESERVED WITH LOVE
+            </Text>
           </View>
-        ))}
-
-        <Text style={styles.footer}>
-          MEMORIES PRESERVED WITH LOVE
-        </Text>
-      </View>
-    </Page>
+        </Page>
+      ))}
+    </>
   );
 }

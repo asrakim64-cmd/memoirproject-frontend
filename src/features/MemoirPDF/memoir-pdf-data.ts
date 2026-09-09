@@ -76,6 +76,7 @@ export const memoirPDFData: MemoirPDFData = {
             "Some of my favorite memories are from family gatherings where he would tell stories and make everyone feel at home.",
           ],
         },
+
         {
           id: "written-2",
           type: "written",
@@ -144,17 +145,68 @@ export const memoirPDFData: MemoirPDFData = {
             relationship: "Daughter",
             storyDate: "September 2, 2026",
           },
+
           media: [
             {
               id: "media-item-1",
+              type: "image",
+              src: "/images/memory-1.jpg",
+              caption:
+                "A quiet family moment that I will always remember.",
+            },
+
+            {
+              id: "media-item-2",
+              type: "image",
+              src: "/images/memory-2.jpg",
+              caption:
+                "One of those simple moments that meant so much to our family.",
+            },
+
+            {
+              id: "media-item-3",
               type: "video",
               src: "",
               caption:
-                "A special moment remembered and preserved as part of Robert's life story.",
+                "A special moment captured in motion and preserved as part of Robert's story.",
             },
           ],
+
           story:
-            "This moment captures one of the many simple memories that made Robert's life so meaningful to the people around him.",
+            "This collection brings together a few moments that remind me of Robert's warmth, kindness and the happiness he brought to our family.",
+        },
+
+        {
+          id: "media-2",
+          type: "media",
+          chapterTitle: "A Cherished Moment",
+          contributor: {
+            id: "contributor-6",
+            name: "Michael Harrison",
+            relationship: "Son",
+            storyDate: "September 4, 2026",
+          },
+
+          media: [
+            {
+              id: "media-item-4",
+              type: "image",
+              src: "/images/memory-3.jpg",
+              caption:
+                "A memory from a day we spent together as a family.",
+            },
+
+            {
+              id: "media-item-5",
+              type: "image",
+              src: "/images/memory-4.jpg",
+              caption:
+                "A photograph that brings back so many beautiful memories.",
+            },
+          ],
+
+          story:
+            "Every photograph holds a different part of his story. Looking back at these moments reminds us of the love and memories we shared with him.",
         },
       ],
     },
